@@ -1,0 +1,10 @@
+name: Build UTR
+
+on:
+  workflow_dispatch:
+
+jobs:
+  stubs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Placeholder" 
