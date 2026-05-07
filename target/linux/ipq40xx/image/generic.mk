@@ -1263,6 +1263,21 @@ endef
 # Missing DSA Setup
 #TARGET_DEVICES += tel_x1pro
 
+define Device/ubnt_utr
+       $(call Device/FitImageLzma)
+       $(call Device/UbiFit)
+       DEVICE_VENDOR := Ubiquiti
+       DEVICE_MODEL := UniFi Travel Router
+       SOC := qcom-ipq4018
+       DEVICE_DTS_CONFIG := config@ea06
+       BLOCKSIZE := 128k
+       PAGESIZE := 2048
+       KERNEL_IN_UBI :=
+       UBINIZE_PARTS = vol=$(KDIR)/ubnt_utr-uImage.itb
+       DEVICE_PACKAGES := kmod-drm-panel-mipi-dbi kmod-backlight-gpio kmod-bluetooth kmod-btusb
+endef
+TARGET_DEVICES += ubnt_utr
+
 define Device/unielec_u4019-32m
 	$(call Device/FitImage)
 	DEVICE_VENDOR := Unielec
