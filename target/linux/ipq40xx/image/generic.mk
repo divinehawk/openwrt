@@ -1274,7 +1274,7 @@ define Device/ubnt_utr
        PAGESIZE := 2048
        KERNEL_IN_UBI :=
        UBINIZE_PARTS = vol=$(KDIR)/ubnt_utr-uImage.itb
-       DEVICE_PACKAGES := kmod-drm-panel-mipi-dbi kmod-backlight-gpio kmod-bluetooth kmod-btusb
+       DEVICE_PACKAGES := kmod-i2c-gpio kmod-iio-st_accel-i2c kmod-drm-panel-mipi-dbi kmod-backlight-gpio kmod-bluetooth kmod-btusb
 endef
 TARGET_DEVICES += ubnt_utr
 

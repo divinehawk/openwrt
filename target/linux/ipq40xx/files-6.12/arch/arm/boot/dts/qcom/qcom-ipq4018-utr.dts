@@ -9,11 +9,6 @@
 	model = "Ubiquiti UniFi Travel Router";
 	compatible = "ubnt,utr", "qcom,ipq4019";
 
-	reserved-memory {
-		/delete-node/ smem@87e00000;
-		/delete-node/ tz@87e80000;
-	};
-
 	chosen {
 		stdout-path = "serial0:115200n8";
 		bootargs-append = " ubi.mtd=kernel1 root=/dev/ubiblock0_1 rootfstype=squashfs";
