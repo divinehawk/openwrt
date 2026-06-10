@@ -5,7 +5,7 @@
 
 set -e
 
-FIRMWARE_URL="https://github.com/divinehawk/openwrt/releases/download/build-17/openwrt-ipq40xx-generic-ubnt_utr-squashfs-factory.ubi"
+FIRMWARE_URL="https://github.com/divinehawk/openwrt/releases/download/build-20/openwrt-ipq40xx-generic-ubnt_utr-squashfs-factory.ubi"
 FIRMWARE_FILE="/tmp/factory.ubi"
 
 # Check boot slot
