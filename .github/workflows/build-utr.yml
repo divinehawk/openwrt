@@ -112,6 +112,14 @@ jobs:
             'CONFIG_PACKAGE_kmod-usb-core=y' \
             'CONFIG_PACKAGE_kmod-usb-dwc3=y' \
             'CONFIG_PACKAGE_kmod-usb-dwc3-qcom=y' \
+            'CONFIG_PACKAGE_kmod-usb-net=y' \
+            'CONFIG_PACKAGE_kmod-usb-net-cdc-ncm=m' \
+            'CONFIG_PACKAGE_kmod-usb-net-cdc-eem=m' \
+            'CONFIG_PACKAGE_kmod-usb-net-cdc-ether=m' \
+            'CONFIG_PACKAGE_kmod-usb-net-cdc-subset=m' \
+            'CONFIG_PACKAGE_kmod-usb-net-huawei-cdc-ncm=m' \
+            'CONFIG_PACKAGE_kmod-usb-net-ipheth=m' \
+            'CONFIG_PACKAGE_kmod-usb-net-rndis=m' \
             'CONFIG_PACKAGE_kmod-usb-roles=y' \
             'CONFIG_PACKAGE_kmod-usb-xhci-hcd=y' \
             'CONFIG_PACKAGE_kmod-usb3=y' \
