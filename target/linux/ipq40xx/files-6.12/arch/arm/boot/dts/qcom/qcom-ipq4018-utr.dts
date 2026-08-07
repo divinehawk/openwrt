@@ -262,7 +262,7 @@
 			pins = "gpio60", "gpio61";
 			function = "blsp_uart0";
 			bias-disable;
-		;
+		};
 	};
 
 	spi_0_pins: spi_0_pinmux {
