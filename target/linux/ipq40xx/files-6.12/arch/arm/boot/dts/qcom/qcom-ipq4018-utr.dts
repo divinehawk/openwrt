@@ -225,7 +225,6 @@
 			partition@4000000 {
 				label = "kernel1";
 				reg = <0x04000000 0x04000000>;
-				linux,ubi;
 			};
 		};
 	};
@@ -256,13 +255,15 @@
 };
 
 &tlmm {
-	serial_pins: serial_pins {
-		pins = "gpio60", "gpio61";
-		function = "blsp_uart0";
-		bias-disable;
+	serial_pins: serial_pinmux {
+		mux {
+			pins = "gpio60", "gpio61";
+			function = "blsp_uart0";
+			bias-disable;
+		;
 	};
 
-	spi_0_pins: spi_0_pins {
+	spi_0_pins: spi_0_pinmux {
 		pinmux {
 			pins = "gpio55", "gpio56", "gpio57";
 			function = "blsp_spi0";
@@ -276,7 +277,7 @@
 		};
 	};
 
-	mdio_pins: mdio_pins {
+	mdio_pins: mdio_pinmux {
 		mdc {
 			pins = "gpio52";
 			function = "mdc";
