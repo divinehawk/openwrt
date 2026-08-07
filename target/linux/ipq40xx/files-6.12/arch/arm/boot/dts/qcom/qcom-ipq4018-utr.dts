@@ -3,6 +3,7 @@
 #include "qcom-ipq4019.dtsi"
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+#include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/soc/qcom,tcsr.h>
 
 / {
@@ -207,7 +208,7 @@
 		};
 	};
 
-	spinand@1 {
+	flash@1 {
 		compatible = "spi-nand";
 		reg = <1>;
 		spi-max-frequency = <24000000>;
@@ -241,6 +242,7 @@
 		height-mm = <25>;
 
 		panel-timing {
+			/* 135 px wide panel, padded to 136 so fbcon line writes stay u32-aligned */
 			hactive = <136>;
 			vactive = <240>;
 			hback-porch = <53>;
