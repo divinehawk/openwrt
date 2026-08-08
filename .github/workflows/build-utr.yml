@@ -30,15 +30,6 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Add UTR board data
-        run: |
-          git clone https://github.com/divinehawk/firmware_qca-wireless /tmp/qca-wireless
-          mkdir -p package/firmware/ipq-wifi/files
-          cp /tmp/qca-wireless/board-ubnt_utr.qca4019 package/firmware/ipq-wifi/files/
-          # Add Build/Prepare only in CI - not part of the PR
-          sed -i 's/^define Build\/Compile/define Build\/Prepare\n\t$(call Build\/Prepare\/Default)\n\t$(CP) .\/files\/* $(PKG_BUILD_DIR)\/\nendef\n\ndefine Build\/Compile/' \
-            package/firmware/ipq-wifi/Makefile
-
       - name: Configure for UTR
         run: |
           printf '%s\n' \

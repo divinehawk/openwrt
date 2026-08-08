@@ -225,11 +225,6 @@ platform_do_upgrade() {
 	sony,ncp-hg100-cellular)
 		sony_emmc_do_upgrade "$1"
 		;;
-	ubnt,utr)
-		CI_UBIPART="kernel1"
-		CI_KERNPART="vol"
-		nand_do_upgrade "$1"
-		;;
 	teltonika,rutx10|\
 	teltonika,rutx50|\
 	zte,mf18a|\
@@ -240,6 +235,11 @@ platform_do_upgrade() {
 	zte,mf287pro|\
 	zte,mf289f)
 		CI_UBIPART="rootfs"
+		nand_do_upgrade "$1"
+		;;
+	ubnt,utr)
+		CI_UBIPART="kernel1"
+		CI_KERNPART="vol"
 		nand_do_upgrade "$1"
 		;;
 	zyxel,nbg6617)
