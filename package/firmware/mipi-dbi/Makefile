@@ -4,6 +4,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mipi-dbi
 PKG_RELEASE:=1
+PKG_LICENSE:=GPL-2.0-or-later
+PKG_LICENSE_FILES:=
 
 PKG_MAINTAINER:=Matt Eaton <linux@divinehawk.com>
 
