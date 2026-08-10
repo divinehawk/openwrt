@@ -25,7 +25,8 @@ openmesh,a42|\
 openmesh,a62|\
 pakedge,wr-1|\
 plasmacloud,pa1200|\
-plasmacloud,pa2200)
+plasmacloud,pa2200|\
+ubnt,utr)
 	ubootenv_add_uci_config "/dev/mtd5" "0x0" "0x10000" "0x10000"
 	;;
 aruba,ap-303)
@@ -57,9 +58,6 @@ linksys,whw03)
         ;;
 linksys,whw03v2)
 	ubootenv_add_uci_config "/dev/mtd6" "0x0" "0x80000" "0x20000"
-	;;
-ubnt,utr)
-	ubootenv_add_uci_config "/dev/mtd5" "0x0" "0x10000" "0x10000"
 	;;
 zyxel,nbg6617)
 	ubootenv_add_uci_config "/dev/mtd6" "0x0" "0x10000" "0x10000"
