@@ -115,7 +115,8 @@ jobs:
             'CONFIG_PACKAGE_kmod-usb-xhci-hcd=y' \
             'CONFIG_PACKAGE_kmod-usb3=y' \
             'CONFIG_PACKAGE_kmod-backlight=y' \
-            'CONFIG_PACKAGE_kmod-backlight-gpio=y' \
+            'CONFIG_PACKAGE_kmod-backlight-pwm=y' \
+            'CONFIG_PACKAGE_kmod-gpio-pwm=y' \
             'CONFIG_PACKAGE_kmod-drm=y' \
             'CONFIG_PACKAGE_kmod-drm-dma-helper=y' \
             'CONFIG_PACKAGE_kmod-drm-kms-helper=y' \
