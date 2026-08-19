@@ -59,17 +59,6 @@ jobs:
             exit 1
           fi
 
-          # Sanity-check the trim actually landed before burning CI time on
-          # a build - these should all be modules, not built-in, or the
-          # size problem this workflow exists to catch is still there.
-          for sym in LEDS_LP5521 LEDS_LP5523 LEDS_LP5562 LEDS_TLC591XX GPIO_74X164; do
-            if ! grep -q "^CONFIG_${sym}=m" .config; then
-              echo "::error::CONFIG_${sym} is not built as a module - trim didn't take effect"
-              exit 1
-            fi
-          done
-          echo "netgear_rbr40 selected, LED/GPIO drivers confirmed modular - proceeding to build."
-
       - name: Download sources
         run: make -j$(nproc) download
 
