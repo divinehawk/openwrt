@@ -847,7 +847,7 @@ define Device/meraki_common
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 	DEVICE_DTS_LOADADDR := 0x89000000
-	DEVICE_PACKAGES := ath10k-firmware-qca9887-ct kmod-leds-lp5562
+	DEVICE_PACKAGES := ath10k-firmware-qca9887-ct
 endef
 
 define Device/meraki_mr20
@@ -862,13 +862,14 @@ define Device/meraki_mr30h
 	$(call Device/meraki_common)
 	DEVICE_MODEL := MR30H
 	DEVICE_DTS_CONFIG := config@2
-	DEVICE_PACKAGES += ipq-wifi-meraki_mr30h
+	DEVICE_PACKAGES += kmod-leds-lp5562 ipq-wifi-meraki_mr30h
 endef
 TARGET_DEVICES += meraki_mr30h
 
 define Device/meraki_mr33
 	$(call Device/meraki_common)
 	DEVICE_MODEL := MR33
+	DEVICE_PACKAGES := kmod-leds-lp5562
 endef
 TARGET_DEVICES += meraki_mr33
 
@@ -884,6 +885,7 @@ define Device/meraki_mr74
 	$(call Device/meraki_common)
 	DEVICE_MODEL := MR74
 	DEVICE_DTS_CONFIG := config@3
+	DEVICE_PACKAGES := kmod-leds-lp5562
 endef
 TARGET_DEVICES += meraki_mr74
 
@@ -891,7 +893,7 @@ define Device/meraki_z3
 	$(call Device/meraki_common)
 	DEVICE_MODEL := Z3
 	DEVICE_DTS_CONFIG := config@1
-	DEVICE_PACKAGES := -ath10k-firmware-qca9887-ct ipq-wifi-meraki_z3
+	DEVICE_PACKAGES := -ath10k-firmware-qca9887-ct kmod-leds-lp5562 ipq-wifi-meraki_z3
 endef
 TARGET_DEVICES += meraki_z3
 
@@ -899,7 +901,7 @@ define Device/meraki_gx20
 	$(call Device/meraki_common)
 	DEVICE_MODEL := GX20
 	DEVICE_DTS_CONFIG := config@2
-	DEVICE_PACKAGES := -ath10k-board-qca4019 -ath10k-firmware-qca9887-ct
+	DEVICE_PACKAGES := -ath10k-board-qca4019 -ath10k-firmware-qca9887-ct kmod-leds-lp5562
 endef
 TARGET_DEVICES += meraki_gx20
 
@@ -907,7 +909,7 @@ define Device/meraki_z3c
 	$(call Device/meraki_common)
 	DEVICE_MODEL := Z3C
 	DEVICE_DTS_CONFIG := config@3
-	DEVICE_PACKAGES := kmod-usb-acm kmod-usb-net kmod-usb-net-cdc-ether -ath10k-firmware-qca9887-ct
+	DEVICE_PACKAGES := kmod-leds-lp5562 kmod-usb-acm kmod-usb-net kmod-usb-net-cdc-ether -ath10k-firmware-qca9887-ct
 endef
 TARGET_DEVICES += meraki_z3c
 
