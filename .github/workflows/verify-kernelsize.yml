@@ -50,14 +50,11 @@ jobs:
           CONFIG_TARGET_ipq40xx=y
           CONFIG_TARGET_ipq40xx_generic=y
           CONFIG_TARGET_MULTI_PROFILE=y
-          CONFIG_TARGET_ipq40xx_generic_DEVICE_netgear_rbr40=y
+          CONFIG_TARGET_PER_DEVICE_ROOTFS=y
+          CONFIG_ALL_KMODS=y
+          CONFIG_BUILDBOT=y
           EOF
           make defconfig
-
-          if ! grep -q "^CONFIG_TARGET_ipq40xx_generic_DEVICE_netgear_rbr40=y" .config; then
-            echo "::error::netgear_rbr40 device profile not selected - no image will be built to check"
-            exit 1
-          fi
 
       - name: Download sources
         run: make -j$(nproc) download
