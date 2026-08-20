@@ -64,7 +64,7 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          make -j$(nproc) 2>&1 | tee build.log
+          make -j$(nproc) V=s 2>&1 | tee build.log
 
       - name: Assert no oversized kernel images
         run: |
