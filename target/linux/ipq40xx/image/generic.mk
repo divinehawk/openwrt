@@ -333,7 +333,7 @@ define Device/cellc_rtl30vw
 	IMAGE_SIZE := 57344k
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
-	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
+	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 kmod-spi-gpio kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
 endef
 TARGET_DEVICES += cellc_rtl30vw
 
@@ -919,7 +919,7 @@ define Device/mobipromo_cm520-79f
 	SOC := qcom-ipq4019
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
-	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 kmod-usb-ledtrig-usbport
+	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 kmod-spi-gpio kmod-usb-ledtrig-usbport
 endef
 TARGET_DEVICES += mobipromo_cm520-79f
 
@@ -931,7 +931,7 @@ define Device/netgear_ex61x0v2
 	NETGEAR_HW_ID := 29765285+16+0+128+2x2
 	IMAGE_SIZE := 14400k
 	SOC := qcom-ipq4018
-	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164
+	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 kmod-spi-gpio
 endef
 
 define Device/netgear_ex6100v2
@@ -1098,7 +1098,7 @@ define Device/netgear_wac510
 	PAGESIZE := 2048
 	IMAGES += factory.tar
 	IMAGE/factory.tar := append-ubi | wac5xx-netgear-tar
-	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 uboot-envtools
+	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 kmod-spi-gpio uboot-envtools
 endef
 TARGET_DEVICES += netgear_wac510
 
@@ -1298,7 +1298,7 @@ define Device/teltonika_rutx50
 	PAGESIZE := 2048
 	FILESYSTEMS := squashfs
 	IMAGE/factory.ubi := append-ubi
-	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
+	DEVICE_PACKAGES := kmod-gpio-nxp-74hc164 kmod-spi-gpio kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
 endef
 TARGET_DEVICES += teltonika_rutx50
 
