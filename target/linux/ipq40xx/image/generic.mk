@@ -847,14 +847,14 @@ define Device/meraki_common
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 	DEVICE_DTS_LOADADDR := 0x89000000
-	DEVICE_PACKAGES := ath10k-firmware-qca9887-ct kmod-leds-lp5562
+	DEVICE_PACKAGES := ath10k-firmware-qca9887-ct kmod-eeprom-at24 kmod-leds-lp5562
 endef
 
 define Device/meraki_mr20
 	$(call Device/meraki_common)
 	DEVICE_MODEL := MR20
 	DEVICE_DTS_CONFIG := config@4
-	DEVICE_PACKAGES := ipq-wifi-meraki_underdog
+	DEVICE_PACKAGES += ipq-wifi-meraki_underdog
 endef
 TARGET_DEVICES += meraki_mr20
 
@@ -876,7 +876,7 @@ define Device/meraki_mr70
 	$(call Device/meraki_common)
 	DEVICE_MODEL := MR70
 	DEVICE_DTS_CONFIG := config@5
-	DEVICE_PACKAGES := ipq-wifi-meraki_underdog
+	DEVICE_PACKAGES += ipq-wifi-meraki_underdog
 endef
 TARGET_DEVICES += meraki_mr70
 
