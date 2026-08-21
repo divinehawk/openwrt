@@ -91,3 +91,11 @@ jobs:
           name: build-log
           path: build.log
           if-no-files-found: warn
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          path: target-arm_cortex-a7+neon-vfpv4_musl_eabi/linux-ipq40xx_generic/linux-6.18.44/.config
+          if-no-files-found: warn
+ 
