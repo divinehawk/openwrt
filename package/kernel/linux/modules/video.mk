@@ -119,8 +119,9 @@ define KernelPackage/fb
 	CONFIG_FB_DEVICE=y \
 	CONFIG_FB_MXS=n \
 	CONFIG_FB_SM750=n
-  FILES:=$(LINUX_DIR)/drivers/video/fbdev/core/fb.ko
-  AUTOLOAD:=$(call AutoLoad,06,fb)
+  FILES:=$(LINUX_DIR)/drivers/video/fbdev/core/fb.ko \
+	$(if $(CONFIG_PACKAGE_kmod-fb-console),$(LINUX_DIR)/lib/fonts/font.ko)
+  AUTOLOAD:=$(call AutoLoad,06,fb$(if $(CONFIG_PACKAGE_kmod-fb-console), font))
 endef
 
 define KernelPackage/fb/description
@@ -129,7 +130,7 @@ endef
 
 define KernelPackage/fb/x86
   FILES+=$(LINUX_DIR)/arch/x86/video/video-common.ko
-  AUTOLOAD:=$(call AutoLoad,06,video-common fb)
+  AUTOLOAD:=$(call AutoLoad,06,video-common fb$(if $(CONFIG_PACKAGE_kmod-fb-console), font))
 endef
 
 $(eval $(call KernelPackage,fb))
@@ -159,16 +160,15 @@ define KernelPackage/fb-console
 	CONFIG_CONSOLE_TRANSLATIONS=y \
 	CONFIG_VT_CONSOLE=y \
 	CONFIG_VT_HW_CONSOLE_BINDING=y
-  FILES:=$(LINUX_DIR)/lib/fonts/font.ko
-  AUTOLOAD:=$(call AutoLoad,07,font)
 endef
 
 define KernelPackage/fb-console/description
  Kernel support for a text console on a framebuffer device.
 
- This enables the virtual terminal layer (CONFIG_VT) and the bitmap
- fonts, both of which are built into the kernel image. Devices that
- only use a framebuffer or DRM panel as a display do not need it.
+ This enables the virtual terminal layer (CONFIG_VT, which selects
+ CONFIG_INPUT) and the bitmap fonts, all of which are built into the
+ kernel image. Devices that only use a framebuffer or DRM panel as a
+ display do not need it.
 endef
 
 $(eval $(call KernelPackage,fb-console))
