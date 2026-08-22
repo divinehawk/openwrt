@@ -450,7 +450,7 @@ endef
 #TARGET_DEVICES += edgecore_oap100
 
 define Device/engenius_eap1300
-	$(call Device/FitImage)
+	$(call Device/FitzImage)
 	DEVICE_VENDOR := EnGenius
 	DEVICE_MODEL := EAP1300
 	DEVICE_ALT0_VENDOR := EnGenius
