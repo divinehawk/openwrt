@@ -164,11 +164,6 @@ endef
 
 define KernelPackage/fb-console/description
  Kernel support for a text console on a framebuffer device.
-
- This enables the virtual terminal layer (CONFIG_VT, which selects
- CONFIG_INPUT) and the bitmap fonts, all of which are built into the
- kernel image. Devices that only use a framebuffer or DRM panel as a
- display do not need it.
 endef
 
 $(eval $(call KernelPackage,fb-console))
