@@ -1,0 +1,76 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Matt Eaton <linux@divinehawk.com>
+Date: Sat, 29 Aug 2026 16:02:32 +0200
+Subject: [PATCH] usb: dwc3: qcom: set xhci_no_soft_retry for IPQ4019
+
+The dwc3 instances on IPQ4019 mishandle xHCI 1.0 Soft Retry. A Stop
+Endpoint command that lands on a just-soft-retry-reset endpoint wedges
+the command ring, and the stop-endpoint watchdog kills the host five
+seconds later:
+
+xhci-hcd xhci-hcd.1.auto: xHCI host not responding to stop endpoint command
+xhci-hcd xhci-hcd.1.auto: xHCI host controller not responding, assume dead
+xhci-hcd xhci-hcd.1.auto: HC died; cleaning up
+
+Reproducible by unplugging a USB-tethered phone mid-transfer. The port
+stays dead until the platform device is rebound. The controller itself
+is alive throughout, hence the -110 timeout rather than -ENODEV.
+Qualcomm's 4.4 vendor kernel predates Soft Retry entirely, so it has
+never been able to hit this.
+
+This is a property of the IP rather than of any board, so it is carried
+as match data on the SoC compatible.
+
+Both dwc3 nodes on this SoC share the compatible, so both get the quirk.
+Measured on the usb2 instance, which drives the external port; the usb3
+instance on the board under test hosts a soldered Bluetooth radio that
+is never unplugged, so it cannot reach the trigger in normal use.
+
+Suggested-by: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+Signed-off-by: Matt Eaton <linux@divinehawk.com>
+---
+ drivers/usb/dwc3/dwc3-qcom.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+--- a/drivers/usb/dwc3/dwc3-qcom.c
++++ b/drivers/usb/dwc3/dwc3-qcom.c
+@@ -607,8 +607,19 @@ struct dwc3_glue_ops dwc3_qcom_glue_ops
+ 	.pre_run_stop	= dwc3_qcom_run_stop_notifier,
+ };
+ 
++/*
++ * The dwc3 instances on IPQ4019 mishandle xHCI Soft Retry: a Stop
++ * Endpoint command landing on a just-soft-retry-reset endpoint wedges the
++ * command ring and the host is killed by the stop-endpoint watchdog.
++ */
++static const struct dwc3_properties dwc3_qcom_ipq4019_properties = {
++	.gsbuscfg0_reqinfo = DWC3_GSBUSCFG0_REQINFO_UNSPECIFIED,
++	.xhci_no_soft_retry = 1,
++};
++
+ static int dwc3_qcom_probe(struct platform_device *pdev)
+ {
++	const struct dwc3_properties *properties;
+ 	struct dwc3_probe_data	probe_data = {};
+ 	struct device		*dev = &pdev->dev;
+ 	struct dwc3_qcom	*qcom;
+@@ -704,7 +715,10 @@ static int dwc3_qcom_probe(struct platfo
+ 	probe_data.dwc = &qcom->dwc;
+ 	probe_data.res = &res;
+ 	probe_data.ignore_clocks_and_resets = true;
+-	probe_data.properties = DWC3_DEFAULT_PROPERTIES;
++
++	properties = of_device_get_match_data(dev);
++	probe_data.properties = properties ? *properties : DWC3_DEFAULT_PROPERTIES;
++
+ 	ret = dwc3_core_probe(&probe_data);
+ 	if (ret)  {
+ 		ret = dev_err_probe(dev, ret, "failed to register DWC3 Core\n");
+@@ -839,6 +853,7 @@ static const struct dev_pm_ops dwc3_qcom
+ };
+ 
+ static const struct of_device_id dwc3_qcom_of_match[] = {
++	{ .compatible = "qcom,ipq4019-dwc3", .data = &dwc3_qcom_ipq4019_properties },
+ 	{ .compatible = "qcom,snps-dwc3" },
+ 	{ }
+ };

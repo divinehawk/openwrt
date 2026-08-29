@@ -1,0 +1,90 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Matt Eaton <linux@divinehawk.com>
+Date: Sat, 29 Aug 2026 15:53:43 +0200
+Subject: [PATCH] usb: dwc3: add xhci_no_soft_retry software property
+
+Some DWC3 instances cannot carry out xHCI 1.0 Soft Retry correctly. Add a
+software property so a glue driver can say so on behalf of hardware it
+recognises from its compatible, carry it into struct dwc3, and pass it on
+to xhci-plat as an xhci-no-soft-retry-quirk swnode property alongside the
+other xHCI properties dwc3_host_init() already sets.
+
+Nothing sets it yet, so no platform changes behaviour.
+
+Suggested-by: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+Signed-off-by: Matt Eaton <linux@divinehawk.com>
+---
+ drivers/usb/dwc3/core.c | 3 +++
+ drivers/usb/dwc3/core.h | 3 +++
+ drivers/usb/dwc3/glue.h | 3 +++
+ drivers/usb/dwc3/host.c | 5 ++++-
+ 4 files changed, 13 insertions(+), 1 deletion(-)
+
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -1699,6 +1699,9 @@ static void dwc3_get_software_properties
+ 	if (properties->needs_full_reinit)
+ 		dwc->needs_full_reinit = true;
+ 
++	if (properties->xhci_no_soft_retry)
++		dwc->xhci_no_soft_retry = true;
++
+ 	dwc->gsbuscfg0_reqinfo = DWC3_GSBUSCFG0_REQINFO_UNSPECIFIED;
+ 
+ 	if (properties->gsbuscfg0_reqinfo !=
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -1122,6 +1122,8 @@ struct dwc3_glue_ops {
+  * @usb2_gadget_lpm_disable: set to disable usb2 lpm for gadget
+  * @needs_full_reinit: set to indicate the core may lose power and need full
+ 			initialization during system pm
++ * @xhci_no_soft_retry: set to indicate the xHCI cannot carry out Soft Retry
++ *			correctly
+  * @disable_scramble_quirk: set if we enable the disable scramble quirk
+  * @u2exit_lfps_quirk: set if we enable u2exit lfps quirk
+  * @u2ss_inp3_quirk: set if we enable P3 OK for U2/SS Inactive quirk
+@@ -1379,6 +1381,7 @@ struct dwc3 {
+ 	unsigned		usb2_lpm_disable:1;
+ 	unsigned		usb2_gadget_lpm_disable:1;
+ 	unsigned		needs_full_reinit:1;
++	unsigned		xhci_no_soft_retry:1;
+ 
+ 	unsigned		disable_scramble_quirk:1;
+ 	unsigned		u2exit_lfps_quirk:1;
+--- a/drivers/usb/dwc3/glue.h
++++ b/drivers/usb/dwc3/glue.h
+@@ -14,10 +14,13 @@
+  * @gsbuscfg0_reqinfo: Value to be programmed in the GSBUSCFG0.REQINFO field
+  * @needs_full_reinit: indicate the controller may not remain power during system
+  *			pm and need full initialization
++ * @xhci_no_soft_retry: indicate the controller cannot carry out xHCI Soft
++ *			Retry correctly
+  */
+ struct dwc3_properties {
+ 	u32 gsbuscfg0_reqinfo;
+ 	unsigned needs_full_reinit:1;
++	unsigned xhci_no_soft_retry:1;
+ };
+ 
+ #define DWC3_DEFAULT_PROPERTIES ((struct dwc3_properties){		\
+--- a/drivers/usb/dwc3/host.c
++++ b/drivers/usb/dwc3/host.c
+@@ -129,7 +129,7 @@ out:
+ 
+ int dwc3_host_init(struct dwc3 *dwc)
+ {
+-	struct property_entry	props[6];
++	struct property_entry	props[8];
+ 	struct platform_device	*xhci;
+ 	int			ret, irq;
+ 	int			prop_idx = 0;
+@@ -185,6 +185,9 @@ int dwc3_host_init(struct dwc3 *dwc)
+ 	if (DWC3_VER_IS_WITHIN(DWC3, ANY, 300A))
+ 		props[prop_idx++] = PROPERTY_ENTRY_BOOL("quirk-broken-port-ped");
+ 
++	if (dwc->xhci_no_soft_retry)
++		props[prop_idx++] = PROPERTY_ENTRY_BOOL("xhci-no-soft-retry-quirk");
++
+ 	props[prop_idx++] = PROPERTY_ENTRY_U16("num-hc-interrupters",
+ 					       dwc->num_hc_interrupters);
+ 

@@ -1,0 +1,108 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Matt Eaton <linux@divinehawk.com>
+Date: Sat, 29 Aug 2026 13:50:08 +0200
+Subject: [PATCH] dt-bindings: usb: qcom,snps-dwc3: relax interrupt
+ requirements for ipq4019
+
+qcom,ipq4019-dwc3 is grouped with the platforms that must supply five or
+six named interrupts, but neither mainline nor Qualcomm's own IPQ4019
+vendor devicetree specifies any wakeup interrupts for this SoC. Both
+describe only the core dwc_usb3 interrupt: GIC_SPI 132 for the usb3
+instance and GIC_SPI 136 for the usb2 instance.
+
+commit dd566faebe9f ("dt-bindings: usb: qcom,dwc3: refine interrupt
+requirements") listed ipq4019 among the compatibles in this position and
+chose to keep the schema warnings for the time being.
+
+Migrating the ipq4019 devicetree onto this binding otherwise fails
+dtbs_check:
+
+usb@8a00000 (qcom,ipq4019-dwc3): interrupts: [[0, 132, 4]] is too short
+usb@8a00000 (qcom,ipq4019-dwc3): interrupt-names: ['dwc_usb3'] is too short
+
+Give ipq4019 its own clause allowing a single interrupt, and lower the
+top-level minimum to match. The per-SoC clause cannot loosen the
+top-level constraint on its own, since allOf intersects.
+
+Lowering the top-level minimum would otherwise weaken the constraint for
+compatibles that have no per-SoC interrupt clause, so add one for
+qcom,ipq5424-dwc3, qcom,ipq9574-dwc3, qcom,qcm2290-dwc3,
+qcom,sar2130p-dwc3 and qcom,sm6375-dwc3 preserving their previous
+minimum of three.
+
+dwc3-qcom.c looks all four wakeup interrupts up with
+platform_get_irq_byname_optional(), so nothing in the driver depends on
+their presence. If the wakeup interrupt numbers are established later
+they can be added without another binding change.
+
+Signed-off-by: Matt Eaton <linux@divinehawk.com>
+---
+ .../bindings/usb/qcom,snps-dwc3.yaml          | 40 ++++++++++++++++++-
+ 1 file changed, 38 insertions(+), 2 deletions(-)
+
+--- a/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml
++++ b/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml
+@@ -133,11 +133,11 @@ properties:
+                                only on SoCs with non-QUSB2 targets with
+                                exception of SDM670/SDM845/SM6350.
+         - ss_phy_irq: Used for remote wakeup in Super Speed mode of operation.
+-    minItems: 3
++    minItems: 1
+     maxItems: 19
+ 
+   interrupt-names:
+-    minItems: 3
++    minItems: 1
+     maxItems: 19
+ 
+   qcom,select-utmi-as-pipe-clk:
+@@ -456,6 +456,23 @@ allOf:
+         compatible:
+           contains:
+             enum:
++              - qcom,ipq5424-dwc3
++              - qcom,ipq9574-dwc3
++              - qcom,qcm2290-dwc3
++              - qcom,sar2130p-dwc3
++              - qcom,sm6375-dwc3
++    then:
++      properties:
++        interrupts:
++          minItems: 3
++        interrupt-names:
++          minItems: 3
++
++  - if:
++      properties:
++        compatible:
++          contains:
++            enum:
+               - qcom,milos-dwc3
+               - qcom,x1e80100-dwc3
+     then:
+@@ -478,6 +495,25 @@ allOf:
+           contains:
+             enum:
+               - qcom,ipq4019-dwc3
++    then:
++      properties:
++        interrupts:
++          minItems: 1
++          maxItems: 6
++        interrupt-names:
++          minItems: 1
++          items:
++            - const: dwc_usb3
++            - const: pwr_event
++            - const: hs_phy_irq
++            - const: dp_hs_phy_irq
++            - const: dm_hs_phy_irq
++            - const: ss_phy_irq
++  - if:
++      properties:
++        compatible:
++          contains:
++            enum:
+               - qcom,ipq8064-dwc3
+               - qcom,msm8994-dwc3
+               - qcom,qcs615-dwc3

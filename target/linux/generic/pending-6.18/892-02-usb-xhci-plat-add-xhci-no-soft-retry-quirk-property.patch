@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Matt Eaton <linux@divinehawk.com>
+Date: Fri, 28 Aug 2026 14:12:43 +0200
+Subject: [PATCH] usb: xhci-plat: add xhci-no-soft-retry-quirk device property
+
+XHCI_NO_SOFT_RETRY exists for hosts that can't perform xHCI 1.0 Soft Retry
+correctly, but it's only reachable from xhci-pci, matched against two AMD
+Promontory PCI ids. Platform hosts have no way to ask for it.
+
+Add it as a device property, read in the same parent-walk block as
+quirk-broken-port-ped and its neighbors. It's opt-in, so no existing
+platform is affected. The following patches set it from the dwc3 core
+on behalf of hardware known to need it, rather than from devicetree.
+
+Needed for the Synopsys DWC3 on a Qualcomm IPQ4019, whose command ring
+wedges when a Stop Endpoint command lands on a just-soft-retry-reset
+endpoint -- exactly what unplugging a device mid-transfer triggers:
+
+xhci-hcd xhci-hcd.1.auto: xHCI host not responding to stop endpoint command
+xhci-hcd xhci-hcd.1.auto: xHCI host controller not responding, assume dead
+xhci-hcd xhci-hcd.1.auto: HC died; cleaning up
+
+Signed-off-by: Matt Eaton <linux@divinehawk.com>
+---
+ drivers/usb/host/xhci-plat.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+--- a/drivers/usb/host/xhci-plat.c
++++ b/drivers/usb/host/xhci-plat.c
+@@ -265,6 +265,9 @@ int xhci_plat_probe(struct platform_devi
+ 		if (device_property_read_bool(tmpdev, "quirk-broken-port-ped"))
+ 			xhci->quirks |= XHCI_BROKEN_PORT_PED;
+ 
++		if (device_property_read_bool(tmpdev, "xhci-no-soft-retry-quirk"))
++			xhci->quirks |= XHCI_NO_SOFT_RETRY;
++
+ 		if (device_property_read_bool(tmpdev, "xhci-sg-trb-cache-size-quirk"))
+ 			xhci->quirks |= XHCI_SG_TRB_CACHE_SIZE_QUIRK;
+ 

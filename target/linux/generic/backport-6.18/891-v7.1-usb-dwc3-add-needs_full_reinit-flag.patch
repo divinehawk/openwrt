@@ -1,0 +1,95 @@
+From a717321ad7c4046eec60fa9469e1401d20071d5a Mon Sep 17 00:00:00 2001
+From: Xu Yang <xu.yang_2@nxp.com>
+Date: Thu, 12 Feb 2026 17:40:27 +0800
+Subject: [PATCH] usb: dwc3: add needs_full_reinit flag
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The current design assumes that the controller remains powered when wakeup
+is enabled. However, some SoCs provide wakeup capability even when the
+controller itself is powered down, using separate dedicated wakeup logic.
+This allows additional power savings, but requires the controller to be
+fully re‑initialized after system resume.
+
+To support these SoCs, introduce a flag needs_full_reinit for the purpose.
+And the glue layer needs to indicate if the controller needs this behavior
+by setting a same flag needs_full_reinit in dwc3_properties.
+
+Reviewed-by: Frank Li <Frank.Li@nxp.com>
+Signed-off-by: Xu Yang <xu.yang_2@nxp.com>
+Acked-by: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+Link: https://patch.msgid.link/20260212-add-flatten-dts-based-dwc3-imx-driver-v5-2-ff04a75ce221@nxp.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/usb/dwc3/core.c | 9 +++++++--
+ drivers/usb/dwc3/core.h | 3 +++
+ drivers/usb/dwc3/glue.h | 3 +++
+ 3 files changed, 13 insertions(+), 2 deletions(-)
+
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -1696,6 +1696,9 @@ static void dwc3_get_software_properties
+ 	u16 gsbuscfg0_reqinfo;
+ 	int ret;
+ 
++	if (properties->needs_full_reinit)
++		dwc->needs_full_reinit = true;
++
+ 	dwc->gsbuscfg0_reqinfo = DWC3_GSBUSCFG0_REQINFO_UNSPECIFIED;
+ 
+ 	if (properties->gsbuscfg0_reqinfo !=
+@@ -2498,7 +2501,8 @@ static int dwc3_suspend_common(struct dw
+ 		dwc3_core_exit(dwc);
+ 		break;
+ 	case DWC3_GCTL_PRTCAP_HOST:
+-		if (!PMSG_IS_AUTO(msg) && !device_may_wakeup(dwc->dev)) {
++		if (!PMSG_IS_AUTO(msg) &&
++		    (!device_may_wakeup(dwc->dev) || dwc->needs_full_reinit)) {
+ 			dwc3_core_exit(dwc);
+ 			break;
+ 		}
+@@ -2561,7 +2565,8 @@ static int dwc3_resume_common(struct dwc
+ 		dwc3_gadget_resume(dwc);
+ 		break;
+ 	case DWC3_GCTL_PRTCAP_HOST:
+-		if (!PMSG_IS_AUTO(msg) && !device_may_wakeup(dwc->dev)) {
++		if (!PMSG_IS_AUTO(msg) &&
++		    (!device_may_wakeup(dwc->dev) || dwc->needs_full_reinit)) {
+ 			ret = dwc3_core_init_for_resume(dwc);
+ 			if (ret)
+ 				return ret;
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -1120,6 +1120,8 @@ struct dwc3_glue_ops {
+  * @usb3_lpm_capable: set if hadrware supports Link Power Management
+  * @usb2_lpm_disable: set to disable usb2 lpm for host
+  * @usb2_gadget_lpm_disable: set to disable usb2 lpm for gadget
++ * @needs_full_reinit: set to indicate the core may lose power and need full
++			initialization during system pm
+  * @disable_scramble_quirk: set if we enable the disable scramble quirk
+  * @u2exit_lfps_quirk: set if we enable u2exit lfps quirk
+  * @u2ss_inp3_quirk: set if we enable P3 OK for U2/SS Inactive quirk
+@@ -1376,6 +1378,7 @@ struct dwc3 {
+ 	unsigned		usb3_lpm_capable:1;
+ 	unsigned		usb2_lpm_disable:1;
+ 	unsigned		usb2_gadget_lpm_disable:1;
++	unsigned		needs_full_reinit:1;
+ 
+ 	unsigned		disable_scramble_quirk:1;
+ 	unsigned		u2exit_lfps_quirk:1;
+--- a/drivers/usb/dwc3/glue.h
++++ b/drivers/usb/dwc3/glue.h
+@@ -12,9 +12,12 @@
+ /**
+  * dwc3_properties: DWC3 core properties
+  * @gsbuscfg0_reqinfo: Value to be programmed in the GSBUSCFG0.REQINFO field
++ * @needs_full_reinit: indicate the controller may not remain power during system
++ *			pm and need full initialization
+  */
+ struct dwc3_properties {
+ 	u32 gsbuscfg0_reqinfo;
++	unsigned needs_full_reinit:1;
+ };
+ 
+ #define DWC3_DEFAULT_PROPERTIES ((struct dwc3_properties){		\
