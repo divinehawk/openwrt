@@ -595,9 +595,7 @@
 
 	pinctrl-0 = <&usb3_pins>, <&lte_pins>;
 	pinctrl-names = "default";
-};
 
-&usb3_dwc {
 	#address-cells = <1>;
 	#size-cells = <0>;
 

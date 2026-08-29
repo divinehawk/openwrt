@@ -1,0 +1,114 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Matt Eaton <linux@divinehawk.com>
+Date: Sat, 29 Aug 2026 15:41:08 +0200
+Subject: [PATCH] ARM: dts: qcom: ipq4019: migrate USB to the qcom,snps-dwc3
+ glue
+
+The legacy qcom,dwc3 glue describes the DWC3 core as a child node and
+populates it with of_platform_populate(). qcom,snps-dwc3 embeds the core
+in the glue device instead, so the two nodes collapse into one and the
+unit address moves to the core base.
+
+The QSCRATCH register block sits at a fixed 0xf8800 from the core base on
+this SoC, which is what dwc3-qcom.c already assumes, so no driver change
+is needed:
+
+  usb3: 0x8a00000 + 0xf8800 = 0x8af8800
+  usb2: 0x6000000 + 0xf8800 = 0x60f8800
+
+Both match the addresses the wrapper nodes used before.
+
+The usb3_dwc label goes away with the child node, so the ap120c-ac
+override of the SS phy moves up to the parent.
+
+Signed-off-by: Matt Eaton <linux@divinehawk.com>
+---
+ .../boot/dts/qcom/qcom-ipq4018-ap120c-ac.dtsi |  4 --
+ arch/arm/boot/dts/qcom/qcom-ipq4019.dtsi      | 46 +++++++------------
+ 2 files changed, 16 insertions(+), 34 deletions(-)
+
+--- a/arch/arm/boot/dts/qcom/qcom-ipq4018-ap120c-ac.dtsi
++++ b/arch/arm/boot/dts/qcom/qcom-ipq4018-ap120c-ac.dtsi
+@@ -260,10 +260,6 @@
+ 
+ &usb3 {
+ 	status = "okay";
+-
+-	};
+-
+-&usb3_dwc {
+ 	phys = <&usb3_hs_phy>;
+ 	phy-names = "usb2-phy";
+ };
+--- a/arch/arm/boot/dts/qcom/qcom-ipq4019.dtsi
++++ b/arch/arm/boot/dts/qcom/qcom-ipq4019.dtsi
+@@ -782,26 +782,19 @@
+ 			status = "disabled";
+ 		};
+ 
+-		usb3: usb@8af8800 {
+-			compatible = "qcom,ipq4019-dwc3", "qcom,dwc3";
+-			reg = <0x8af8800 0x100>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
++		usb3: usb@8a00000 {
++			compatible = "qcom,ipq4019-dwc3", "qcom,snps-dwc3";
++			reg = <0x8a00000 0xf8c00>;
++			interrupts = <GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "dwc_usb3";
+ 			clocks = <&gcc GCC_USB3_MASTER_CLK>,
+ 				 <&gcc GCC_USB3_SLEEP_CLK>,
+ 				 <&gcc GCC_USB3_MOCK_UTMI_CLK>;
+ 			clock-names = "core", "sleep", "mock_utmi";
+-			ranges;
++			phys = <&usb3_hs_phy>, <&usb3_ss_phy>;
++			phy-names = "usb2-phy", "usb3-phy";
++			dr_mode = "host";
+ 			status = "disabled";
+-
+-			usb3_dwc: usb@8a00000 {
+-				compatible = "snps,dwc3";
+-				reg = <0x8a00000 0xf8000>;
+-				interrupts = <GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>;
+-				phys = <&usb3_hs_phy>, <&usb3_ss_phy>;
+-				phy-names = "usb2-phy", "usb3-phy";
+-				dr_mode = "host";
+-			};
+ 		};
+ 
+ 		usb2_hs_phy: usb-phy@a8000 {
+@@ -814,26 +807,19 @@
+ 			status = "disabled";
+ 		};
+ 
+-		usb2: usb@60f8800 {
+-			compatible = "qcom,ipq4019-dwc3", "qcom,dwc3";
+-			reg = <0x60f8800 0x100>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
++		usb2: usb@6000000 {
++			compatible = "qcom,ipq4019-dwc3", "qcom,snps-dwc3";
++			reg = <0x6000000 0xf8c00>;
++			interrupts = <GIC_SPI 136 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "dwc_usb3";
+ 			clocks = <&gcc GCC_USB2_MASTER_CLK>,
+ 				 <&gcc GCC_USB2_SLEEP_CLK>,
+ 				 <&gcc GCC_USB2_MOCK_UTMI_CLK>;
+ 			clock-names = "core", "sleep", "mock_utmi";
+-			ranges;
++			phys = <&usb2_hs_phy>;
++			phy-names = "usb2-phy";
++			dr_mode = "host";
+ 			status = "disabled";
+-
+-			usb@6000000 {
+-				compatible = "snps,dwc3";
+-				reg = <0x6000000 0xf8000>;
+-				interrupts = <GIC_SPI 136 IRQ_TYPE_LEVEL_HIGH>;
+-				phys = <&usb2_hs_phy>;
+-				phy-names = "usb2-phy";
+-				dr_mode = "host";
+-			};
+ 		};
+ 	};
+ };

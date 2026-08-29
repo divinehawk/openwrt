@@ -183,9 +183,7 @@
 
 &usb3 {
 	status = "okay";
-};
 
-&usb3_dwc {
 	#address-cells = <1>;
 	#size-cells = <0>;
 
