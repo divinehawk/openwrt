@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: GPL-2.0-only OR MIT
+
+#include "qcom-ipq4018-utr.dtsi"
+
+/ {
+	model = "Ubiquiti UniFi Travel Router Long-Range";
+	compatible = "ubnt,utr-lr", "qcom,ipq4019";
+};
+
+&display {
+	rotation = <180>;
+};
+
+&wifi0 {
+	qcom,ath10k-calibration-variant = "Ubiquiti-UTR-LR";
+};
+
+&wifi1 {
+	qcom,ath10k-calibration-variant = "Ubiquiti-UTR-LR";
+};
