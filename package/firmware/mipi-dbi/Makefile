@@ -22,6 +22,7 @@ endef
 
 # From https://github.com/notro/panel-mipi-dbi
 # mipi-dbi-cmd ubnt,utr-lcd.bin ubnt,utr-lcd.txt
+# mipi-dbi-cmd ubnt,utr-lr-lcd.bin ubnt,utr-lr-lcd.txt
 
 define Package/mipi-dbi-ubnt-utr
   $(Package/mipi-dbi-default)
@@ -34,4 +35,16 @@ define Package/mipi-dbi-ubnt-utr/install
 	$(INSTALL_DATA) ./files/ubnt,utr-lcd.bin $(1)/lib/firmware/
 endef
 
+define Package/mipi-dbi-ubnt-utr-lr
+  $(Package/mipi-dbi-default)
+  TITLE:=MIPI DBI LCD init sequence for Ubiquiti UniFi Travel Router Long-Range
+  DEPENDS:=@TARGET_ipq40xx
+endef
+
+define Package/mipi-dbi-ubnt-utr-lr/install
+	$(INSTALL_DIR) $(1)/lib/firmware
+	$(INSTALL_DATA) ./files/ubnt,utr-lr-lcd.bin $(1)/lib/firmware/
+endef
+
 $(eval $(call BuildPackage,mipi-dbi-ubnt-utr))
+$(eval $(call BuildPackage,mipi-dbi-ubnt-utr-lr))

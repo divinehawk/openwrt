@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: GPL-2.0-only OR MIT
+
+#include "qcom-ipq4018-utr.dtsi"
+
+/ {
+	model = "Ubiquiti UniFi Travel Router Long-Range";
+	compatible = "ubnt,utr-lr", "qcom,ipq4019";
+};
+
+/*
+ * The panel is mounted the other way up from the UTR's. panel-mipi-dbi takes
+ * its orientation from the init sequence named after the first compatible,
+ * not from a rotation property, so the LR has a sequence of its own (MADCTL
+ * 0x00 rather than 0xC0) and the column offset that goes with it.
+ */
+&display {
+	compatible = "ubnt,utr-lr-lcd", "panel-mipi-dbi-spi";
+
+	panel-timing {
+		hback-porch = <52>;
+	};
+};
+
+&wifi0 {
+	qcom,ath10k-calibration-variant = "Ubiquiti-UTR-LR";
+};
+
+&wifi1 {
+	qcom,ath10k-calibration-variant = "Ubiquiti-UTR-LR";
+};
