@@ -92,9 +92,9 @@ endef
 
 define Device/BootUboot
   DEVICE_PACKAGES += uboot-envtools
-  ARTIFACTS := uboot-bootloader.bin
-  ARTIFACT/uboot-bootloader.bin := staging-copy-file $(1)-preload_u-boot.bin | \
-    fill-zero 0x80000
+  ARTIFACTS += bootloader.bin uboot-chainload.itb
+  ARTIFACT/bootloader.bin := bootloader-atf | fill-zero 0x100000
+  ARTIFACT/uboot-chainload.itb := uboot-chainloader tplink_xx230v-v1
 endef
 
 # Make image with new u-boot part version and ubi partion support
@@ -174,13 +174,14 @@ define Build/routerboot-elf
   mv $@.new $@
 endef
 
+# Make U-Boot chainload
 define Build/uboot-chainloader
   $(INSTALL_DIR) $(KDIR)/chainload-fit-$(notdir $@)
-  @if [ -f "$(STAGING_DIR_IMAGE)/$(SUBTARGET)_$1-u-boot.bin.lzma" ]; then \
-    KERNEL="$(STAGING_DIR_IMAGE)/$(SUBTARGET)_$1-u-boot.bin.lzma"; \
+  @if [ -f "$(STAGING_DIR_IMAGE)/$(SUBTARGET)_$(if $($1),$1,$(DEVICE_NAME))-u-boot.lzma" ]; then \
+    KERNEL="$(STAGING_DIR_IMAGE)/$(SUBTARGET)_$(if $($1),$1,$(DEVICE_NAME))-u-boot.lzma"; \
     COMP="lzma"; \
   else \
-    KERNEL="$(STAGING_DIR_IMAGE)/$(SUBTARGET)_$1-u-boot.bin"; \
+    KERNEL="$(STAGING_DIR_IMAGE)/$(SUBTARGET)_$(if $($1),$1,$(DEVICE_NAME))-u-boot.bin"; \
     COMP="none"; \
   fi; \
   $(TOPDIR)/scripts/mkits.sh \
@@ -191,14 +192,26 @@ define Build/uboot-chainloader
     -a $(KERNEL_LOADADDR) -e $(KERNEL_LOADADDR) \
     -c conf-uboot \
     -A $(ARCH) -v u-boot \
-    -d $(STAGING_DIR_IMAGE)/$(SUBTARGET)_$1-u-boot.dtb \
+    -d $(STAGING_DIR_IMAGE)/$(SUBTARGET)_$(if $($1),$1,$(DEVICE_NAME))-u-boot.dtb \
     -s 0x82000000
   PATH=$(LINUX_DIR)/scripts/dtc:$(PATH) \
     $(STAGING_DIR_HOST)/bin/mkimage \
     -D "-i $(KDIR)/chainload-fit-$(notdir $@)" \
     -f $(KDIR)/chainload-fit-$(notdir $@)/u-boot.its \
-    $(STAGING_DIR_IMAGE)/$(SUBTARGET)_$1-chainload-u-boot.itb
-  cat $(STAGING_DIR_IMAGE)/$(SUBTARGET)_$1-chainload-u-boot.itb >> $@
+    $(STAGING_DIR_IMAGE)/$(SUBTARGET)_$(if $($1),$1,$(DEVICE_NAME))-chainload-u-boot.itb
+  cat $(STAGING_DIR_IMAGE)/$(SUBTARGET)_$(if $($1),$1,$(DEVICE_NAME))-chainload-u-boot.itb >> $@
+endef
+
+# Make bootloader replacer, same to tcboot.bin
+define Build/bootloader-atf
+  rm -f $@.tmp
+	$(STAGING_DIR_HOST)/bin/fiptool create $@.tmp \
+		--align 1024 \
+		--tb-fw $(STAGING_DIR_IMAGE)/$(SUBTARGET)-bl2.bin \
+		--soc-fw $(STAGING_DIR_IMAGE)/$(SUBTARGET)-bl31.lzma \
+		--nt-fw $(STAGING_DIR_IMAGE)/$(SUBTARGET)_$(DEVICE_NAME)-u-boot.lzma
+	cat $(STAGING_DIR_IMAGE)/$(SUBTARGET)-bl1.bin $@.tmp > $@
+	rm -f $@.tmp
 endef
 
 include $(SUBTARGET).mk

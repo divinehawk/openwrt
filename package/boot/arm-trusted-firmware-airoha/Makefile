@@ -18,6 +18,7 @@ define Trusted-Firmware-A/Default
   BUILD_TARGET:=airoha
   PLAT:=en7523
   HIDDEN:=y
+  PREBUILT_IMAGE:=
 endef
 
 define Trusted-Firmware-A/bl2/Default
@@ -62,9 +63,51 @@ define Trusted-Firmware-A/an7583-bl31
 	nokia_xg-040g-mf-ubi
 endef
 
+EN7523_BL1:=$(CURDIR)/files/en7523-bl1.bin
+EN7523_BL2:=$(CURDIR)/files/en7523-bl2.bin
+EN7523_BL31:=$(CURDIR)/files/en7523-bl31.bin
+
+define Trusted-Firmware-A/en7523-bl1
+  NAME:=Airoha en7523 bl1
+  ARCH:=aarch32
+  ATF_STAGE:=bl1
+  BUILD_SUBTARGET:=en7523
+  SOC:=EN7523
+  DEFAULT:=y
+  PREBUILT_IMAGE:=$(EN7523_BL1)
+endef
+
+define Trusted-Firmware-A/en7523-bl2
+  $(call Trusted-Firmware-A/bl2/Default)
+  NAME:=Airoha en7523 bl2
+  BUILD_SUBTARGET:=en7523
+  SOC:=EN7523
+  DEFAULT:=y
+  PREBUILT_IMAGE:=$(EN7523_BL2)
+endef
+
+define Trusted-Firmware-A/en7523-bl31
+  $(call Trusted-Firmware-A/bl31/Default)
+  NAME:=Airoha en7523 bl31
+  BUILD_SUBTARGET:=en7523
+  SOC:=EN7523
+  DEFAULT:=y
+  PREBUILT_IMAGE:=$(EN7523_BL31)
+endef
+
 TFA_TARGETS:= \
 	an7581-bl2 an7581-bl31 \
 	an7583-bl2 an7583-bl31
+
+ifneq ($(wildcard $(EN7523_BL1)),)
+  TFA_TARGETS += en7523-bl1
+endif
+ifneq ($(wildcard $(EN7523_BL2)),)
+  TFA_TARGETS += en7523-bl2
+endif
+ifneq ($(wildcard $(EN7523_BL31)),)
+  TFA_TARGETS += en7523-bl31
+endif
 
 TFA_MAKE_FLAGS= \
 	ARM32TOOLCHAIN_BASE=$(PKG_BUILD_DIR)/$(BL2_GCC_SOURCE)/bin/arm-none-eabi- \
@@ -137,7 +180,11 @@ define Host/Install
 	$(INSTALL_BIN) $(HOST_BUILD_DIR)/spi_nand_flash_table $(STAGING_DIR_HOST)/bin/airoha-atf-gen-flash-table
 endef
 
-define Build/Prepare
+define Build/Prepare/prebuilt
+	$(INSTALL_DIR) $(PKG_BUILD_DIR)
+endef
+
+define Build/Prepare/source
 	$(if $(filter bl2,$(ATF_STAGE)),
 		$(eval $(call Download,bl2-toolchain))
 		$(TAR) -C $(PKG_BUILD_DIR) -xf $(DL_DIR)/$(FILE)
@@ -152,6 +199,10 @@ define Build/Prepare
 	$(TAR) -C $(PKG_BUILD_DIR) --strip-components=1 -xf $(DL_DIR)/$(FILE)
 endef
 
+define Build/Prepare
+	$(call Build/Prepare/$(if $(PREBUILT_IMAGE),prebuilt,source))
+endef
+
 define Build/Compile/bl2
 	$(Build/Compile/Trusted-Firmware-A) IMAGE_BL21=1 bl2
 	$(Build/Compile/Trusted-Firmware-A) clean
@@ -164,8 +215,11 @@ define Build/Compile/bl31
 	$(Build/Compile/Trusted-Firmware-A) bl31
 endef
 
+define Build/Compile/prebuilt
+endef
+
 define Build/Compile
-	$(call Build/Compile/$(ATF_STAGE))
+	$(call Build/Compile/$(if $(PREBUILT_IMAGE),prebuilt,$(ATF_STAGE)))
 endef
 
 define Package/trusted-firmware-a/bl2/install
@@ -192,8 +246,19 @@ define Package/trusted-firmware-a/bl31/install
 		$(STAGING_DIR_IMAGE)/$(BUILD_SUBTARGET)-bl31.lzma
 endef
 
+define Package/trusted-firmware-a/prebuilt/install
+	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)
+	$(if $(filter bl31,$(ATF_STAGE)),
+		$(STAGING_DIR_HOST)/bin/lzma e \
+			$(PREBUILT_IMAGE) \
+			$(STAGING_DIR_IMAGE)/$(BUILD_SUBTARGET)-$(ATF_STAGE).lzma,
+		$(INSTALL_DATA) $(PREBUILT_IMAGE) \
+			$(STAGING_DIR_IMAGE)/$(BUILD_SUBTARGET)-$(ATF_STAGE).bin
+	)
+endef
+
 define Package/trusted-firmware-a/install
-	$(call Package/trusted-firmware-a/$(ATF_STAGE)/install)
+	$(call Package/trusted-firmware-a/$(if $(PREBUILT_IMAGE),prebuilt,$(ATF_STAGE))/install)
 endef
 
 $(eval $(call HostBuild))
