@@ -1,4 +1,4 @@
-From fe365406ddc8ee66ffeea5de1794d13db7f905fd Mon Sep 17 00:00:00 2001
+From 190798c6a77c0f907f6c3ed2b7197dfc6fb489ac Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 30 Jul 2026 16:58:15 +0000
 Subject: [PATCH] net: airoha: reset xPON MAC between OMCI sessions

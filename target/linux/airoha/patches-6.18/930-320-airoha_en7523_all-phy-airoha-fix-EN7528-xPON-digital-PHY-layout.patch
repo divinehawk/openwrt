@@ -1,4 +1,4 @@
-From ac824dff095d4cd2f7f46b25e1385b9d9af5b25b Mon Sep 17 00:00:00 2001
+From 14a1d639e0a88a133b8dd51f5ccaf18cdf0fb19e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 13:03:51 -0300
 Subject: [PATCH] phy: airoha: fix EN7528 xPON digital PHY layout

@@ -1,4 +1,4 @@
-From 5fbbca3c50015fbcac318e7ded4f931eb2e4e097 Mon Sep 17 00:00:00 2001
+From db5aafd3da89b2907e85d63c4aee27f354b22024 Mon Sep 17 00:00:00 2001
 From: Matheus <sirherobrine23@users.noreply.github.com>
 Date: Tue, 28 Jul 2026 17:01:40 +0000
 Subject: [PATCH] net: omci: reduce agent stack usage

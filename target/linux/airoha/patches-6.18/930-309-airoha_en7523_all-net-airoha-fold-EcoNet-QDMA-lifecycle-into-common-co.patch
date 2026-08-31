@@ -1,4 +1,4 @@
-From aaeccec84b8c63eef789725497970a295c1157ef Mon Sep 17 00:00:00 2001
+From e75188ce4ad4ba33e5aaa7791135b749993ef01a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:22:34 -0300
 Subject: [PATCH] net: airoha: fold EcoNet QDMA lifecycle into common core

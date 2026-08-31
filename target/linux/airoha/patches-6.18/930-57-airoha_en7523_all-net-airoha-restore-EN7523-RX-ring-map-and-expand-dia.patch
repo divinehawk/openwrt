@@ -1,4 +1,4 @@
-From ec60e71aac303729ce18d87cced97255b9ac6b19 Mon Sep 17 00:00:00 2001
+From c3f4212d30b5628d6c632544c674976239858713 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 18:38:04 +0000
 Subject: [PATCH] net: airoha: restore EN7523 RX ring map and expand

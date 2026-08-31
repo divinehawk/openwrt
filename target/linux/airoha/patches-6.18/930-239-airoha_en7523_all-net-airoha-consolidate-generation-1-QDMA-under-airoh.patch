@@ -1,4 +1,4 @@
-From 4353d4bbdca012f98eb5d967de53dac8f49d1788 Mon Sep 17 00:00:00 2001
+From 026ea56a0cfa2ad5ffffa6be212533000e8ba8b8 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:39 -0300
 Subject: [PATCH] net: airoha: consolidate generation-1 QDMA under airoha_qdma

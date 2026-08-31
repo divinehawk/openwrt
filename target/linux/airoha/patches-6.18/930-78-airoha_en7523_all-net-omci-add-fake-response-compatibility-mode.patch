@@ -1,4 +1,4 @@
-From 528719554853c5bd932db217be0a92aec51562a0 Mon Sep 17 00:00:00 2001
+From f0b2e5faa4399424cb2ecdc615c1ae6cb1e986ac Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 04:53:22 +0000
 Subject: [PATCH] net: omci: add fake response compatibility mode

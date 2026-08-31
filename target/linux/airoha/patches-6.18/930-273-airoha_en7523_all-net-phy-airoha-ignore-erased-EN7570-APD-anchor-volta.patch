@@ -1,4 +1,4 @@
-From cfcefb06a56776bbb574fc4394a5e31ed82b96f8 Mon Sep 17 00:00:00 2001
+From 65d6d9a871315aed4ed6455ddeec32c358e1c7a5 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 13:32:02 +0200
 Subject: [PATCH] net: phy: airoha: ignore erased EN7570 APD anchor voltages

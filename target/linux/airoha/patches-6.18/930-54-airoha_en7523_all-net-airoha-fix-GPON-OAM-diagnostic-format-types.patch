@@ -1,4 +1,4 @@
-From c48d1ae84cb0a37f63e53579c1e94a129d90594c Mon Sep 17 00:00:00 2001
+From b234b80efcd6652154f5330a752954d93a6a0659 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 16:40:18 +0000
 Subject: [PATCH] net: airoha: fix GPON OAM diagnostic format types

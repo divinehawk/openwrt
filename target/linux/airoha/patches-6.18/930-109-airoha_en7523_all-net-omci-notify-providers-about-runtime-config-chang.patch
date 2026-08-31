@@ -1,4 +1,4 @@
-From fa848dc43a66d5bb97940183ebaa36edbc412acd Mon Sep 17 00:00:00 2001
+From a7ec794dcb65f6414175eea5df6ffb4109aec2e9 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 20:11:50 +0000
 Subject: [PATCH] net: omci: notify providers about runtime config changes

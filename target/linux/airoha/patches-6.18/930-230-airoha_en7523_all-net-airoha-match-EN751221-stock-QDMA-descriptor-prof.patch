@@ -1,4 +1,4 @@
-From a665c6b48fd995243be1267b912c549db84ad36c Mon Sep 17 00:00:00 2001
+From 9580fe7cf44274e0d6dbcac0f1d9c258b322b460 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:29 -0300
 Subject: [PATCH] net: airoha: match EN751221 stock QDMA descriptor profile

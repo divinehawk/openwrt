@@ -1,4 +1,4 @@
-From 0c2b4ddc6d4789b8e950e600ae2eeb9537301b7a Mon Sep 17 00:00:00 2001
+From 7b67dc296b34c99d716ce07fe58d47967110ff97 Mon Sep 17 00:00:00 2001
 From: Ahmed Naseef <naseefkm@gmail.com>
 Date: Thu, 6 Aug 2026 15:49:22 -0300
 Subject: [PATCH] gpio: en7523: enable for EcoNet MIPS platform

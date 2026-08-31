@@ -1,4 +1,4 @@
-From f9d0360e4d4181e08025ed3895b4aeb2dcb1f027 Mon Sep 17 00:00:00 2001
+From 338da57c7d7de9ff9866599e94d1f8e5b3a66b03 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 17:49:32 +0000
 Subject: [PATCH] net: airoha: use legacy EN7523 RX ring registers

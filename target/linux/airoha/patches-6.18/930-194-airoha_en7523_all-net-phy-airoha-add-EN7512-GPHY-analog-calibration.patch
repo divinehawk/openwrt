@@ -1,4 +1,4 @@
-From 1f0c410f820029da4f6a418ffdf590c8a1b88580 Mon Sep 17 00:00:00 2001
+From 7f107f24fe6c4f24f7f50705fcbf0029e0b12cc6 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 23:08:49 -0300
 Subject: [PATCH] net: phy: airoha: add EN7512 GPHY analog calibration

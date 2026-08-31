@@ -1,4 +1,4 @@
-From 8ca99689ef865808f789c334ad30029f4bf16722 Mon Sep 17 00:00:00 2001
+From 5cc8182d76d0c78e949035d8e10d6aabd3362c8f Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <benjamin.larsson@genexis.eu>
 Date: Sat, 13 Jun 2026 21:31:00 +0200
 Subject: [PATCH] net: airoha: restrict supported interfaces for SGMII ports

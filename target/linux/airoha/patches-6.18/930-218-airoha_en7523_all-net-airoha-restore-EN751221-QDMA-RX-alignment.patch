@@ -1,4 +1,4 @@
-From 4d61b6885b0aa502b24dc8937b4034e7157d9cdd Mon Sep 17 00:00:00 2001
+From 17555489fad076afa11571ff31a28e17bc93d0ab Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:18 -0300
 Subject: [PATCH] net: airoha: restore EN751221 QDMA RX alignment

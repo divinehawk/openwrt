@@ -1,4 +1,4 @@
-From b98f4c85f02a78adbe79dde63b5df84c955cc512 Mon Sep 17 00:00:00 2001
+From 1ed5dfee2d5b9975873b3e786cda434e84e36031 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 19:03:18 +0000
 Subject: [PATCH] dt-bindings: net: omci: add optional dying-gasp alarm

@@ -1,4 +1,4 @@
-From 115ff9a3a5a2fa7903a506a3576e4c1daa451ac6 Mon Sep 17 00:00:00 2001
+From 0ef7de0cf3100eab1d6f1daafabb87df3163ff9c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:09 -0300
 Subject: [PATCH] net: dsa: mt7530: restore EN751221 DSA cascade semantics

@@ -1,4 +1,4 @@
-From 3ffa33f8540a9e05ec7c530dd70726a830ea565b Mon Sep 17 00:00:00 2001
+From fad1d53899f49c6aff79904bf8ce2485913b30b3 Mon Sep 17 00:00:00 2001
 From: Caleb James DeLisle <cjd@cjdns.fr>
 Date: Thu, 6 Aug 2026 15:52:01 -0300
 Subject: [PATCH] dt-bindings: clock, reset: add EcoNet EN751221

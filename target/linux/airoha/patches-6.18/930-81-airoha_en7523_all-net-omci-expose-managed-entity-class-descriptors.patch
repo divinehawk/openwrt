@@ -1,4 +1,4 @@
-From 1caa11d05b87698569662db7577ae824c39d8df5 Mon Sep 17 00:00:00 2001
+From 4a5ef33a085eec11772c80f93ed1baf0db7e163f Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 10:52:37 +0000
 Subject: [PATCH] net: omci: expose managed entity class descriptors

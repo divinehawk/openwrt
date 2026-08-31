@@ -1,4 +1,4 @@
-From e3a537c01cd8d328bd4b19b193e44e2832af5e0b Mon Sep 17 00:00:00 2001
+From 3f678bae2f0d36e6a5eff5a08be4647ad6fedf11 Mon Sep 17 00:00:00 2001
 From: ChatGPT <noreply@openai.com>
 Date: Thu, 6 Aug 2026 10:46:58 +0000
 Subject: [PATCH] dt-bindings: net: add EcoNet EN751221 frame engine

@@ -1,4 +1,4 @@
-From 23e65961a6d105e4c7cbf097d5f8831c48e5465d Mon Sep 17 00:00:00 2001
+From afede7311301f9ff27d0bbd5f5e0b8009c82a693 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:03 -0300
 Subject: [PATCH] net: airoha: fix EN751221 downstream QDMA channel

@@ -1,4 +1,4 @@
-From f35c7554aaf9db8412797224af425511aa42a80f Mon Sep 17 00:00:00 2001
+From 751d9d8c1157cb4d5d67128b0f62299366210834 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 10:43:00 +0000
 Subject: [PATCH] dt-bindings: net: airoha: add xPON-managed GDM property

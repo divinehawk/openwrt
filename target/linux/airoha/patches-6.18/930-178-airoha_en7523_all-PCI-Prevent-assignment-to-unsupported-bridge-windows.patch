@@ -1,4 +1,4 @@
-From 04d1459dc1bbda9ec6379e19b55d1d0509c19a5e Mon Sep 17 00:00:00 2001
+From 42c9c7d2dbf335992b5e6d64a50dd69ef3486cee Mon Sep 17 00:00:00 2001
 From: Ahmed Naseef <naseefkm@gmail.com>
 Date: Thu, 12 Mar 2026 16:53:32 +0000
 Subject: [PATCH] PCI: Prevent assignment to unsupported bridge windows

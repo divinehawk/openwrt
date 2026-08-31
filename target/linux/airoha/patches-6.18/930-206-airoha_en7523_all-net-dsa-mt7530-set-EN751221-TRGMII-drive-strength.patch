@@ -1,4 +1,4 @@
-From 317e2f6701bfdc9efa959f259fce630f7c34f6db Mon Sep 17 00:00:00 2001
+From 15f91fa5929b39050cbab72a3ace5bec62cf2b3b Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:06 -0300
 Subject: [PATCH] net: dsa: mt7530: set EN751221 TRGMII drive strength

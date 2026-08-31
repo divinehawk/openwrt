@@ -1,4 +1,4 @@
-From 566f99cd5cdc20e3225b52df422a11d873866e94 Mon Sep 17 00:00:00 2001
+From 374d76bd430183b46b5a8496cb74e541f48a0751 Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Wed, 8 Jul 2026 12:23:27 +0200
 Subject: [PATCH] net: phy: mediatek: export __mtk_tr_write

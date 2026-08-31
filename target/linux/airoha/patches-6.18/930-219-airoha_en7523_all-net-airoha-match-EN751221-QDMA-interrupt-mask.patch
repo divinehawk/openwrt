@@ -1,4 +1,4 @@
-From ea63dc74cd867e3434d4fe111f8032e5211e8234 Mon Sep 17 00:00:00 2001
+From 5fcb36ad66c13d0dc71d7ed2468a7e699bc1e5f2 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:19 -0300
 Subject: [PATCH] net: airoha: match EN751221 QDMA interrupt mask

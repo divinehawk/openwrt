@@ -1,4 +1,4 @@
-From 618209b278ab5ceb8135951d74fed6986309d93a Mon Sep 17 00:00:00 2001
+From 7adae9b4e180bd9b832afa26aa39ca4cb01c17e2 Mon Sep 17 00:00:00 2001
 From: OpenAI <openai@example.com>
 Date: Thu, 30 Jul 2026 22:55:18 +0000
 Subject: [PATCH] net: airoha: match GPON NBOQ to T-CONT channel

@@ -1,4 +1,4 @@
-From 395675b72a91a970e99c1096ddbde806b2d465b1 Mon Sep 17 00:00:00 2001
+From 3e9486500e470489b1457633b749deabfed9a784 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 19 Aug 2026 16:25:04 -0300
 Subject: [PATCH] net: Add support for common optical frontend transmitter GPIO

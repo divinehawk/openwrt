@@ -1,4 +1,4 @@
-From 28c5b2ba3f1fa66ab306edf242434d100141b0d0 Mon Sep 17 00:00:00 2001
+From 5a6ef52b1cbc295b902bfeef0b359601f82d4518 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 25 Aug 2026 13:35:50 -0300
 Subject: [PATCH] sync openwrt en7528.dtsi

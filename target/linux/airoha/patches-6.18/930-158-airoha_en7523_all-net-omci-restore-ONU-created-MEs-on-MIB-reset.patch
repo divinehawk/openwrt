@@ -1,4 +1,4 @@
-From fd983ebf51ba6be01d6bd85666aee3197e790811 Mon Sep 17 00:00:00 2001
+From 06ce0100fc03d5e5a1c81cbadc08b08cfd7cd0d3 Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@openai.com>
 Date: Mon, 3 Aug 2026 17:08:07 +0000
 Subject: [PATCH] net: omci: restore ONU-created MEs on MIB reset

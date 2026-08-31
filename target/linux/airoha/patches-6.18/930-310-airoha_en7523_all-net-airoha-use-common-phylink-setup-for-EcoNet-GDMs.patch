@@ -1,4 +1,4 @@
-From 8d72d784d0ec0960cd261bac86ea53333a6e96f7 Mon Sep 17 00:00:00 2001
+From 910fa60f1e480407b715c8e46e6a8f87b830eb30 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:22:37 -0300
 Subject: [PATCH] net: airoha: use common phylink setup for EcoNet GDMs

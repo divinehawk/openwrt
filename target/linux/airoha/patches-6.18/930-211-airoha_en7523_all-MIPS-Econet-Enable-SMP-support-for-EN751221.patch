@@ -1,4 +1,4 @@
-From 3ccfbb01241f24dd8a0a7cfdc97a91e66e822583 Mon Sep 17 00:00:00 2001
+From e06936aac500409237227f3f4d4aaebe798a7638 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:11 -0300
 Subject: [PATCH] MIPS: Econet: Enable SMP support for EN751221

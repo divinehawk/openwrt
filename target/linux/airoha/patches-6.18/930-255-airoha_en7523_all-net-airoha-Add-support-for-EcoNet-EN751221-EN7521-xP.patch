@@ -1,4 +1,4 @@
-From d5a5ea055e3ea0b97e3ab67490619c53b603eadf Mon Sep 17 00:00:00 2001
+From 704dcbbf9c957d0cc5207915d3bf742e3a26409a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 18:56:03 -0300
 Subject: [PATCH] net: airoha: Add support for EcoNet EN751221/EN7521 xPON

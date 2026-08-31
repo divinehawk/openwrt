@@ -1,4 +1,4 @@
-From 3cbacd40328443012dd6fd75d48195b9d94504d8 Mon Sep 17 00:00:00 2001
+From a80ba4f2b02203a579eed1ed329692158abc47d9 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 19 Aug 2026 18:58:17 -0300
 Subject: [PATCH] pinctrl: econet: add econet pinctrl driver with EN7528

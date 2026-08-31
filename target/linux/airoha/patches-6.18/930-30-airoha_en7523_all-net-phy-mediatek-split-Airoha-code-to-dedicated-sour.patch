@@ -1,4 +1,4 @@
-From 55ecce0d588ebf5a5f2dd251aa8fac5474bc291b Mon Sep 17 00:00:00 2001
+From b82a3afb2a97e35880b20e5362cacd546d7e3011 Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Wed, 8 Jul 2026 12:23:29 +0200
 Subject: [PATCH] net: phy: mediatek: split Airoha code to dedicated source

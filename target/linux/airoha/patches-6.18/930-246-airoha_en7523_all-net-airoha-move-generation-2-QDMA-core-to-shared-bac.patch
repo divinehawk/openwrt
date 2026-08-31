@@ -1,4 +1,4 @@
-From 73a17d00525c506b7ca64f982db51543f901380f Mon Sep 17 00:00:00 2001
+From d50b085fc46adf46c449d69cbc7d87b98b0e0d68 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:46 -0300
 Subject: [PATCH] net: airoha: move generation-2 QDMA core to shared backend

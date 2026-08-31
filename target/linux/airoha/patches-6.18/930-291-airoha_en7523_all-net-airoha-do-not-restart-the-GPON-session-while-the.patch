@@ -1,4 +1,4 @@
-From 144ee7ef5469c5d8ddcc7e3bfbba61aa5d9c496f Mon Sep 17 00:00:00 2001
+From b358814d7e3eb0e9adb974ad653f79d736ca9c5a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 20 Aug 2026 16:57:01 -0300
 Subject: [PATCH] net: airoha: do not restart the GPON session while the fibre

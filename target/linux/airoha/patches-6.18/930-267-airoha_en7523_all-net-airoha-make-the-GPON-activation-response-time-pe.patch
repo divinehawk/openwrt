@@ -1,4 +1,4 @@
-From f8a5f85433fc84d0288553c6a73ee0cdbf219b02 Mon Sep 17 00:00:00 2001
+From 83fe5b685e4087af51b955106bdcbc5188c9cf10 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 12:22:44 +0200
 Subject: [PATCH] net: airoha: make the GPON activation response time per-SoC

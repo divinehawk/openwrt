@@ -1,4 +1,4 @@
-From 5102e66443da971e541b80d802dfbcc3ad27f97e Mon Sep 17 00:00:00 2001
+From 862b762f0f30281db964420d364864dfd5b699cb Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 16:32:58 +0000
 Subject: [PATCH] net: airoha: support PHY-less xPON GDM2

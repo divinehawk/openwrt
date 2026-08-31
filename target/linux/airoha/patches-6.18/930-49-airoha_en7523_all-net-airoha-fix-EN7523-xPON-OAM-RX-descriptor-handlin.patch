@@ -1,4 +1,4 @@
-From e66b011f4e3ce8656d43644666f8696502300587 Mon Sep 17 00:00:00 2001
+From f66e77deb9245d74f4d7453fd43e0675425ff259 Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@example.com>
 Date: Fri, 17 Jul 2026 15:26:39 +0000
 Subject: [PATCH] net: airoha: fix EN7523 xPON OAM RX descriptor handling

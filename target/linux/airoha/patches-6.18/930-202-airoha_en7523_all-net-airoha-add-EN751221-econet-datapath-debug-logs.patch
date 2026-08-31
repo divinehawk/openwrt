@@ -1,4 +1,4 @@
-From 47c8585f39d52bf8ff5898f0d6039f951f82751a Mon Sep 17 00:00:00 2001
+From 784e42fb9285bdada4d59f494583a87ba3ae7227 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:03 -0300
 Subject: [PATCH] net: airoha: add EN751221 econet datapath debug logs

@@ -1,4 +1,4 @@
-From 775eaaeeb6eab818cd6e60d44d04d02ec175dd51 Mon Sep 17 00:00:00 2001
+From 9a3390c4bd69ca7d9d474ba15d5c362127268465 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 13:31:58 +0200
 Subject: [PATCH] net: phy: airoha: complete EN7570 xPON integration

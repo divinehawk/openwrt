@@ -1,4 +1,4 @@
-From 130c9e139c29fe637b4c31b76be88f0bc2eae18f Mon Sep 17 00:00:00 2001
+From f8c86744fed868bfcf6bf488dfdb0a9cfbcf280e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:01 -0300
 Subject: [PATCH] net: airoha: decode EN751221 MT7530 RX source port

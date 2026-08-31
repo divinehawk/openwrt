@@ -1,4 +1,4 @@
-From a30a818f1779e00d57249fd6b52a30222aca05d3 Mon Sep 17 00:00:00 2001
+From dcc342331dc2a53e93e7803c1f686c76213a233b Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:22:11 -0300
 Subject: [PATCH] mips: econet: fall back to PDIDR for SoC name

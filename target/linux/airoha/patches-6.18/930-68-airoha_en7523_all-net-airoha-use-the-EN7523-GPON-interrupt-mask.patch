@@ -1,4 +1,4 @@
-From f297b4542df1083b24bf8f3776209e77091902db Mon Sep 17 00:00:00 2001
+From ada7daa7bc6c5ea2d6d21bafef3b544bbf12473a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 22:12:31 +0000
 Subject: [PATCH] net: airoha: use the EN7523 GPON interrupt mask

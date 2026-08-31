@@ -1,4 +1,4 @@
-From 81497f352570ffa7012db3ffeb8e463be462f8c6 Mon Sep 17 00:00:00 2001
+From b84ef19585eca4d804a85333686a892e59e4a2d8 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 16 Jul 2026 11:52:52 -0300
 Subject: [PATCH] remove pinctrl strict

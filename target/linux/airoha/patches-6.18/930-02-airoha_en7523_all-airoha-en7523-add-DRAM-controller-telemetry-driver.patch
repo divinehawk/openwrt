@@ -1,4 +1,4 @@
-From 509ddbb3b86bfc4cb6c384a86f058060d8ccba10 Mon Sep 17 00:00:00 2001
+From cffec161b6eaf6978a8fe2bb3cfce76202998098 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sun, 14 Jun 2026 18:46:08 -0300
 Subject: [PATCH] airoha: en7523: add DRAM controller telemetry driver

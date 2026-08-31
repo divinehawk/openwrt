@@ -1,4 +1,4 @@
-From 241cfe7f99402e839ddf62c5b11d39e2e6a53733 Mon Sep 17 00:00:00 2001
+From 5e7771bdb61cf4fca86adb46ec070afce5d590a4 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 22:50:21 -0300
 Subject: [PATCH] econet: enable mt7621 i2c driver

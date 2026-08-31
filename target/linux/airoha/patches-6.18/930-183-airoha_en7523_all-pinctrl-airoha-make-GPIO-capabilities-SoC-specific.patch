@@ -1,4 +1,4 @@
-From 6523ae54680ac9b860847fc65e3b603b1c675c4f Mon Sep 17 00:00:00 2001
+From a2a4a60705bdd6a641bcf21c99a5483af2184774 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 22:50:15 -0300
 Subject: [PATCH] pinctrl: airoha: make GPIO capabilities SoC-specific

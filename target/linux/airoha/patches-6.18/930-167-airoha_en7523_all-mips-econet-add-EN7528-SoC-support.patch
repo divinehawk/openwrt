@@ -1,4 +1,4 @@
-From 0171ec3e8b630b33f615d05a64400e8c228c6274 Mon Sep 17 00:00:00 2001
+From 801238a3f714c845ef9924244957556b3084823b Mon Sep 17 00:00:00 2001
 From: Ahmed Naseef <naseefkm@gmail.com>
 Date: Thu, 6 Aug 2026 15:48:28 -0300
 Subject: [PATCH] mips: econet: add EN7528 SoC support

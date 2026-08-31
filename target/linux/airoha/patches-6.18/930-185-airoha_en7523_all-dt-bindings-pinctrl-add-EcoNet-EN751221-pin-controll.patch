@@ -1,4 +1,4 @@
-From acb686a515e1168bd646060a9121a3ca9c94e0f6 Mon Sep 17 00:00:00 2001
+From 9b750fc1bf2a7961e8bce294aae256e8e1279b1e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 22:50:17 -0300
 Subject: [PATCH] dt-bindings: pinctrl: add EcoNet EN751221 pin controller

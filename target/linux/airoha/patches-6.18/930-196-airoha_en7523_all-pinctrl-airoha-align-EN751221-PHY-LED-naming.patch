@@ -1,4 +1,4 @@
-From 6ffff751cdf6da3fa19f033655f710363bb133c0 Mon Sep 17 00:00:00 2001
+From f6574a40f3cdacf89b12ca9ab2a24c1c35fc75fe Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:03:57 -0300
 Subject: [PATCH] pinctrl: airoha: align EN751221 PHY LED naming

@@ -1,4 +1,4 @@
-From 3162372c697f3ae50c666c6bd1c6e250f8810065 Mon Sep 17 00:00:00 2001
+From 9964cc17e8b355751f809143a9c1c39097c68c27 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 18 Aug 2026 11:08:36 -0300
 Subject: [PATCH] net: airoha: Improve EN751221 FoE entry layout handling

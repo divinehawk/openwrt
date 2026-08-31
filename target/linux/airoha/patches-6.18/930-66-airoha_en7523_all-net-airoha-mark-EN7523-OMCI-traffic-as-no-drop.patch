@@ -1,4 +1,4 @@
-From add8cb65f6dcf09f457bed1cf5ddd991fcb88dbe Mon Sep 17 00:00:00 2001
+From 4a1b101ea202d5d1a64053b16e8ab1dfb8c7f650 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 22:12:31 +0000
 Subject: [PATCH] net: airoha: mark EN7523 OMCI traffic as no-drop

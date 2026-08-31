@@ -1,4 +1,4 @@
-From 08ed4761d3b7d6cea803e84a156bb48321b8b421 Mon Sep 17 00:00:00 2001
+From 12932c66ffd7a297dee4ced9153f3f8902e746c2 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 30 Jan 2026 16:08:04 -0300
 Subject: [PATCH] hwrng: airoha: read more data and wait for new data if

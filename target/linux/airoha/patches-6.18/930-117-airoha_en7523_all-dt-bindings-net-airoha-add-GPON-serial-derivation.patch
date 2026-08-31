@@ -1,4 +1,4 @@
-From 9e8cb93d5d202f7bb09c917d4982738e7e36fdfa Mon Sep 17 00:00:00 2001
+From 5705590404ba6d40ac2853da4d0e708cda054182 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 24 Jul 2026 00:50:11 +0000
 Subject: [PATCH] dt-bindings: net: airoha: add GPON serial derivation

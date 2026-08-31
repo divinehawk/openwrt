@@ -1,4 +1,4 @@
-From f49b529bdcd755524baebe59da34aed8990e0f15 Mon Sep 17 00:00:00 2001
+From c23ae78349fa232764b17a9abf6ff18118c622ac Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 12:22:48 +0200
 Subject: [PATCH] net: airoha: raise the xPON service table to 256 entries

@@ -1,4 +1,4 @@
-From 3873765d68652cd0dfe61d6e6f9e7faaa63da955 Mon Sep 17 00:00:00 2001
+From 25ede316c0d2652ffa72c4f946f668c004e003dc Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:22:15 -0300
 Subject: [PATCH] net: airoha: consolidate Ethernet driver implementation

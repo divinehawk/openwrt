@@ -1,4 +1,4 @@
-From 7cc513fdd623766d3da768a823dc88292ceee11f Mon Sep 17 00:00:00 2001
+From 5ead4090cd75c1ae18fd611b48fe45520d1056bd Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Mon, 15 Jun 2026 16:00:00 +0200
 Subject: [PATCH] net: airoha: en7523: fix GDM3 hw-NAT egress queue (NBQ=6)

@@ -1,4 +1,4 @@
-From d2b2152fe7ec4bd17ecaa7060eb34d2f03ea9f68 Mon Sep 17 00:00:00 2001
+From 01b4e69a1b008b81fd2adee5a7a4e6a67466de6e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 22:39:54 +0000
 Subject: [PATCH] net: airoha: enable EN7523 GPON downstream channels

@@ -1,4 +1,4 @@
-From 2b4fb5dfdd7934d30f85d33c54ba44f447b34257 Mon Sep 17 00:00:00 2001
+From 5aae8dead7630edcf69a3603b2769759e1af880e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:43 -0300
 Subject: [PATCH] net: airoha: dispatch xPON Ethernet hooks through soc data

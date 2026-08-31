@@ -1,4 +1,4 @@
-From 43fcc99b6ca2b4a30de58a5f410ff68b80f27c46 Mon Sep 17 00:00:00 2001
+From cd84b9064f32ae61e7d6904e71e9564d44237724 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 13:31:54 +0200
 Subject: [PATCH] net: phy: airoha: load EN7570 factory calibration

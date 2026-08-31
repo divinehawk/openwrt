@@ -1,4 +1,4 @@
-From fec16989af68e7db312af9fc17712d6510b5ce1f Mon Sep 17 00:00:00 2001
+From 8f685f996b48b904fc9c622f2a721ce9e0173bd1 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 30 Jul 2026 20:12:21 +0000
 Subject: [PATCH] net: airoha: use EN7523 WAN rate-meter timing

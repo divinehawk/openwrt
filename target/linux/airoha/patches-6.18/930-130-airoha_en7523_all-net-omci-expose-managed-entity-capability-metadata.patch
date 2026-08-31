@@ -1,4 +1,4 @@
-From 52b6565c1ca01bbe899abbfa86ced81d10f9b211 Mon Sep 17 00:00:00 2001
+From b47a6c80b426c0a0eba8d9bd14a562045ebef4fb Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 28 Jul 2026 20:06:16 -0300
 Subject: [PATCH] net: omci: expose managed entity capability metadata

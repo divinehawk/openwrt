@@ -1,4 +1,4 @@
-From e977032f317ea083e2dc15e53c035019f9e6b6c2 Mon Sep 17 00:00:00 2001
+From fe942457cfa2f900d03cb2b751425185e79f8557 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 19 Aug 2026 16:57:12 -0300
 Subject: [PATCH] add hwmon of optical class

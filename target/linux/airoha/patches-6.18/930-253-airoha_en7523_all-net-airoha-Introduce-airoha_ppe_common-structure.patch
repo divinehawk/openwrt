@@ -1,4 +1,4 @@
-From 251f70a70e17efde9aaff3a32c07da6a133cf5c4 Mon Sep 17 00:00:00 2001
+From 12f2759dbc7038464ca4308b3a310f43fad17a90 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:54 -0300
 Subject: [PATCH] net: airoha: Introduce airoha_ppe_common structure

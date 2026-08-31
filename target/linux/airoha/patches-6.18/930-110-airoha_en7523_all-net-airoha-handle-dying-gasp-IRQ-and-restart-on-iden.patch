@@ -1,4 +1,4 @@
-From a09e3c648d5ef1958f8f79943aa1555f63cba77f Mon Sep 17 00:00:00 2001
+From 0984be3c154ed6f8f7f6b39117eeca09618391e0 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 20:11:50 +0000
 Subject: [PATCH] net: airoha: handle dying-gasp IRQ and restart on identity

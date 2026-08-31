@@ -1,4 +1,4 @@
-From 4d8fb2b14f6929cbf49bdbdf9cb99639bc25f4b2 Mon Sep 17 00:00:00 2001
+From 38a8b43fd1ad0eec28f1dfe9ea381e1fd2a2c816 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 13:30:43 +0000
 Subject: [PATCH] net: omci: avoid large MIB objects on the stack

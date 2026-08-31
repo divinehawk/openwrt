@@ -1,4 +1,4 @@
-From 5b62160a12fe0eae90520b97c186319b5593c09a Mon Sep 17 00:00:00 2001
+From 326bead73914e7ba49c8514db843fe356addd819 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 20:11:49 +0000
 Subject: [PATCH] dt-bindings: net: use xPON dying-gasp interrupt

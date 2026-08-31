@@ -1,4 +1,4 @@
-From c7dbf6f44291898a2f9ab30fc5c800e9e4b6ba70 Mon Sep 17 00:00:00 2001
+From 49c568de07eecb9f243c3ad1280d61f571dbdf5f Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 10:43:00 +0000
 Subject: [PATCH] net: airoha: make GDM2 the xPON data interface

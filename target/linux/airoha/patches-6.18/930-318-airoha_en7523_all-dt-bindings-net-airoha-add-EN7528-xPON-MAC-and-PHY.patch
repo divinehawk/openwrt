@@ -1,4 +1,4 @@
-From f082f33d0311a299d2254bd62264addea1f6cb44 Mon Sep 17 00:00:00 2001
+From 8861f3bb81464d53b8bd211efa05b338432176bc Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 01:29:27 -0300
 Subject: [PATCH] dt-bindings: net: airoha: add EN7528 xPON MAC and PHY

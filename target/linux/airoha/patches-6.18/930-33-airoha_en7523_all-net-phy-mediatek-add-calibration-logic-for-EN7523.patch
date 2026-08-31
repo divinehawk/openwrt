@@ -1,4 +1,4 @@
-From 03e7ffad6be813115480cc24ab5c9a0ad9ef59dc Mon Sep 17 00:00:00 2001
+From 9005742c3368d7759dbaea9421c68a72f381d01d Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 9 Jul 2026 18:13:24 -0300
 Subject: [PATCH] net: phy: mediatek: add calibration logic for EN7523

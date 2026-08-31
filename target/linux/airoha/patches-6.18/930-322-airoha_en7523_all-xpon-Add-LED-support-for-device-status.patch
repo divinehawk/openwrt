@@ -1,4 +1,4 @@
-From e4b961cb8323b91c13b2095b8995b240330cd7d8 Mon Sep 17 00:00:00 2001
+From f9c3ee684970fa70c5e25d38ebd89fb17a862698 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 27 Aug 2026 16:37:55 -0300
 Subject: [PATCH] xpon: Add LED support for device status

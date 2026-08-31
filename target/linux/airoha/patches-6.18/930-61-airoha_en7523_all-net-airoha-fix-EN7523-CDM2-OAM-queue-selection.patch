@@ -1,4 +1,4 @@
-From b532f9a16d5057b3ea36ae61a011bcb9fd2ddf58 Mon Sep 17 00:00:00 2001
+From a277dc1137f8dfe8b0e8cb9d47790b808ec20e5b Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 20:10:24 +0000
 Subject: [PATCH] net: airoha: fix EN7523 CDM2 OAM queue selection

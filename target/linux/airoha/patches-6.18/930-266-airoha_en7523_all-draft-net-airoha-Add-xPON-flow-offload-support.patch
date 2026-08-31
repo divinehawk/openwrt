@@ -1,4 +1,4 @@
-From 75697f3b7b15b8a80e38343621e6a0b0fdf6dc3c Mon Sep 17 00:00:00 2001
+From 9f9dc526787a83e879ed6eabb808f4d5df96405a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 13 Aug 2026 23:30:33 -0300
 Subject: [PATCH] draft: net: airoha: Add xPON flow offload support

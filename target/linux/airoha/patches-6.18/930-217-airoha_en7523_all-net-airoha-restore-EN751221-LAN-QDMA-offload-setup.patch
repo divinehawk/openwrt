@@ -1,4 +1,4 @@
-From a0a448df7aad891eb6c17d5383fc13863f146635 Mon Sep 17 00:00:00 2001
+From 927205e03187c169e358d5b55772f4d4ccf6461c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:17 -0300
 Subject: [PATCH] net: airoha: restore EN751221 LAN QDMA offload setup

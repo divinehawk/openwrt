@@ -1,4 +1,4 @@
-From ac7463405849e41c89ea2ac326bcd308d51c1642 Mon Sep 17 00:00:00 2001
+From 9b28a09d3f2bcb1f61c1f880d2d30fab922b3c8f Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 09:42:09 -0300
 Subject: [PATCH] revert: net: airoha: Fix skb->priority underflow in

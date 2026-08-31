@@ -1,4 +1,4 @@
-From 592d199430a573da9e86be51f0dd09bcf0299522 Mon Sep 17 00:00:00 2001
+From 72dd878beeb827eb8c83b07aecce295d2a92fd4a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 20 Aug 2026 16:57:00 -0300
 Subject: [PATCH] net: airoha: only reset the GPON MAC after a run of TO1

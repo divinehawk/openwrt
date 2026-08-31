@@ -1,4 +1,4 @@
-From f8af47ce9dc03b731d8feaf94eb2f239bef0cc27 Mon Sep 17 00:00:00 2001
+From 24695a6d9dc14b323696446c6fc44e9de78a5ad2 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 13:32:15 +0200
 Subject: [PATCH] net: airoha: demote the periodic GPON activation logs

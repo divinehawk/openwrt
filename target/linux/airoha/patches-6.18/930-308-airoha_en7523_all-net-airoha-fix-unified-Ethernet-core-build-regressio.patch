@@ -1,4 +1,4 @@
-From 6331c68e5683dc43d3e2d47f3bb5c54f0cad7e0e Mon Sep 17 00:00:00 2001
+From 9bacfffb5a67a9a0e576120fc27df63e96582d69 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:22:31 -0300
 Subject: [PATCH] net: airoha: fix unified Ethernet core build regressions

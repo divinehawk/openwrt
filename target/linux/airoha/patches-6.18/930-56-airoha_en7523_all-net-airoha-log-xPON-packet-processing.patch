@@ -1,4 +1,4 @@
-From af3d9edd091059059bf6090b065f858262c782a0 Mon Sep 17 00:00:00 2001
+From 3a19e779aa6e5363a589ad2c5dcaf54e1715f5ec Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 17:51:13 +0000
 Subject: [PATCH] net: airoha: log xPON packet processing

@@ -1,4 +1,4 @@
-From 2368fe3326351a326b24058816d83957535e4f2d Mon Sep 17 00:00:00 2001
+From e29649eebd56d90b27d0206722081e5358c7e4a1 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 22:50:22 -0300
 Subject: [PATCH] clk: airoha: guard SMCCC CPU clock calls on ARM

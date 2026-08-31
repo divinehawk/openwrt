@@ -1,4 +1,4 @@
-From 97338342b83c16b0395fc16a8aa9a6c20889b1f6 Mon Sep 17 00:00:00 2001
+From 8e8bee6f1145ea520f03957dd42adf56cf0c7c66 Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@openai.com>
 Date: Fri, 31 Jul 2026 00:13:37 +0000
 Subject: [PATCH] net: airoha: carry GPON service metadata in PPE flows

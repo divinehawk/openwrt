@@ -1,4 +1,4 @@
-From 48364b12f36de25ffb305a927448d220b48d0b5d Mon Sep 17 00:00:00 2001
+From d2fc1babb560f585d3edbd57c49ea2104dcbd1f6 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 22:55:20 +0000
 Subject: [PATCH] net: airoha: generate a random GPON serial fallback

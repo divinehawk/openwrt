@@ -1,4 +1,4 @@
-From 6920dd27270fe1ae0f5cbac72b6e18b3981430b3 Mon Sep 17 00:00:00 2001
+From e002e51b1ea26e52f3edf7739c171c6fc41307c5 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:23:00 -0300
 Subject: [PATCH] net: airoha: fold FoE v1 PPE into common core

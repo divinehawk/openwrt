@@ -1,4 +1,4 @@
-From 00fbceaf90ed981f74bada2ad3d69bb3ab3fb791 Mon Sep 17 00:00:00 2001
+From e0c33a11dc5ebe4c35d2af2871aae97f443d0f6c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:48 -0300
 Subject: [PATCH] net: airoha: unify gen1 PPE memory and Kconfig

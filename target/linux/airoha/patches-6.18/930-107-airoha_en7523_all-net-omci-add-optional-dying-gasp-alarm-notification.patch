@@ -1,4 +1,4 @@
-From 2fc14c8833dabacd1849b53be79457bb82e74516 Mon Sep 17 00:00:00 2001
+From 01485b4d3b2bac221693cc2ae4c7ea15b3e92e10 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 19:04:08 +0000
 Subject: [PATCH] net: omci: add optional dying-gasp alarm notification

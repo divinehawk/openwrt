@@ -1,4 +1,4 @@
-From e16bbf840974e25a9e593bb6b3fde348b5bec44a Mon Sep 17 00:00:00 2001
+From 2b5cbae64ca77970c2a1a3b6ee1ebcc0c43e52fe Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 13:31:50 +0200
 Subject: [PATCH] phy: airoha: describe the transceiver pin conventions in DT

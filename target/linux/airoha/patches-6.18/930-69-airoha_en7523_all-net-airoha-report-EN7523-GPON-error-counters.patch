@@ -1,4 +1,4 @@
-From 6a151ca1b1dac37a62c9ff2836e25039047398be Mon Sep 17 00:00:00 2001
+From f87c45b6a65f089fd1b72200bc1b513138666ece Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 22:12:32 +0000
 Subject: [PATCH] net: airoha: report EN7523 GPON error counters

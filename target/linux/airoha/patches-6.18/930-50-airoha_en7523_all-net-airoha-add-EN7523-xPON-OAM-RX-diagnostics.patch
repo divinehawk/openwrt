@@ -1,4 +1,4 @@
-From ff812ffc08f15cbea373d2fcd5d0d454b5960715 Mon Sep 17 00:00:00 2001
+From b44681889184898b8fa3e86e1da8d1098efd4679 Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@example.com>
 Date: Fri, 17 Jul 2026 15:28:42 +0000
 Subject: [PATCH] net: airoha: add EN7523 xPON OAM RX diagnostics

@@ -1,4 +1,4 @@
-From 0f6d6f30843bf4f479bbea536359e510f8337b98 Mon Sep 17 00:00:00 2001
+From db9d54abe1f2ae10ca9f50e533bd079073b8e1ad Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 25 Jul 2026 22:06:07 +0000
 Subject: [PATCH] net: airoha: make GPON session recovery deterministic

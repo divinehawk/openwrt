@@ -1,4 +1,4 @@
-From 61e89dfba330e7897d7654efa47486670fa1a809 Mon Sep 17 00:00:00 2001
+From 3d514320ec1f3cd2c6d91cbf29b195e8574a27d1 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 04:06:46 +0000
 Subject: [PATCH] net: omci: expose parsed VLAN tables over netlink

@@ -1,4 +1,4 @@
-From 8ce6ce25477cd6e9d89ec99ae9e2a6387ed3a7b8 Mon Sep 17 00:00:00 2001
+From 65cc29234a1c366822471b2cc9c3dbc73a6aef54 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Mon, 24 Aug 2026 23:40:11 -0300
 Subject: [PATCH] spi: airoha: Add support for EN751221 SoC

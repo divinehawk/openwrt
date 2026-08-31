@@ -1,4 +1,4 @@
-From aa199b689ea44992a1a588ef2e07596cb475fe33 Mon Sep 17 00:00:00 2001
+From 8c452d460e6f5935d2a3edee5e36a0b9fc9701f7 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 13:32:10 +0200
 Subject: [PATCH] net: omci: trace staged services and report install failures

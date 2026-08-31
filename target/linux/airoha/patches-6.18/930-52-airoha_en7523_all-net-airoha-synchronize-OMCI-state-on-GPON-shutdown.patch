@@ -1,4 +1,4 @@
-From b9780b8b1143ba00a75831a8c1ff3319bed7f779 Mon Sep 17 00:00:00 2001
+From 4f4b8f6ca75d9455d1022e99efcc56e2279c0c92 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 16:23:39 +0000
 Subject: [PATCH] net: airoha: synchronize OMCI state on GPON shutdown

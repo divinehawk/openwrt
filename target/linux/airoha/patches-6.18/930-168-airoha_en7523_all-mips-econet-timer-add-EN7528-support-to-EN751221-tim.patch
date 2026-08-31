@@ -1,4 +1,4 @@
-From f1db793a844842b8bfa6c409510aa05ff10cfbdd Mon Sep 17 00:00:00 2001
+From ba8bed566d9ec8ab81171b55483193c83e3f3106 Mon Sep 17 00:00:00 2001
 From: Ahmed Naseef <naseefkm@gmail.com>
 Date: Thu, 6 Aug 2026 15:48:34 -0300
 Subject: [PATCH] mips: econet: timer: add EN7528 support to EN751221 timer

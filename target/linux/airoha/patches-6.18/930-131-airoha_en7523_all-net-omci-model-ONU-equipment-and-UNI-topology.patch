@@ -1,4 +1,4 @@
-From 5855ea8108cf5f6a7b1e5fb42d29f954bda42cff Mon Sep 17 00:00:00 2001
+From 9d668253e99cb7026c4cf12e9a610a6d65b2cd45 Mon Sep 17 00:00:00 2001
 From: OpenAI Analysis <analysis@example.invalid>
 Date: Wed, 29 Jul 2026 00:07:57 +0000
 Subject: [PATCH] net: omci: model ONU equipment and UNI topology

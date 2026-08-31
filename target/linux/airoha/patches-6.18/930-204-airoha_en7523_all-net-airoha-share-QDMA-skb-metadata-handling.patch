@@ -1,4 +1,4 @@
-From dbc07bd02c0254a92874565e7a0c2cf8b3e431a3 Mon Sep 17 00:00:00 2001
+From 7fbaf682d85d5475ad8b98df9f588c4fb1f7eef3 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:04 -0300
 Subject: [PATCH] net: airoha: share QDMA skb metadata handling

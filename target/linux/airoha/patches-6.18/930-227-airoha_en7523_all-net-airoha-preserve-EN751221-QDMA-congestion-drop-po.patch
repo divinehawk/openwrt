@@ -1,4 +1,4 @@
-From 2ed4fc70d454afc614195ae4363d9d42ca25812a Mon Sep 17 00:00:00 2001
+From 8a3fe4c66d9318cd413a5f2cdbcee2b3664fd8d6 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:26 -0300
 Subject: [PATCH] net: airoha: preserve EN751221 QDMA congestion drop policy

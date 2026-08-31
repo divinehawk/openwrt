@@ -1,4 +1,4 @@
-From 8cf610a7b4a9f1c2c15588fb7e4880ce0e516480 Mon Sep 17 00:00:00 2001
+From b879da1933db801aead138bf3ae9b6e556ddb961 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 22:50:19 -0300
 Subject: [PATCH] mips: dts: econet: add EN751221 pin controller

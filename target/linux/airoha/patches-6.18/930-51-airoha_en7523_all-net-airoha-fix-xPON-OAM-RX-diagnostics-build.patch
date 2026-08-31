@@ -1,4 +1,4 @@
-From 3aa112afc5aa6e2a91374a01f4a60e297eab4002 Mon Sep 17 00:00:00 2001
+From f89053b2e1b80d7d545147b80fce998beee9e6e8 Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@example.com>
 Date: Fri, 17 Jul 2026 15:42:08 +0000
 Subject: [PATCH] net: airoha: fix xPON OAM RX diagnostics build

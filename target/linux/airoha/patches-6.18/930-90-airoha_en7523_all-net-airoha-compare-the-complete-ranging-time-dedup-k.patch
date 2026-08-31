@@ -1,4 +1,4 @@
-From 2690cae3e44b9546efaff7c6a5734ed09412c945 Mon Sep 17 00:00:00 2001
+From 7a6446d27b6c4449bba207f319f1e972c4053c36 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 22:03:40 +0000
 Subject: [PATCH] net: airoha: compare the complete ranging-time dedup key

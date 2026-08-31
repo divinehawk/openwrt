@@ -1,4 +1,4 @@
-From 2e1d8c0b67bd320cedf7131895cfd867ffb7d975 Mon Sep 17 00:00:00 2001
+From 82e7ccd6374b8dfff7a0fabe6fba50f76a9c051e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Mon, 25 May 2026 15:11:36 -0300
 Subject: [PATCH] pmdomain: airoha: Introduce EN7523 support and direct PLL

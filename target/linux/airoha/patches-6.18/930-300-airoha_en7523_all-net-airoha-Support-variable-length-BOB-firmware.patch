@@ -1,4 +1,4 @@
-From 4934243c5190e8235a1bf5f7d9d5a9ac6eb39855 Mon Sep 17 00:00:00 2001
+From a77117adaf787fbbe218b0cd3791f089b2a847c6 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Mon, 24 Aug 2026 13:52:58 -0300
 Subject: [PATCH] net: airoha: Support variable length BOB firmware

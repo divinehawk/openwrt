@@ -1,4 +1,4 @@
-From 685b6d5ab8a7c10ed0ae34897b0f7a7ee67bcb41 Mon Sep 17 00:00:00 2001
+From 279860b439c06bda7a613281caed30f143f695ae Mon Sep 17 00:00:00 2001
 From: Ahmed Naseef <naseefkm@gmail.com>
 Date: Thu, 6 Aug 2026 15:50:35 -0300
 Subject: [PATCH] mtd: nand: enable EcoNet bad block table

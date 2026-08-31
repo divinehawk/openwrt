@@ -1,4 +1,4 @@
-From 1426e53a838519c61d5a2ac40733d320e6e401e6 Mon Sep 17 00:00:00 2001
+From 4535e7006cc3fc935c284182dafe7e9ae5817262 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 16 Jul 2026 19:59:43 +0000
 Subject: [PATCH] net: airoha: clear GPON activation context on restart

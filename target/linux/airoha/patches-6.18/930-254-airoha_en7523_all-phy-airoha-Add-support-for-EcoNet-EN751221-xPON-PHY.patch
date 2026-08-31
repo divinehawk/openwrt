@@ -1,4 +1,4 @@
-From e807b0bce52cd3d15aa796b0f994888afdc96a6b Mon Sep 17 00:00:00 2001
+From 5b35318190bb94b60d32f78e4d666af4ff000fb5 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 15:54:33 -0300
 Subject: [PATCH] phy: airoha: Add support for EcoNet EN751221 xPON PHY

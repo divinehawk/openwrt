@@ -1,4 +1,4 @@
-From 7dfdcfbd2e8d8d74d145d32a439f265a7bb9466a Mon Sep 17 00:00:00 2001
+From 7635f653eef70e34d16fa214467e3d42d89903d1 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 30 Jul 2026 16:58:15 +0000
 Subject: [PATCH] dt-bindings: net: airoha: describe xPON MAC reset

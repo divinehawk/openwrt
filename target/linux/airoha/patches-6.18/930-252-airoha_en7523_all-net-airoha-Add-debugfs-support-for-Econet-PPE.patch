@@ -1,4 +1,4 @@
-From 8dc2a347a8faf964413052b119d1314a772da04d Mon Sep 17 00:00:00 2001
+From 68f6de48bfd4cc67e90d4a2d75c00c2e489554a3 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:53 -0300
 Subject: [PATCH] net: airoha: Add debugfs support for Econet PPE

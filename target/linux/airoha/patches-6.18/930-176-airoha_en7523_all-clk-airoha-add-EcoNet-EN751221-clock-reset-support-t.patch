@@ -1,4 +1,4 @@
-From 0f313649486fb1fc50c3369d708ef57ce95073b3 Mon Sep 17 00:00:00 2001
+From eda61fa3cd3c6770cce1bf387399f962f9c70ac0 Mon Sep 17 00:00:00 2001
 From: Caleb James DeLisle <cjd@cjdns.fr>
 Date: Thu, 6 Aug 2026 15:55:10 -0300
 Subject: [PATCH] clk: airoha: add EcoNet EN751221 clock/reset support to

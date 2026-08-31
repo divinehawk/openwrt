@@ -1,4 +1,4 @@
-From 72af954f1b53e302ebeefe837c7d225c2919cc27 Mon Sep 17 00:00:00 2001
+From 994a5a785c170f089f6da85ba79f8764370d56fe Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 30 Jul 2026 17:09:57 +0000
 Subject: [PATCH] net: airoha: avoid selecting reset controller from xPON

@@ -1,4 +1,4 @@
-From ee9f2ac8edd0d2bd976ad862340c066067e3b33c Mon Sep 17 00:00:00 2001
+From ada782972c1832b982a4b8ea2a065f4d73f809b4 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:45 -0300
 Subject: [PATCH] net: airoha: fix generation split build dependencies

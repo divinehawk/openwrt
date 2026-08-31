@@ -1,4 +1,4 @@
-From 1be1e67a5c7f56ec71f81f8338f642ce378bfab1 Mon Sep 17 00:00:00 2001
+From 27ee505329cdb29719ec904f11f4b4801912eb7b Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:50 -0300
 Subject: [PATCH] net: airoha: derive gen1 FoE size from SoC data

@@ -1,4 +1,4 @@
-From aec042a23ec9a1618eda1c5cc93898719f36849b Mon Sep 17 00:00:00 2001
+From 24e0aa4a376e2c49f1bb957a0db7381579b52c6e Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@openai.com>
 Date: Mon, 3 Aug 2026 15:46:13 +0000
 Subject: [PATCH] net: airoha: coalesce GPON runtime configuration restarts

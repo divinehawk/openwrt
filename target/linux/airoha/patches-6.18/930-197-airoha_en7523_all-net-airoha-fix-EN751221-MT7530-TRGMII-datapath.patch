@@ -1,4 +1,4 @@
-From 0cd9d292e9b77eedae445eb1ae3cd312a7ccddaf Mon Sep 17 00:00:00 2001
+From c1883749a827ce8038c94ccd875b27af289e8bb1 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:03:58 -0300
 Subject: [PATCH] net: airoha: fix EN751221 MT7530 TRGMII datapath

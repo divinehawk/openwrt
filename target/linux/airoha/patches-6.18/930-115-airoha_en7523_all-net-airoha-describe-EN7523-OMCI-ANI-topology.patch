@@ -1,4 +1,4 @@
-From b535d073a0083e45afa2968c3c065ad328494e28 Mon Sep 17 00:00:00 2001
+From 7899529b8a1e806754129500d1834cc0d03068f4 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 22 Jul 2026 08:52:39 +0000
 Subject: [PATCH] net: airoha: describe EN7523 OMCI ANI topology

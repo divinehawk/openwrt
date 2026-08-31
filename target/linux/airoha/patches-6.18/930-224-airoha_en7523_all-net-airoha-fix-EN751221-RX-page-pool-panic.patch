@@ -1,4 +1,4 @@
-From c20f78d52a43422f04b3caafe9c86923d4600461 Mon Sep 17 00:00:00 2001
+From 389572807fd85a32282bdea930cb29fec2152118 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:24 -0300
 Subject: [PATCH] net: airoha: fix EN751221 RX page-pool panic

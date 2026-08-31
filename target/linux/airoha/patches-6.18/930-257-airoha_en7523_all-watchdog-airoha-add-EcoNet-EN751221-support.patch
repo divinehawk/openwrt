@@ -1,4 +1,4 @@
-From b2136b663bd271cee3fa250faaf75db1bfc74cf1 Mon Sep 17 00:00:00 2001
+From 2a758c1411bcc046483091ccb3b3e0b049530b84 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 19:03:20 -0300
 Subject: [PATCH] watchdog: airoha: add EcoNet EN751221 support

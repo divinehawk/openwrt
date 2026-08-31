@@ -1,4 +1,4 @@
-From 145061b89cf9ce64a4b61815f2219e9d4e895474 Mon Sep 17 00:00:00 2001
+From 915a13a57f985fe08b242b1825aeee77fb0c7a98 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <benjamin.larsson@genexis.eu>
 Date: Sat, 13 Jun 2026 22:45:00 +0200
 Subject: [PATCH] net: pcs: airoha: en7523: init PON serdes (SGMII/2500Base-X)

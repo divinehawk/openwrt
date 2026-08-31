@@ -1,4 +1,4 @@
-From bfddc5388b4e3945708ea0ff5f90a251789c1625 Mon Sep 17 00:00:00 2001
+From 6049fcf2d820f95e15aaf07c4b043696f4a79883 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 22:50:24 -0300
 Subject: [PATCH] net: phy: airoha: make LDDLA hwmon support optional

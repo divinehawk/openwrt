@@ -1,4 +1,4 @@
-From d26c33d83fd1df4e311a227cf4a199836f04cc26 Mon Sep 17 00:00:00 2001
+From 084e8e1c7b1021428ba622c6ff83be096d75ac88 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <benjamin.larsson@genexis.eu>
 Date: Sat, 13 Jun 2026 23:55:00 +0200
 Subject: [PATCH] net: pcs: airoha: en7523: init USB/PCIe XSI serdes

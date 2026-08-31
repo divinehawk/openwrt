@@ -1,4 +1,4 @@
-From 3ff7920bb6532a1e63cd897bdba6e0cf29e0a19c Mon Sep 17 00:00:00 2001
+From 87f6e4cdd4b9d648278ce5b10e67423fb15fba5c Mon Sep 17 00:00:00 2001
 From: Matheus <sirherobrine23@users.noreply.github.com>
 Date: Fri, 24 Jul 2026 00:48:09 +0000
 Subject: [PATCH] clk: en7523: add reset pulse operation

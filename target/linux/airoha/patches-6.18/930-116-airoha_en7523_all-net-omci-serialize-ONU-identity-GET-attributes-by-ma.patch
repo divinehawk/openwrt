@@ -1,4 +1,4 @@
-From 141e8b84a7889172cb1feabc134f593f6882c1a4 Mon Sep 17 00:00:00 2001
+From 716a76cdda1def971838f31ac51a5d03bf244d3f Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 24 Jul 2026 00:47:38 +0000
 Subject: [PATCH] net: omci: serialize ONU identity GET attributes by mask

@@ -1,4 +1,4 @@
-From a49222900ae97fe4e2bdace46c9759671079a9cf Mon Sep 17 00:00:00 2001
+From efd4b97189e717e1fe8d0a3d0e22fcee85bae948 Mon Sep 17 00:00:00 2001
 From: Matheus <sirherobrine23@users.noreply.github.com>
 Date: Tue, 28 Jul 2026 14:56:25 +0000
 Subject: [PATCH] net: omci: enable OLT profile autodetection by default

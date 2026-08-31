@@ -1,4 +1,4 @@
-From a40fb84b9b0c97ae677b4974d748d673dd13f485 Mon Sep 17 00:00:00 2001
+From fb8d19aa6608fa012131e3cd7659fd1d0ef5ab97 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 13:32:06 +0200
 Subject: [PATCH] net: airoha: use the GPON guard time the OLT asks for

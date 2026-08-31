@@ -1,4 +1,4 @@
-From a9d1bded589e740f193913205e82c96c3376c98c Mon Sep 17 00:00:00 2001
+From 62ba888e2c1dda8e07dcc6b2db64b1df5cff9975 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 22:50:13 -0300
 Subject: [PATCH] net: airoha: share GDM and PPE infrastructure with EcoNet

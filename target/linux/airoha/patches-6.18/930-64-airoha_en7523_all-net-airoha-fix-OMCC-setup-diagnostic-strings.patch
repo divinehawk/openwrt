@@ -1,4 +1,4 @@
-From 809dce9c5f903e2a0ce19424205faf1633eb3b0f Mon Sep 17 00:00:00 2001
+From 7ad13caca6b399cb8da7f3d27527949fd76123ac Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 20:50:23 +0000
 Subject: [PATCH] net: airoha: fix OMCC setup diagnostic strings

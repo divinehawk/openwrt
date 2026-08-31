@@ -1,4 +1,4 @@
-From c045c8f984e2bea8b34b4766aaf8b240f82303fc Mon Sep 17 00:00:00 2001
+From f18c2985238ff97d4760a1d289c943c707a32926 Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Wed, 8 Jul 2026 12:23:30 +0200
 Subject: [PATCH] net: phy: mediatek: add calibration logic for AN7581

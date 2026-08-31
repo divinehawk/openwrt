@@ -1,4 +1,4 @@
-From 576a502c8deb6ed75be506d179d1bd06974ccb29 Mon Sep 17 00:00:00 2001
+From b73d669199e893aa595c15c6ae7515f4f3716e0d Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 16 Jul 2026 19:59:43 +0000
 Subject: [PATCH] net: airoha: recover GPON after OLT deactivation

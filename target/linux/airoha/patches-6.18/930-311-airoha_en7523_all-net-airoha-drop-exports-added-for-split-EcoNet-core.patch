@@ -1,4 +1,4 @@
-From 2ce65191a6d0bce8529672c322aa90a1c0240565 Mon Sep 17 00:00:00 2001
+From edf36de5b82d22c042a1f4807a25f8430bc8f3bc Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:22:41 -0300
 Subject: [PATCH] net: airoha: drop exports added for split EcoNet core

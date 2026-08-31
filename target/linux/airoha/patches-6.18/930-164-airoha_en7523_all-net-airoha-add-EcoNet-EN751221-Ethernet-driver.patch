@@ -1,4 +1,4 @@
-From 9c646648b8912bbc08d5d42fb14ef6fc10dccd70 Mon Sep 17 00:00:00 2001
+From 6707a66fab614c945573a1b398c56db7a9aee1c9 Mon Sep 17 00:00:00 2001
 From: ChatGPT <noreply@openai.com>
 Date: Thu, 6 Aug 2026 10:47:12 +0000
 Subject: [PATCH] net: airoha: add EcoNet EN751221 Ethernet driver

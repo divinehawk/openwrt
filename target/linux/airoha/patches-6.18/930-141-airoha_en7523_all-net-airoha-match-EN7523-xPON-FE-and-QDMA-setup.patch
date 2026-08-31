@@ -1,4 +1,4 @@
-From c251045677996b8a1b0c96cf49ab5d8e24543ad7 Mon Sep 17 00:00:00 2001
+From ff390eefa25e2c24f30dbb862b3e3af26ed517a2 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 30 Jul 2026 17:51:20 +0000
 Subject: [PATCH] net: airoha: match EN7523 xPON FE and QDMA setup

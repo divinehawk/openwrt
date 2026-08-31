@@ -1,4 +1,4 @@
-From a36d35ed17d6aaf741e3a13788577f5d2bd487c6 Mon Sep 17 00:00:00 2001
+From 5af561385564d45ba2496705307164b06de8e68a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 10:29:34 +0000
 Subject: [PATCH] net: omci: add complete ITU managed entity name catalog

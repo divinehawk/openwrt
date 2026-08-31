@@ -1,4 +1,4 @@
-From 217aed651e57661a50ddee1d8a5052cd918dbb03 Mon Sep 17 00:00:00 2001
+From a166be3730f8a5b7e5164e0736decd11d96d7261 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 11:07:04 +0000
 Subject: [PATCH] dt-bindings: net: add common OMCI identity data

@@ -1,4 +1,4 @@
-From 02150c6fa1cf8055842869f4b13e6c057116485e Mon Sep 17 00:00:00 2001
+From 338970e02ec837f8137941175db8ce4d6cd58288 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sun, 23 Aug 2026 21:01:54 -0300
 Subject: [PATCH] net: phy: airoha: add EN7528 GPHY calibration

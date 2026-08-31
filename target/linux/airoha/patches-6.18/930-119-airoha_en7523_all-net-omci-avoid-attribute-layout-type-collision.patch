@@ -1,4 +1,4 @@
-From 0fcc054bd6400a6bb4789992c2cf7f2680b1568f Mon Sep 17 00:00:00 2001
+From 12903a213493968144edc75babf55ffb28f509e4 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 24 Jul 2026 02:02:12 +0000
 Subject: [PATCH] net: omci: avoid attribute layout type collision

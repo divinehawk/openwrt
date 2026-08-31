@@ -1,4 +1,4 @@
-From 81c18d45a4fda3277f3b79125eba18189576255e Mon Sep 17 00:00:00 2001
+From 3cb0086b6b3f60a1df1a12ce4d56325078b67546 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 16 Jul 2026 23:46:06 +0000
 Subject: [PATCH] net: omci: add Generic Netlink transport and Airoha backend

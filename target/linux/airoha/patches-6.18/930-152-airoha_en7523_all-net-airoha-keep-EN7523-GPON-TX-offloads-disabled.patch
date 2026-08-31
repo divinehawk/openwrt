@@ -1,4 +1,4 @@
-From 85bd7e66e3a46faede5c35af87928b64d76f30d0 Mon Sep 17 00:00:00 2001
+From 7cdb435daef9547e9e8c0b1480c1ce315598e8b8 Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@openai.com>
 Date: Fri, 31 Jul 2026 03:58:51 +0000
 Subject: [PATCH] net: airoha: keep EN7523 GPON TX offloads disabled

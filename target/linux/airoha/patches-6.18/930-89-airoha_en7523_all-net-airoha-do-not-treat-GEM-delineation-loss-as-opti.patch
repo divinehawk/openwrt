@@ -1,4 +1,4 @@
-From be7936b918e7675764c48ac166edb80289c0e231 Mon Sep 17 00:00:00 2001
+From 9791d189d9957a075761d9e7391550a412dedafb Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 22:03:40 +0000
 Subject: [PATCH] net: airoha: do not treat GEM delineation loss as optical LOS

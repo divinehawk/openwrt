@@ -1,4 +1,4 @@
-From 78f53dad60d00a692a6c8a32ada3817ba09ff23e Mon Sep 17 00:00:00 2001
+From 2d5f17dd5bb007e507102b0a4d16c60e30b123bb Mon Sep 17 00:00:00 2001
 From: Ifran Ali <khanu.i.i.k.2000@gmail.com>
 Date: Sat, 22 Aug 2026 21:21:00 +0530
 Subject: [PATCH] net: omci: reconcile services after a MIB reset

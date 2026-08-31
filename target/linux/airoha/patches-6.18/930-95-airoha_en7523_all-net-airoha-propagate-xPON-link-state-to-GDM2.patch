@@ -1,4 +1,4 @@
-From 485d550bbcde01231e2b70381d186f270f71dd87 Mon Sep 17 00:00:00 2001
+From 6a6fe6ed1ac9b2d58fea38a954de2c56b893410b Mon Sep 17 00:00:00 2001
 From: Sirherobrine23 <srherobrine20@gmail.com>
 Date: Mon, 20 Jul 2026 11:11:50 +0000
 Subject: [PATCH] net: airoha: propagate xPON link state to GDM2

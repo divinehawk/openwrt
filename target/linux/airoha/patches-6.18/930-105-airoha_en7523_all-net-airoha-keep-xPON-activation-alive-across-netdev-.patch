@@ -1,4 +1,4 @@
-From 685dbceeb02b8ebc1390e406ca487143eb807a38 Mon Sep 17 00:00:00 2001
+From eb1e09ca445064e7ad92b652c7c0dfaff21b0fc7 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 19:03:06 +0000
 Subject: [PATCH] net: airoha: keep xPON activation alive across netdev cycles

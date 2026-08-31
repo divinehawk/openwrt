@@ -1,4 +1,4 @@
-From 445864ca61339d947cfcc4e1cfd6e145d43baf20 Mon Sep 17 00:00:00 2001
+From 2dd89c46e506adcf939e3dd9cd6240720de3345b Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Mon, 19 Jan 2026 14:08:05 -0300
 Subject: [PATCH] thermal: airoha: Add thermal to en7523

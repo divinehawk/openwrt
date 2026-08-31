@@ -1,4 +1,4 @@
-From 1e10c0b2cccf630c48320940cffb92cd7ebf2cbb Mon Sep 17 00:00:00 2001
+From 53e5ea2c8267590e6ca1de83535bca5a098e7ec8 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 16:07:12 +0000
 Subject: [PATCH] net: airoha: defer GPON MAC start until PHY sync

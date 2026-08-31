@@ -1,4 +1,4 @@
-From f69592fd746b939f1857d2fc9e2deed9d3873a64 Mon Sep 17 00:00:00 2001
+From 6cc831ad740068c03966a5798f3b096a37f53de9 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Mon, 15 Jun 2026 12:00:00 +0200
 Subject: [PATCH] net: pcs: airoha: en7523: reset the USB serdes so its RX

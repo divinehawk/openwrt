@@ -1,4 +1,4 @@
-From 6d22462806df46fd22fec3d48b5e1b8a1ad6721a Mon Sep 17 00:00:00 2001
+From 1d3bac7ad7162da02986a274519ad9ac995d1f08 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:38 -0300
 Subject: [PATCH] net: airoha: fold EcoNet PPE into the shared lifecycle

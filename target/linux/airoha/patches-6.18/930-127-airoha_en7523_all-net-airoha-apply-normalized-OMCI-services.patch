@@ -1,4 +1,4 @@
-From c1dc9b2f168da6dea7383c953c3bbc2f4c6bcf9f Mon Sep 17 00:00:00 2001
+From cd86b0ccd2fcf2dfb7addfec099b96b1ecc3ec6d Mon Sep 17 00:00:00 2001
 From: Matheus <sirherobrine23@users.noreply.github.com>
 Date: Tue, 28 Jul 2026 16:34:32 +0000
 Subject: [PATCH] net: airoha: apply normalized OMCI services

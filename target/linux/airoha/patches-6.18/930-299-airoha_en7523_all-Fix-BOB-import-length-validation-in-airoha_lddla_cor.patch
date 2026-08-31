@@ -1,4 +1,4 @@
-From 4cb99add1279e9746ee1a71debb71616fa26e9c6 Mon Sep 17 00:00:00 2001
+From 2441d768a50c8989d3106ed24fbec825069399df Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Mon, 24 Aug 2026 00:07:00 -0300
 Subject: [PATCH] Fix BOB import length validation in airoha_lddla_core

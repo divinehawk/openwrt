@@ -1,4 +1,4 @@
-From 97eb10f3c665688c0eb857cb0a5a951509c05a58 Mon Sep 17 00:00:00 2001
+From 15f9413fe338decffdf39663eef58b10b989492d Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 11:06:49 +0000
 Subject: [PATCH] dt-bindings: nvmem: add OMCI U-Boot environment cells

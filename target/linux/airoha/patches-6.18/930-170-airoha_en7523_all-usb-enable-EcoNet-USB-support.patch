@@ -1,4 +1,4 @@
-From 833de77b44ba60668e4aec55a709202465ef1b57 Mon Sep 17 00:00:00 2001
+From 9f5fe601e5ca83f81b25c8edbb4a287060b697fa Mon Sep 17 00:00:00 2001
 From: Ahmed Naseef <naseefkm@gmail.com>
 Date: Thu, 6 Aug 2026 15:49:16 -0300
 Subject: [PATCH] usb: enable EcoNet USB support

@@ -1,4 +1,4 @@
-From d7571202265b5bd53db03d5e3654aca2e5c65f3d Mon Sep 17 00:00:00 2001
+From c44beee038f14bc1569d2bd7463a5832a1ade28c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 30 Jul 2026 22:35:47 +0000
 Subject: [PATCH] net: airoha: initialize EN7523 GPON DBA trTCM

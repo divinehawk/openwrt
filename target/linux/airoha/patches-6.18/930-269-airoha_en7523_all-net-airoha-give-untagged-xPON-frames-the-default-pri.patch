@@ -1,4 +1,4 @@
-From 3de457a0f71ca36f9342b64addc580e72101c992 Mon Sep 17 00:00:00 2001
+From d8e8b0df04f4d657c34b91342ec435f9ec8ed1e1 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 16 Aug 2026 12:22:56 +0200
 Subject: [PATCH] net: airoha: give untagged xPON frames the default priority

@@ -1,4 +1,4 @@
-From 6a2f390420ef6560afea8080624b8e8d6137333d Mon Sep 17 00:00:00 2001
+From 6406ce2a551a43c4821500ac83d92c88e7e17cf1 Mon Sep 17 00:00:00 2001
 From: Matheus <sirherobrine23@users.noreply.github.com>
 Date: Tue, 28 Jul 2026 14:56:26 +0000
 Subject: [PATCH] net: omci: describe the advertised OMCC version accurately

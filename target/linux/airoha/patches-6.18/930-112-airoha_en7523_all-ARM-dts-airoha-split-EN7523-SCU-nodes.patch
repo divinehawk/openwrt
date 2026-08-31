@@ -1,4 +1,4 @@
-From 53fef7c7dd5580c5f449a6e506b97acffcf332bb Mon Sep 17 00:00:00 2001
+From 454f23526393b9cb92def6374e876e9b10ce92e4 Mon Sep 17 00:00:00 2001
 From: Matheus <sirherobrine23@users.noreply.github.com>
 Date: Fri, 24 Jul 2026 01:29:46 +0000
 Subject: [PATCH] ARM: dts: airoha: split EN7523 SCU nodes

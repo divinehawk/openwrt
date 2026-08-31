@@ -1,4 +1,4 @@
-From f02a21906977f06df0c1579f8b5ea1ddaf0ee35c Mon Sep 17 00:00:00 2001
+From d6057082263187b636a9f90a8284e49c9a09c63d Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 29 Jul 2026 09:54:58 -0300
 Subject: [PATCH] net: airoha: fix EN7523 GPON RX steering

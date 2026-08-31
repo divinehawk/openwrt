@@ -1,4 +1,4 @@
-From 15553f5b8c3867c22ba384d1eeb2991153ff85eb Mon Sep 17 00:00:00 2001
+From 324060b5a78ac456985fc0417bfcabde86fa5297 Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@openai.com>
 Date: Tue, 21 Jul 2026 21:38:34 +0000
 Subject: [PATCH] net: airoha: stop GPON PLOAM traffic after LOS

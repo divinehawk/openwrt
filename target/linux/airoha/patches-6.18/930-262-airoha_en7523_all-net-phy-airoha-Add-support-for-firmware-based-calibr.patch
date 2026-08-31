@@ -1,4 +1,4 @@
-From 623968210324016db024f43af5bead50d7bd9b8e Mon Sep 17 00:00:00 2001
+From 4bcc60505c3d811682ebeaa5c9e27280741d0d31 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 12 Aug 2026 13:55:35 -0300
 Subject: [PATCH] net: phy: airoha: Add support for firmware-based calibration

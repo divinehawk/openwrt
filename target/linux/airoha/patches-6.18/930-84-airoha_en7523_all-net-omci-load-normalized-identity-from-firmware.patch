@@ -1,4 +1,4 @@
-From 40e59517c3b1dedfdfa1f6654d7fa3f042ba1544 Mon Sep 17 00:00:00 2001
+From 12c4d6b148ccb47919a559a9492d5824c5df303c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 11:07:19 +0000
 Subject: [PATCH] net: omci: load normalized identity from firmware

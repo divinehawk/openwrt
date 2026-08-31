@@ -1,4 +1,4 @@
-From b1aadbd6e3c874c8aa462e1e4d76e6045fdffcb6 Mon Sep 17 00:00:00 2001
+From 979a8670db648d629208124092e77fb6b0435b32 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 24 Jul 2026 00:50:11 +0000
 Subject: [PATCH] net: airoha: derive GPON serial from GDM2 MAC

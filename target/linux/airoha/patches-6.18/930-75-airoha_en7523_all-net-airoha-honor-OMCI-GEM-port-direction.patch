@@ -1,4 +1,4 @@
-From 64484c8051730cea29618518d87b2e9c99af4fbc Mon Sep 17 00:00:00 2001
+From 4bf5fdb55e32191ed96a1840838e6f599d1b3b57 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 00:42:28 +0000
 Subject: [PATCH] net: airoha: honor OMCI GEM port direction

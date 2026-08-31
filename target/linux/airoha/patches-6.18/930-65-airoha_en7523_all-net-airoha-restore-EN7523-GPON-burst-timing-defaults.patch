@@ -1,4 +1,4 @@
-From b53537c3c72743363b0ef9a1350093e0e32c2e60 Mon Sep 17 00:00:00 2001
+From cdd1033e42c592d9ffc27f77d824c9b16b8fac2a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 22:12:31 +0000
 Subject: [PATCH] net: airoha: restore EN7523 GPON burst timing defaults

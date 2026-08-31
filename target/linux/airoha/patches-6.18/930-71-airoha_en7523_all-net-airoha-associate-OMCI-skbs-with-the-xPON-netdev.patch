@@ -1,4 +1,4 @@
-From 785ef0cbb9ef60cd56b60c4c6fb685f54433ba19 Mon Sep 17 00:00:00 2001
+From a25363aabbdf2f45091739881981766e45470684 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 22:39:57 +0000
 Subject: [PATCH] net: airoha: associate OMCI skbs with the xPON netdev

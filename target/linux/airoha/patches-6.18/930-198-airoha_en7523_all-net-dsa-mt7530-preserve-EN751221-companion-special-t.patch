@@ -1,4 +1,4 @@
-From f9419141204749439877856e24c4f4a570bf2264 Mon Sep 17 00:00:00 2001
+From b13959d46647af87cc1ff06d9da89162917a2013 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:03:59 -0300
 Subject: [PATCH] net: dsa: mt7530: preserve EN751221 companion special tag PVC

@@ -1,4 +1,4 @@
-From c06633ae4d3a10a3a13db4cd6155e28feacde8bd Mon Sep 17 00:00:00 2001
+From dff74d428837eb306f0e32db57c292a494d373dd Mon Sep 17 00:00:00 2001
 From: Matheus <sirherobrine23@users.noreply.github.com>
 Date: Tue, 28 Jul 2026 16:34:09 +0000
 Subject: [PATCH] net: omci: add profile-aware service provisioning

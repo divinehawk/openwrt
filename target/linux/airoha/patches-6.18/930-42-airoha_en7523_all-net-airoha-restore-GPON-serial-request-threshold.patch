@@ -1,4 +1,4 @@
-From d864d70f1a3d84cdad5751677b6102b6d23e2118 Mon Sep 17 00:00:00 2001
+From 283d758a3aa257925846f2862b215bd27dd3d24c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 16 Jul 2026 20:17:23 +0000
 Subject: [PATCH] net: airoha: restore GPON serial request threshold

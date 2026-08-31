@@ -1,4 +1,4 @@
-From 203e1b2d4401cd74d160132990a348ac53ed3107 Mon Sep 17 00:00:00 2001
+From 85288b3c0cac36f1df1afa764f9e7854af49fab7 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Mon, 3 Aug 2026 21:25:11 -0300
 Subject: [PATCH] net: airoha: ignore stale QDMA TX completions

@@ -1,4 +1,4 @@
-From d55331cd1cd5455a973d46971c3c87d19797b476 Mon Sep 17 00:00:00 2001
+From a0897b14fc4604dae1bc383598ad051969c4ab0b Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:21 -0300
 Subject: [PATCH] net: airoha: order EN751221 QDMA descriptor handoff

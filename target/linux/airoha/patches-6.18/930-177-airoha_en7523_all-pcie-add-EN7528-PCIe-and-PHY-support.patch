@@ -1,4 +1,4 @@
-From e5abe664e7e1c06177002c9d516e0742c5036779 Mon Sep 17 00:00:00 2001
+From f70508b44d7f2179e31c7c9a87140e403a2e388d Mon Sep 17 00:00:00 2001
 From: Ahmed Naseef <naseefkm@gmail.com>
 Date: Thu, 6 Aug 2026 15:57:21 -0300
 Subject: [PATCH] pcie: add EN7528 PCIe and PHY support

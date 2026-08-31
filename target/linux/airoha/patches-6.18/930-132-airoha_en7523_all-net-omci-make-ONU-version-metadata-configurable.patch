@@ -1,4 +1,4 @@
-From ffd11c624552438778e9fcf7d655cbd31e695abf Mon Sep 17 00:00:00 2001
+From 666e5ef6fd4401042f7c6ace6a7b55067b85a65d Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 28 Jul 2026 22:19:03 -0300
 Subject: [PATCH] net: omci: make ONU version metadata configurable

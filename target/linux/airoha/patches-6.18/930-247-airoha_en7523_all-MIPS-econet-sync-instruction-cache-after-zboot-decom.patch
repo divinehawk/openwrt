@@ -1,4 +1,4 @@
-From b3939109245c10fc0f0bf6b04073a2f2ea5559fa Mon Sep 17 00:00:00 2001
+From bb41048b75c064f074b8631b06f24da8914a844f Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:47 -0300
 Subject: [PATCH] MIPS: econet: sync instruction cache after zboot

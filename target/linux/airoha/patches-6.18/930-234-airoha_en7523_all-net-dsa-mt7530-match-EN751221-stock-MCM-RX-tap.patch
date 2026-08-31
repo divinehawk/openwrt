@@ -1,4 +1,4 @@
-From b53f3b3ccba030de627f4ff6418d74ff0bc11dea Mon Sep 17 00:00:00 2001
+From 855f5a5912fbd423683e7078ee634714b6f0c989 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:33 -0300
 Subject: [PATCH] net: dsa: mt7530: match EN751221 stock MCM RX tap

@@ -1,4 +1,4 @@
-From 32050946f0458ec0f2570e2815460155d0745ce0 Mon Sep 17 00:00:00 2001
+From d80a7cdc7f35efc583323f5d259fd2f1b7a3216e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 17:21:07 +0000
 Subject: [PATCH] net: airoha: report O1 while waiting for GPON PHY sync

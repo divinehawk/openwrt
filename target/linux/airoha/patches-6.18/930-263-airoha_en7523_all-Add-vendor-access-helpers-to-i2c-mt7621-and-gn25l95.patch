@@ -1,4 +1,4 @@
-From 614154e3003837d7f981a67dbfa5bea7adf67fea Mon Sep 17 00:00:00 2001
+From 921770b0915e46b21334c5398477c93409005384 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 12 Aug 2026 19:47:54 -0300
 Subject: [PATCH] Add vendor access helpers to i2c-mt7621 and gn25l95

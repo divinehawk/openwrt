@@ -1,4 +1,4 @@
-From 698baa81d850520a3ebddde1bf7361261da19b5a Mon Sep 17 00:00:00 2001
+From 0807d82216266fdd17928317c8712ec3cb7b2238 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:08 -0300
 Subject: [PATCH] net: dsa: mtk: pass tags through upstream switches

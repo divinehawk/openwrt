@@ -1,4 +1,4 @@
-From 928e52017ada9c64e8e6669da0f53c508fdc2124 Mon Sep 17 00:00:00 2001
+From a8cf32e6144c3ef580c31b4d4a964c4f67d86c68 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 22:12:31 +0000
 Subject: [PATCH] net: airoha: repeat critical GPON upstream PLOAM messages

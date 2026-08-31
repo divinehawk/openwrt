@@ -1,4 +1,4 @@
-From 81a229c09f44c3e57f08ce2a665d1d9b3f5fffe5 Mon Sep 17 00:00:00 2001
+From 4e314dd844930805886fdbc32a2c62edfd8c51a5 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 08:36:01 +0000
 Subject: [PATCH] net: airoha: keep phylink stopped for xPON-managed GDM2

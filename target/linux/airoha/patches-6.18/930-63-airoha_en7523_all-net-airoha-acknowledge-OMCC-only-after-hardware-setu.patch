@@ -1,4 +1,4 @@
-From 224d2b4b750a8e7ff92af9e267e8b06bf1f0bf4a Mon Sep 17 00:00:00 2001
+From 5fb1be722ce9ffb1cc6eed66c70fb1eb44f90402 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 20:12:11 +0000
 Subject: [PATCH] net: airoha: acknowledge OMCC only after hardware setup

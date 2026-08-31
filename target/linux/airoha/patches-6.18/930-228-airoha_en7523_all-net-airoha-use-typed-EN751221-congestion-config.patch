@@ -1,4 +1,4 @@
-From c960a559ecbeb907c2760dcb64eb7d0707f3f698 Mon Sep 17 00:00:00 2001
+From 4cbb90f7c6d4f3780cb0c8aadcabf8e015e99189 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:27 -0300
 Subject: [PATCH] net: airoha: use typed EN751221 congestion config

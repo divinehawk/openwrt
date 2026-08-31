@@ -1,4 +1,4 @@
-From e137a3030fc156ef6c7c9ead8c98d2a112ad29b8 Mon Sep 17 00:00:00 2001
+From eaf6301075ede468d53f77f49ec0c9d66a979356 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <benjamin.larsson@genexis.eu>
 Date: Thu, 11 Jun 2026 02:20:00 +0000
 Subject: [PATCH] airoha_en7523_eth: allocate GDM ports before QDMA hw init

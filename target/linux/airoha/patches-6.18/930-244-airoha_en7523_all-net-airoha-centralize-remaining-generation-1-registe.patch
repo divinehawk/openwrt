@@ -1,4 +1,4 @@
-From 67c362146f93ed8a67d59666a5850709842244d4 Mon Sep 17 00:00:00 2001
+From 2b7515beb3d4af62f7e5775e6b5a8751a1e77ad4 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:44 -0300
 Subject: [PATCH] net: airoha: centralize remaining generation-1 register

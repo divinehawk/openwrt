@@ -1,4 +1,4 @@
-From 0cdbbaebf82df3f14258b69253666bbe46ad21d6 Mon Sep 17 00:00:00 2001
+From 4030eb6ff60e8ecd45ec34c10e35763d29c9c49f Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:52 -0300
 Subject: [PATCH] net: airoha: fix EN751221 PPE cache command field

@@ -1,4 +1,4 @@
-From 2d3f6072ffdf09e878ee6754ba88602ea0069b0b Mon Sep 17 00:00:00 2001
+From 182a988780355d26cb61c44af0b1d46ad5855955 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 19:08:20 +0000
 Subject: [PATCH] net: phy: airoha: expose LDDLA optical telemetry

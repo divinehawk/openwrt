@@ -1,4 +1,4 @@
-From 3d3b1803ccad9a20fafbdfc6e8db64a7ef3c9670 Mon Sep 17 00:00:00 2001
+From 8c8fd88f86504d47bc12a8f22d4a940fb302c252 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sun, 19 Jul 2026 14:24:47 -0300
 Subject: [PATCH] Add ANI-G optical and telemetry support

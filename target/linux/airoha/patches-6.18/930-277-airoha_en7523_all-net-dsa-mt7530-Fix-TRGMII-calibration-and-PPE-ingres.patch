@@ -1,4 +1,4 @@
-From 2cf5ae033ad2eea2963a77d43d8b2499d7db8c7b Mon Sep 17 00:00:00 2001
+From db8b912589c1edcccf155a2d41037d9a0fd7498a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Mon, 17 Aug 2026 13:42:45 -0300
 Subject: [PATCH] net: dsa: mt7530: Fix TRGMII calibration and PPE ingress

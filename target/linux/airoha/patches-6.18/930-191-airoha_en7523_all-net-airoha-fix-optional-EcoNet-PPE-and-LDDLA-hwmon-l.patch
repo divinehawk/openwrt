@@ -1,4 +1,4 @@
-From 315438ed42c7be160099bde5383122c308fb43be Mon Sep 17 00:00:00 2001
+From 92adf72b3f3f8fb4eda9c1d705fe83b041f41c86 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 6 Aug 2026 22:50:23 -0300
 Subject: [PATCH] net: airoha: fix optional EcoNet PPE and LDDLA hwmon links

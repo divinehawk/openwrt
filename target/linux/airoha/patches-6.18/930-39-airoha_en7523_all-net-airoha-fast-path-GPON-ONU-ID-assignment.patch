@@ -1,4 +1,4 @@
-From 494ff62b5d49f9ad95e00f50b848dfb5579f63d0 Mon Sep 17 00:00:00 2001
+From fe646840842338c30fe4297c0f91ae200337bb9c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 16 Jul 2026 19:59:43 +0000
 Subject: [PATCH] net: airoha: fast-path GPON ONU-ID assignment

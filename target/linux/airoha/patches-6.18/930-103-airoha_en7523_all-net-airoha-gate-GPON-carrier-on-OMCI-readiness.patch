@@ -1,4 +1,4 @@
-From 8de3a76306c0c0580aaa25356edf070b26c7673f Mon Sep 17 00:00:00 2001
+From ba6c891031c3d7520659c1ad40b5d3dd5b8a77a4 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 17:46:27 +0000
 Subject: [PATCH] net: airoha: gate GPON carrier on OMCI readiness

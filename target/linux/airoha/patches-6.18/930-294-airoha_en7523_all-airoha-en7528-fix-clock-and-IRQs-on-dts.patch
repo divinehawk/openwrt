@@ -1,4 +1,4 @@
-From e1c503c5d9bb48781aa3bf6060010380777da0f8 Mon Sep 17 00:00:00 2001
+From 21d76aeece99e37024bb155ff1cde3991bcad76e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sun, 23 Aug 2026 18:19:27 -0300
 Subject: [PATCH] airoha: en7528: fix clock and IRQs on dts

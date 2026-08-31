@@ -1,4 +1,4 @@
-From de1d7b460a75eaf1fc680a670342ed86bb3671b3 Mon Sep 17 00:00:00 2001
+From e54c058ba99c6d7d65d21c5f88c0064ff6030477 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:22:45 -0300
 Subject: [PATCH] net: airoha: use common 80-byte FoE representation

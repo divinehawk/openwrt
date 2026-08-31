@@ -1,4 +1,4 @@
-From 55eab71527c386b23756d33572ea4d5b7e7229f5 Mon Sep 17 00:00:00 2001
+From ca764b75e2f6a577840fa88ae7cefc0d3f688089 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:20 -0300
 Subject: [PATCH] net: airoha: keep EN751221 GDM1 long-frame headroom

@@ -1,4 +1,4 @@
-From 8861f7618e93edeec7119e4e95b6e9d47ba5e209 Mon Sep 17 00:00:00 2001
+From 872bd49dddc20d6261ce6f04691ec9abdac23d39 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 30 Jul 2026 19:37:07 +0000
 Subject: [PATCH] net: airoha: resize EN7523 GPON PSE buffers per T-CONT

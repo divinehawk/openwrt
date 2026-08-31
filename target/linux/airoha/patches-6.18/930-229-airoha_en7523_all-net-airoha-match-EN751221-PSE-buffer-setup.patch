@@ -1,4 +1,4 @@
-From b13d5fb5212fcd7275754e714dba3d9b45e760cd Mon Sep 17 00:00:00 2001
+From af0b539bdc87fe7d9c73e649a9fe7b77a8ec109e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:28 -0300
 Subject: [PATCH] net: airoha: match EN751221 PSE buffer setup

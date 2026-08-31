@@ -1,4 +1,4 @@
-From 09a6191824ee1a14c542dd24a0f06a6f10a990a7 Mon Sep 17 00:00:00 2001
+From 8e882b4d0a97e1bd021e65c1732060eb1fa69429 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:25 -0300
 Subject: [PATCH] net: airoha: fix EN751221 QDMA ring field layouts

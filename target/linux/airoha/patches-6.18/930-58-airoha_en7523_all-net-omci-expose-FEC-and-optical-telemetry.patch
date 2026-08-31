@@ -1,4 +1,4 @@
-From 32de4d708c0ef479807055687b06e079113f03d4 Mon Sep 17 00:00:00 2001
+From 23d0e81b1df83bb4a1385823552fa90e23dc5673 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 19:04:14 +0000
 Subject: [PATCH] net: omci: expose FEC and optical telemetry

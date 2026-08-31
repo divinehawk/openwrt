@@ -1,4 +1,4 @@
-From 8c85355791225745af5b3da4c22f165997c418d5 Mon Sep 17 00:00:00 2001
+From 8a314ed19ac8ce3f6b22e1da7ae9f4fb331935b8 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:15 -0300
 Subject: [PATCH] net: airoha: align EN751221 PPE and switch throughput setup

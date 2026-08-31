@@ -1,4 +1,4 @@
-From b33f0a68aba43ecb3a349db12ca867172ea74723 Mon Sep 17 00:00:00 2001
+From 1f0e28a6967de0d9f6bc80f8cea440d31d592020 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 22:11:28 -0300
 Subject: [PATCH] pinctrl: airoha: Update EN7512/21 pinctrl and GPIO mapping

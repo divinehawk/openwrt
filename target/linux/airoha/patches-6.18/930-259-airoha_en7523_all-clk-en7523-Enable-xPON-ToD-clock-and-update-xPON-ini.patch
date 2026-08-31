@@ -1,4 +1,4 @@
-From f2beaad9e9f1da0d376901a1bc6935f269ccbebb Mon Sep 17 00:00:00 2001
+From eda1a77831ca4989b05b5fd13cbb9292d6ca3ed3 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 19:53:55 -0300
 Subject: [PATCH] clk: en7523: Enable xPON ToD clock and update xPON

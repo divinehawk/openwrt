@@ -1,4 +1,4 @@
-From ef42645015a4c4540def51dc2a3c9ed08c466c28 Mon Sep 17 00:00:00 2001
+From be1f9cc50663d6a901ff84dc44f0f6735de98ef3 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:00 -0300
 Subject: [PATCH] net: phy: mediatek: load EN751221 MT7530 E3.0 profile

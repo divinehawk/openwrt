@@ -1,4 +1,4 @@
-From de12cc744b558f34da2d99c9d9ea6f3588968634 Mon Sep 17 00:00:00 2001
+From a2b2d33549f67ae5fb704e09f7d7be786d1bf561 Mon Sep 17 00:00:00 2001
 From: Sirherobrine23 <sirherobrine23@users.noreply.github.com>
 Date: Thu, 6 Aug 2026 12:26:33 +0000
 Subject: [PATCH] net: airoha: fold EcoNet driver into two files

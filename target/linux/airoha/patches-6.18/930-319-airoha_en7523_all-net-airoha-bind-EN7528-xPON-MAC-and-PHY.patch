@@ -1,4 +1,4 @@
-From 84b883b4951ba095daa57e09b9d988eb51dfd695 Mon Sep 17 00:00:00 2001
+From 99f0dd8dc246f5b9cc2e7ba271928b5b50f03bd9 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 01:29:34 -0300
 Subject: [PATCH] net: airoha: bind EN7528 xPON MAC and PHY

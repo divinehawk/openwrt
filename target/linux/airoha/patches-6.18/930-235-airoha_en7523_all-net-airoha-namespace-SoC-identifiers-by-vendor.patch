@@ -1,4 +1,4 @@
-From 23a91e48057c510a02a719b28b8ebe4bfb2c5f3c Mon Sep 17 00:00:00 2001
+From ac95b6645cb05f4cc0f37b82f13f67938416ced9 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:34 -0300
 Subject: [PATCH] net: airoha: namespace SoC identifiers by vendor

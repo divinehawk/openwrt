@@ -1,4 +1,4 @@
-From 115e7ad26b92b072266831bdc88350d3ae614fa5 Mon Sep 17 00:00:00 2001
+From 71f3789e7c9fd355fbbd1c2faae1807dc170fe0d Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@openai.com>
 Date: Fri, 31 Jul 2026 00:16:19 +0000
 Subject: [PATCH] net: omci: demote wire and OAM descriptor traces to debug

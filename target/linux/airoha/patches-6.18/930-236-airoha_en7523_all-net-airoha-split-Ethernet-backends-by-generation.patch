@@ -1,4 +1,4 @@
-From a240e6c85baf969a1484b2a96b2cce71eb296c65 Mon Sep 17 00:00:00 2001
+From 2613a99844af057788343fafcbfa3486021fea76 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:35 -0300
 Subject: [PATCH] net: airoha: split Ethernet backends by generation

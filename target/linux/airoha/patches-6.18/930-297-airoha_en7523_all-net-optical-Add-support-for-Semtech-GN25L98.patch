@@ -1,4 +1,4 @@
-From 4f5719587e8ea2853301b160cd2d305f74976e73 Mon Sep 17 00:00:00 2001
+From 8aed69f3246157e411fb33bc34410b0858a88708 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sun, 23 Aug 2026 21:24:49 -0300
 Subject: [PATCH] net: optical: Add support for Semtech GN25L98

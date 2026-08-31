@@ -1,4 +1,4 @@
-From eab66f4266546eff09607c2e0b70c6fa4e0e8aa9 Mon Sep 17 00:00:00 2001
+From cab9398f9ee8e64c7bf27aed5579d73f8d475089 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 19:12:16 +0000
 Subject: [PATCH] net: airoha: report GPON FEC and BOSA telemetry

@@ -1,4 +1,4 @@
-From 886288f0f2efbea7787b0d875c8da0ab424f22b0 Mon Sep 17 00:00:00 2001
+From a275f4130767bab8d5cd14ec4fac4170c4355e13 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 20 Aug 2026 11:47:07 -0300
 Subject: [PATCH] net: airoha: Add support for Nokia/ALCL GPON OLTs

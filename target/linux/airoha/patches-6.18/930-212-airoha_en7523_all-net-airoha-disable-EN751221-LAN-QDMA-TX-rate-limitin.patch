@@ -1,4 +1,4 @@
-From 951bbe08d38eed7e0b853438c0033534aef137b6 Mon Sep 17 00:00:00 2001
+From 633f5bae65a68630b7a5dde42d62eb7b477fd488 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:12 -0300
 Subject: [PATCH] net: airoha: disable EN751221 LAN QDMA TX rate limiting

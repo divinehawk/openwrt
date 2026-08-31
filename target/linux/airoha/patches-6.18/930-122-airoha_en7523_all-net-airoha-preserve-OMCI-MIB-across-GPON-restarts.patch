@@ -1,4 +1,4 @@
-From 4373089f9e7b853b2ae1fcc9089cdf8a8b53e82b Mon Sep 17 00:00:00 2001
+From ce57775f9e305d2c211b0e62627d626dc36629d7 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 25 Jul 2026 22:39:22 +0000
 Subject: [PATCH] net: airoha: preserve OMCI MIB across GPON restarts

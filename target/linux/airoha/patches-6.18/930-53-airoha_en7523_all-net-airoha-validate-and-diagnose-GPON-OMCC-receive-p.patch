@@ -1,4 +1,4 @@
-From be4de4b6533e02810c262b5049cd3ff65cb57d6f Mon Sep 17 00:00:00 2001
+From f0135f25216d5d83a33e957694c53a38af30e78c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 16:23:39 +0000
 Subject: [PATCH] net: airoha: validate and diagnose GPON OMCC receive path

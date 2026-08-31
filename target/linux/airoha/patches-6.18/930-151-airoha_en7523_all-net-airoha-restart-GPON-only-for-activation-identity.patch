@@ -1,4 +1,4 @@
-From d4c55d05bcadfb5d91e0a6dee3eb819c54e95104 Mon Sep 17 00:00:00 2001
+From 27af350c2d5a6a86e3e6f2b8af7cfe5442d3e48a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 31 Jul 2026 03:04:19 +0000
 Subject: [PATCH] net: airoha: restart GPON only for activation identity

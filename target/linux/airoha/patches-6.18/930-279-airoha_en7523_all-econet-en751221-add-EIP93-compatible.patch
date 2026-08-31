@@ -1,4 +1,4 @@
-From 29fcd304265793cd51b0ba06aac5c801ccfb24d4 Mon Sep 17 00:00:00 2001
+From f03f179f0dcf4305bfae1a7d03d86bd9bdc5733b Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 18 Aug 2026 14:12:34 -0300
 Subject: [PATCH] econet en751221: add EIP93 compatible

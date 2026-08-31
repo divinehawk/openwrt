@@ -1,4 +1,4 @@
-From d090f308bbc41e7814048dac520b6b9b749968db Mon Sep 17 00:00:00 2001
+From cb2f8345534a02d2aae4758f6f2db7cfb93bc646 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 28 Jul 2026 20:06:04 -0300
 Subject: [PATCH] net: omci: implement OMCI capability tables

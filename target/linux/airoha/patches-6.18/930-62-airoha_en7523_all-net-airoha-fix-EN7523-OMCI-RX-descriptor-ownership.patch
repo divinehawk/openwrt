@@ -1,4 +1,4 @@
-From 97b69d1528b36250779c42a2ba0ab7ab57f5d7f1 Mon Sep 17 00:00:00 2001
+From 02990ea4351f8e8be7e0e2e41c2cc16fc5aaeae8 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 20:10:50 +0000
 Subject: [PATCH] net: airoha: fix EN7523 OMCI RX descriptor ownership

@@ -1,4 +1,4 @@
-From 4ca42fdc63a8589f7ee8b56a3a19b062d3f73e34 Mon Sep 17 00:00:00 2001
+From 8266d80e7568f617a78217dab1125abf68424aae Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@openai.com>
 Date: Fri, 31 Jul 2026 02:16:49 +0000
 Subject: [PATCH] net: airoha: fix asynchronous TX completion handling

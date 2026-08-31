@@ -1,4 +1,4 @@
-From ec0daff040f160241b97e9bb0d1a017435a4b88c Mon Sep 17 00:00:00 2001
+From e14b7d2b36910247472cc9160d6a24eacc66a54c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 18 Aug 2026 17:11:38 -0300
 Subject: [PATCH] net: airoha: Add support for EN751221 SLM

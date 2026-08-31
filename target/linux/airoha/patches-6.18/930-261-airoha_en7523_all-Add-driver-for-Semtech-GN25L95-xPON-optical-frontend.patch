@@ -1,4 +1,4 @@
-From cc7150d3f12772ee033efa8cbcbc0e1ec91b3a84 Mon Sep 17 00:00:00 2001
+From b3732fc833000b954e04ff0c458b1f304afbb630 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 12 Aug 2026 11:36:09 -0300
 Subject: [PATCH] Add driver for Semtech GN25L95 xPON optical frontend

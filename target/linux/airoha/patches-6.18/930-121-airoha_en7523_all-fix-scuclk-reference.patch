@@ -1,4 +1,4 @@
-From ade0e56b9d13a0391501a45b332b9d91d5c3f906 Mon Sep 17 00:00:00 2001
+From 9fb8e88ba12d00641ca2caa15c7bbef3bdc08d0e Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 25 Jul 2026 19:13:54 -0300
 Subject: [PATCH] fix scuclk reference

@@ -1,4 +1,4 @@
-From 6a2df8ecf094d9679ab33c9ef6c1bc3d36aa9c66 Mon Sep 17 00:00:00 2001
+From 681eaa3a2917bd5b95db494b1a519ee302301860 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <banan@ludd.ltu.se>
 Date: Sun, 14 Jun 2026 21:00:00 +0200
 Subject: [PATCH] net: airoha: en7523: enable CPU-direct PPE hardware NAT

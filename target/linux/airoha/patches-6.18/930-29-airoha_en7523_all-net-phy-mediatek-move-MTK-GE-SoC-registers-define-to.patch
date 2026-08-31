@@ -1,4 +1,4 @@
-From 179cde66a81a858d37063cb4480ce38ce5b3ce3f Mon Sep 17 00:00:00 2001
+From d6f06b763bb9c792bf1147cbae5a894b4c862e41 Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Wed, 8 Jul 2026 12:23:28 +0200
 Subject: [PATCH] net: phy: mediatek: move MTK GE SoC registers define to

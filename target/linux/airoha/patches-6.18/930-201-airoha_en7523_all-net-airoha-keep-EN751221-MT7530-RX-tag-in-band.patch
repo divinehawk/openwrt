@@ -1,4 +1,4 @@
-From ebe343ed9adb632f6a8002ef2f468b17e4ea50db Mon Sep 17 00:00:00 2001
+From 6dc08ad0ca587dbb29bc5e1512a95efae444ce33 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:02 -0300
 Subject: [PATCH] net: airoha: keep EN751221 MT7530 RX tag in-band

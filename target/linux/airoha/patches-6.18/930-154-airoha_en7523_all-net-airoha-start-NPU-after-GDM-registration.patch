@@ -1,4 +1,4 @@
-From b57b06713e0812177b509efab8e00e555cdba89f Mon Sep 17 00:00:00 2001
+From 28e061492281484964c3a59122e3c5f7b508921a Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sun, 2 Aug 2026 20:51:19 -0300
 Subject: [PATCH] net: airoha: start NPU after GDM registration

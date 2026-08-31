@@ -1,4 +1,4 @@
-From 087ab6a775d090ca35819bfd5aff496e6e5c7454 Mon Sep 17 00:00:00 2001
+From 3aa66b78dc3789e3ce04cfc3bdb75005541abb15 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:04:32 -0300
 Subject: [PATCH] net: dsa: mt7530: match EN751221 companion TRGMII drive

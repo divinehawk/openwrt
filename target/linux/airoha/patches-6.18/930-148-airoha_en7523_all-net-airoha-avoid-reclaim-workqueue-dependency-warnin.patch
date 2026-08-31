@@ -1,4 +1,4 @@
-From 02547b7260a5635ac114e0cbfe5a15954400c632 Mon Sep 17 00:00:00 2001
+From 72951280a19be5c20197310ceb9cfa992a07f443 Mon Sep 17 00:00:00 2001
 From: OpenAI <noreply@openai.com>
 Date: Fri, 31 Jul 2026 00:17:56 +0000
 Subject: [PATCH] net: airoha: avoid reclaim workqueue dependency warning

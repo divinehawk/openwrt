@@ -1,4 +1,4 @@
-From b5b26856160c51ad96947dde947749beb180f063 Mon Sep 17 00:00:00 2001
+From 5fe221d19b0e31635e80e5aebedd063b0ec96fb1 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 30 Jan 2026 11:20:30 -0300
 Subject: [PATCH] clk: airoha: split en7523 chip-scu and add trng reset bits

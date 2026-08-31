@@ -1,4 +1,4 @@
-From 508259d12fc385fe6f02df34ea11b0ce8773bb9d Mon Sep 17 00:00:00 2001
+From 5ed8bc5128776f86ca2705bb6a1f99f1ef08d615 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 1 Aug 2026 14:51:34 -0300
 Subject: [PATCH] fix crc32 for uboot-env geting invalid size from nvmem

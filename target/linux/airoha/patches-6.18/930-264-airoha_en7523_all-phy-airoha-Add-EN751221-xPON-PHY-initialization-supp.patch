@@ -1,4 +1,4 @@
-From 9a29bf97d289ccf8ce9bb60cc068f8019ddf9e87 Mon Sep 17 00:00:00 2001
+From 3f58cefc0fbecc19b9cfa225e6fead0abacc2f27 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 12 Aug 2026 21:23:57 -0300
 Subject: [PATCH] phy: airoha: Add EN751221 xPON PHY initialization support

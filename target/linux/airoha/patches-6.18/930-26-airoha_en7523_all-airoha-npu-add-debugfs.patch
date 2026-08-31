@@ -1,4 +1,4 @@
-From 6db390ae38d22df592112fcba49be0c966891dfd Mon Sep 17 00:00:00 2001
+From 7aae7f041c355a66a02565ea879ae753fb77b05c Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 30 Jun 2026 12:59:22 -0300
 Subject: [PATCH] airoha: npu: add debugfs

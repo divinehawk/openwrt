@@ -1,4 +1,4 @@
-From 071918dfd278617167d2c36ba6c3da67dc74f6ad Mon Sep 17 00:00:00 2001
+From 06719c6ffdb32f760da9bad0f7833f476c729d51 Mon Sep 17 00:00:00 2001
 From: Sirherobrine23 <srherobrine20@gmail.com>
 Date: Tue, 21 Jul 2026 12:38:54 +0000
 Subject: [PATCH] net: omci: add OLT interoperability profiles

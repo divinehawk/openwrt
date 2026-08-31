@@ -1,4 +1,4 @@
-From 75161daa6d5354da35bd04d250bd4d0dfa71d498 Mon Sep 17 00:00:00 2001
+From c25132cba80f5288e71661a9148fd06ba381980f Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 11 Aug 2026 14:03:56 -0300
 Subject: [PATCH] Add support for Airoha EN7512/EN7521 companion MT7530 switch

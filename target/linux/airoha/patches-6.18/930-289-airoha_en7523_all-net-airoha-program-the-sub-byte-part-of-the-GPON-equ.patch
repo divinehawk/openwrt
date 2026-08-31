@@ -1,4 +1,4 @@
-From 0e269e64c1f7bdebca63a43a03a399ace1ff04fb Mon Sep 17 00:00:00 2001
+From ea4ee8b0abacf608faa0468a7c6b0487cd9becf7 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 20 Aug 2026 16:56:58 -0300
 Subject: [PATCH] net: airoha: program the sub-byte part of the GPON

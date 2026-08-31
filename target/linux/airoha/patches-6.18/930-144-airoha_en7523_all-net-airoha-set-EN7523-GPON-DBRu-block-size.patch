@@ -1,4 +1,4 @@
-From ace57f0d1c608fd98df72114a8d279f9e43e5ab7 Mon Sep 17 00:00:00 2001
+From 70d63425355245406393a69be16e2e6310772037 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Thu, 30 Jul 2026 21:13:01 +0000
 Subject: [PATCH] net: airoha: set EN7523 GPON DBRu block size

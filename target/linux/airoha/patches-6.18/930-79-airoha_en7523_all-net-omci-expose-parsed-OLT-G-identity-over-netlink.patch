@@ -1,4 +1,4 @@
-From eed9ffa2a34568b2e0c7a165178caf0f01708157 Mon Sep 17 00:00:00 2001
+From 918672debe1ec1c41c657e7bbb086cf489f314eb Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 10:10:46 +0000
 Subject: [PATCH] net: omci: expose parsed OLT-G identity over netlink

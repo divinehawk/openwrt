@@ -1,4 +1,4 @@
-From 4274f30b587fa650fa5c011389e2790a1b2b69cb Mon Sep 17 00:00:00 2001
+From 8d27bf812874f9ef00a9833697286bca47f41cb6 Mon Sep 17 00:00:00 2001
 From: Benjamin Larsson <benjamin.larsson@genexis.eu>
 Date: Sat, 13 Jun 2026 23:56:00 +0200
 Subject: [PATCH] net: airoha: en7523: support the GDM3 USB serdes port

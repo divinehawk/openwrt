@@ -1,4 +1,4 @@
-From edc6d8fd304a095a35cebd299c3bc004dab4b914 Mon Sep 17 00:00:00 2001
+From e161784e51eadca801eb7482a8e48a8de0e0df1b Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Tue, 25 Aug 2026 10:12:38 -0300
 Subject: [PATCH] net: optical: airoha: refactor BOB magic validation

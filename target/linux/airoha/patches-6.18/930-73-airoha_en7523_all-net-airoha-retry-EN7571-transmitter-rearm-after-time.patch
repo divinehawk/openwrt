@@ -1,4 +1,4 @@
-From b081024d67c12066587001450beba71529f8c675 Mon Sep 17 00:00:00 2001
+From b7c4906b5fe3d10794a2e70a1989ca26aac592c0 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Fri, 17 Jul 2026 23:32:01 +0000
 Subject: [PATCH] net: airoha: retry EN7571 transmitter rearm after timeout

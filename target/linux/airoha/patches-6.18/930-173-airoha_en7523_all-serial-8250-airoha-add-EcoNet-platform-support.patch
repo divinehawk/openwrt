@@ -1,4 +1,4 @@
-From 28f3689e0e5f4948bbd86ff2e2f3da44aa6a5bca Mon Sep 17 00:00:00 2001
+From 56745eaa48067417b4612b7ed40ecc9c32e83bce Mon Sep 17 00:00:00 2001
 From: Ahmed Naseef <naseefkm@gmail.com>
 Date: Thu, 6 Aug 2026 15:50:28 -0300
 Subject: [PATCH] serial: 8250: airoha: add EcoNet platform support

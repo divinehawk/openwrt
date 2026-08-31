@@ -1,4 +1,4 @@
-From 81116d14fa47f79dfe5fa76f9073c222f59ecf28 Mon Sep 17 00:00:00 2001
+From 1fa10633cb606c3865dae7888782dced6afa3bd7 Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Wed, 26 Aug 2026 00:22:29 -0300
 Subject: [PATCH] net: airoha: unify EcoNet and Airoha Ethernet core state

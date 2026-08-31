@@ -1,4 +1,4 @@
-From 0b8b43c9e4c46ff83f5e81badca6d727d51c19f9 Mon Sep 17 00:00:00 2001
+From 5bd1c26a7e5270727d13592485544cf350ed2ddc Mon Sep 17 00:00:00 2001
 From: Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Date: Sat, 18 Jul 2026 22:03:40 +0000
 Subject: [PATCH] net: airoha: reserve GPON T-CONT zero for the ONU-ID
