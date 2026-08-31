@@ -105,7 +105,11 @@
 	};
 };
 
-&gmac0 {
+&eth {
+	status = "okay";
+};
+
+&gdm1 {
 	status = "okay";
 	nvmem-cells = <&macaddr_bootloader_ff48 0>;
 	nvmem-cell-names = "mac-address";
