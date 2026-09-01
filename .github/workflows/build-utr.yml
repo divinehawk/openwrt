@@ -92,6 +92,7 @@ jobs:
             'CONFIG_PACKAGE_kmod-nft-fib=y' \
             'CONFIG_PACKAGE_kmod-nft-nat=y' \
             'CONFIG_PACKAGE_kmod-nft-offload=y' \
+            'CONFIG_PACKAGE_kmod-ovpn-backports=m' \
             'CONFIG_PACKAGE_kmod-ppp=y' \
             'CONFIG_PACKAGE_kmod-pppoe=y' \
             'CONFIG_PACKAGE_kmod-pppox=y' \
