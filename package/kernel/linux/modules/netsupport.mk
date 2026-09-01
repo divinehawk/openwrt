@@ -1551,6 +1551,22 @@ endef
 $(eval $(call KernelPackage,netconsole))
 
 
+define KernelPackage/ovpn
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=OpenVPN data channel offload
+  DEPENDS:= @LINUX_6_18 +kmod-udptunnel4 +IPV6:kmod-udptunnel6
+  KCONFIG:=CONFIG_OVPN
+  FILES:= $(LINUX_DIR)/drivers/net/ovpn/ovpn.ko
+  AUTOLOAD:=$(call AutoProbe,ovpn)
+endef
+
+define KernelPackage/ovpn/description
+  OpenVPN data channel offload.
+endef
+
+$(eval $(call KernelPackage,ovpn))
+
+
 define KernelPackage/qrtr
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Qualcomm IPC Router support
