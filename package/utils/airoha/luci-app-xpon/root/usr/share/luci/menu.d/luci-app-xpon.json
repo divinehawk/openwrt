@@ -1,0 +1,63 @@
+{
+	"admin/network/xpon": {
+		"title": "xPON",
+		"order": 65,
+		"action": { "type": "firstchild" },
+		"depends": { "acl": [ "luci-app-xpon" ] }
+	},
+	"admin/network/xpon/status": {
+		"title": "Status",
+		"order": 10,
+		"action": { "type": "view", "path": "xpon/status" }
+	},
+	"admin/network/xpon/settings": {
+		"title": "Settings",
+		"order": 20,
+		"action": { "type": "view", "path": "xpon/settings" }
+	},
+	"admin/network/xpon/omci": {
+		"title": "OMCI",
+		"order": 30,
+		"action": { "type": "firstchild" }
+	},
+	"admin/network/xpon/omci/status": {
+		"title": "Status",
+		"order": 10,
+		"action": { "type": "view", "path": "xpon/omci/status" }
+	},
+	"admin/network/xpon/omci/config": {
+		"title": "Configuration",
+		"order": 20,
+		"action": { "type": "view", "path": "xpon/omci/config" }
+	},
+	"admin/network/xpon/omci/mib": {
+		"title": "MIB",
+		"order": 30,
+		"action": { "type": "firstchild" }
+	},
+	"admin/network/xpon/omci/mib/inventory": {
+		"title": "Inventory",
+		"order": 10,
+		"action": { "type": "view", "path": "xpon/omci/mib/inventory" }
+	},
+	"admin/network/xpon/omci/mib/gpon": {
+		"title": "GPON",
+		"order": 20,
+		"action": { "type": "view", "path": "xpon/omci/mib/gpon" }
+	},
+	"admin/network/xpon/omci/mib/bridge": {
+		"title": "Bridge / UNI",
+		"order": 30,
+		"action": { "type": "view", "path": "xpon/omci/mib/bridge" }
+	},
+	"admin/network/xpon/omci/mib/multicast": {
+		"title": "Multicast",
+		"order": 40,
+		"action": { "type": "view", "path": "xpon/omci/mib/multicast" }
+	},
+	"admin/network/xpon/omci/mib/other": {
+		"title": "Other",
+		"order": 50,
+		"action": { "type": "view", "path": "xpon/omci/mib/other" }
+	}
+}

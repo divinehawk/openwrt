@@ -1,0 +1,26 @@
+{
+	"luci-app-xpon": {
+		"description": "Grant access to the xPON control plane",
+		"read": {
+			"ubus": {
+				"xpon": [ "family", "status" ],
+				"xpon.omci": [
+					"family", "status", "config_list", "config_details",
+					"config_get", "config_inspect", "class_list", "class_get",
+					"mib_list", "mib_get"
+				]
+			},
+			"uci": [ "xpon" ]
+		},
+		"write": {
+			"ubus": {
+				"xpon": [ "mode_set", "oam_set", "apply" ],
+				"xpon.omci": [
+					"agent_set", "config_set", "mib_set", "mib_delete",
+					"mib_reset", "raw_tx", "apply"
+				]
+			},
+			"uci": [ "xpon" ]
+		}
+	}
+}

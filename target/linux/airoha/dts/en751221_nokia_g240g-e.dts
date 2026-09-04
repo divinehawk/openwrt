@@ -242,8 +242,8 @@
 		compatible = "semtech,gn25l98";
 		reg = <0x51>;
 
-		nvmem-cells = <&cal_l98>;
-		nvmem-cell-names = "calibration";
+		// nvmem-cells = <&cal_l98>;
+		// nvmem-cell-names = "calibration";
 		tx-disable-gpios = <&pinctrl 16 GPIO_ACTIVE_HIGH>;
 
 		#optical-frontend-cells = <0>;
@@ -271,6 +271,11 @@
 
 &eth {
 	status = "okay";
+};
+
+&gdm1 {
+	status = "okay";
+
 	nvmem-cells = <&macaddr_ri_3e 0>;
 	nvmem-cell-names = "mac-address";
 };

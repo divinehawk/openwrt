@@ -1,0 +1,26 @@
+config core
+	option mode 'gpon' # GPON, EPON, XGSPON
+	option device 'pon0'
+
+config omci
+	option enabled '1'
+	option device 'pon0'
+	option permissive '1'
+	option fake_omci '0'
+	option dying_gasp '1'
+
+	option serial ''
+	option vendor_id ''
+	option hardware_version ''
+	option software_version_0 ''
+	option software_version_1 ''
+	option equipment_id ''
+	option password ''
+	option omcc_version ''
+	option traffic_management_option ''
+	option onu_type ''
+	option uni_count ''
+
+config oam
+	option enabled '1'
+	option device 'pon0'

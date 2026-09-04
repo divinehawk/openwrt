@@ -1,0 +1,136 @@
+#!/usr/bin/ucode
+'use strict';
+
+/* xPON command line client. Kernel access stays private to rpcd/xpon.so. */
+
+let ubus = require('ubus').connect();
+let json_output = false;
+let iface = '';
+
+function usage(exitcode) {
+	let text =
+		'usage: xponctl [--json] [--interface IFNAME] COMMAND\n' +
+		'\n' +
+		'Commands:\n' +
+		'  family\n' +
+		'  status\n' +
+		'  mode gpon|epon|xgspon\n' +
+		'  oam enable|disable\n' +
+		'  apply\n';
+
+	if (exitcode)
+		warn(text);
+	else
+		print(text);
+	exit(exitcode);
+}
+
+function rpc(method, args, field) {
+	let reply = ubus.call('xpon', method, args || {});
+	if (reply == null) {
+		warn(`xponctl: ubus call xpon ${method} failed\n`);
+		exit(1);
+	}
+	if (reply.error != null) {
+		warn(`xponctl: ${reply.error}\n`);
+		exit(1);
+	}
+	return field == null ? reply : reply[field];
+}
+
+function maybe(value) {
+	return value == null || `${value}` == '' ? 'unavailable' : `${value}`;
+}
+
+function print_status(status) {
+	let fields = [
+		'interface', 'ifindex', 'mode_name', 'registration_name', 'carrier',
+		'signal_detect', 'los', 'oam_present', 'oam_enabled', 'uapi_version',
+		'client_uapi_version', 'uapi_compatible'
+	];
+
+	for (let key in fields)
+		printf('%s: %s\n', replace(key, /_/g, '-'), maybe(status[key]));
+	printf('available-modes: %s\n', join(', ', status.available_mode_names || []));
+
+	if (status.optical != null) {
+		print('\noptical:\n');
+		for (let key in status.optical) {
+			if (key == 'supported_protocol_names')
+				printf('  supported-protocols: %s\n', join(', ', status.optical[key] || []));
+			else
+				printf('  %s: %s\n', replace(key, /_/g, '-'), maybe(status.optical[key]));
+		}
+	}
+
+	if (status.oam != null) {
+		print('\noam:\n');
+		for (let key in status.oam)
+			printf('  %s: %s\n', replace(key, /_/g, '-'), maybe(status.oam[key]));
+	}
+}
+
+while (length(ARGV)) {
+	if (ARGV[0] == '--json') {
+		json_output = true;
+		shift(ARGV);
+	}
+	else if (ARGV[0] == '--interface') {
+		shift(ARGV);
+		if (!length(ARGV))
+			usage(2);
+		iface = shift(ARGV);
+	}
+	else if (ARGV[0] == '-h' || ARGV[0] == '--help') {
+		usage(0);
+	}
+	else {
+		break;
+	}
+}
+
+if (!length(ARGV))
+	usage(2);
+
+let command = shift(ARGV);
+let result;
+let kind = 'object';
+
+switch (command) {
+case 'family':
+	if (length(ARGV)) usage(2);
+	result = rpc('family', {}, 'family');
+	break;
+case 'status':
+	if (length(ARGV)) usage(2);
+	result = rpc('status', { interface: iface }, 'status');
+	kind = 'status';
+	break;
+case 'mode':
+	if (length(ARGV) != 1) usage(2);
+	result = rpc('mode_set', { interface: iface, mode: shift(ARGV) });
+	break;
+case 'oam':
+	if (length(ARGV) != 1) usage(2);
+	let oamState = shift(ARGV);
+	if (oamState != 'enable' && oamState != 'disable') usage(2);
+	result = rpc('oam_set', { interface: iface, enabled: oamState == 'enable' ? 1 : 0 });
+	break;
+case 'apply':
+	if (length(ARGV)) usage(2);
+	result = rpc('apply', {});
+	break;
+default:
+	usage(2);
+}
+
+if (json_output) {
+	printf('%J\n', result);
+	exit(0);
+}
+
+if (kind == 'status')
+	print_status(result);
+else
+	for (let key in (result || {}))
+		printf('%s: %s\n', replace(key, /_/g, '-'), maybe(result[key]));

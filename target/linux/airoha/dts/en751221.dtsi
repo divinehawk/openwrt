@@ -77,13 +77,13 @@
 	};
 
 	pcie_phy1: pcie-phy@1fac0000 {
-		compatible = "econet,en751221-pcie-gen2";
+		compatible = "econet,en751221-pcie-phy1";
 		reg = <0x1fac0000 0x1000>;
 		#phy-cells = <0>;
 	};
 
 	pcie_phy0: pcie-phy@1faf2000 {
-		compatible = "econet,en751221-pcie-gen1";
+		compatible = "econet,en751221-pcie-phy0";
 		reg = <0x1faf2000 0x1000>;
 		#phy-cells = <0>;
 	};
@@ -369,8 +369,8 @@
 
 		gdm1: ethernet@1 {
 			compatible = "econet,eth-mac";
-			reg = <0>;
-			phy-mode = "trgmii";
+			reg = <1>;
+			phy-mode = "internal";
 			status = "disabled";
 
 			fixed-link {
@@ -382,9 +382,9 @@
 
 		gdm2: ethernet@2 {
 			compatible = "econet,eth-mac";
-			reg = <1>;
+			reg = <2>;
+			phy-mode = "internal";
 			status = "disabled";
-			phy-mode = "rgmii-rxid";
 		};
 	};
 

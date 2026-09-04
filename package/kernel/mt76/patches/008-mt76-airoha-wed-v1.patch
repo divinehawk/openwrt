@@ -1,0 +1,452 @@
+From 5f8dd2d2d4dbeada1bb2da58e4d2b81e64fa2118 Mon Sep 17 00:00:00 2001
+From: Matheus Sampaio Queiroha <me@sirherobrine23.com.br>
+Date: Mon, 31 Aug 2026 12:46:33 +1000
+Subject: [PATCH] wifi: mt76: enable the Airoha WED v1 data path
+
+Remove the attach-only debugging bypasses that kept Airoha devices on
+the native WPDMA queues. Use the WED-owned TX, TX-free and interrupt
+paths, and build the fixed 128-byte descriptor required by WED v1.
+
+Signed-off-by: Matheus Sampaio Queiroha <me@sirherobrine23.com.br>
+---
+ mmio.c        | 13 ++-----
+ mt7915/dma.c  | 99 ++++++++++++---------------------------------------
+ mt7915/mac.c  | 11 ++++--
+ mt7915/mcu.c  | 17 ++++-----
+ mt7915/mmio.c | 64 ++-------------------------------
+ mt7915/pci.c  | 24 ++-----------
+ 6 files changed, 44 insertions(+), 184 deletions(-)
+
+diff --git a/mmio.c b/mmio.c
+index eadad10..05d74cd 100644
+--- a/mmio.c
++++ b/mmio.c
+@@ -83,20 +83,11 @@ void mt76_set_irq_mask(struct mt76_dev *dev, u32 addr,
+ 	dev->mmio.irqmask &= ~clear;
+ 	dev->mmio.irqmask |= set;
+ 	if (addr) {
+-		if (mtk_wed_device_active(&dev->mmio.wed)) {
++		if (mtk_wed_device_active(&dev->mmio.wed))
+ 			mtk_wed_device_irq_set_mask(&dev->mmio.wed,
+ 						    dev->mmio.irqmask);
+-
+-			/*
+-			 * Airoha WED bring-up keeps the native PCI IRQ enabled for
+-			 * MCU and other non-offloaded WPDMA events while the WED
+-			 * interrupt agent is being validated.
+-			 */
+-			if (IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED))
+-				mt76_mmio_wr(dev, addr, dev->mmio.irqmask);
+-		} else {
++		else
+ 			mt76_mmio_wr(dev, addr, dev->mmio.irqmask);
+-		}
+ 	}
+ 	spin_unlock_irqrestore(&dev->mmio.irq_lock, flags);
+ }
+diff --git a/mt7915/dma.c b/mt7915/dma.c
+index 524ef36..c880e82 100644
+--- a/mt7915/dma.c
++++ b/mt7915/dma.c
+@@ -12,18 +12,13 @@ mt7915_init_tx_queues(struct mt7915_phy *phy, int idx, int n_desc, int ring_base
+ 	struct mtk_wed_device *wed = NULL;
+ 
+ 	if (mtk_wed_device_active(&dev->mt76.mmio.wed)) {
+-		if (IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED)) {
+-			dev_info(dev->mt76.dev,
+-				 "WED active: keeping TX queues on native WPDMA for Airoha attach-only debug\n");
+-		} else {
+-			if (is_mt798x(&dev->mt76))
+-				ring_base += MT_TXQ_ID(0) * MT_RING_SIZE;
+-			else
+-				ring_base = MT_WED_TX_RING_BASE;
++		if (is_mt798x(&dev->mt76))
++			ring_base += MT_TXQ_ID(0) * MT_RING_SIZE;
++		else
++			ring_base = MT_WED_TX_RING_BASE;
+ 
+-			idx -= MT_TXQ_ID(0);
+-			wed = &dev->mt76.mmio.wed;
+-		}
++		idx -= MT_TXQ_ID(0);
++		wed = &dev->mt76.mmio.wed;
+ 	}
+ 
+ 	return mt76_connac_init_tx_queues(phy->mt76, idx, n_desc, ring_base,
+@@ -263,11 +258,6 @@ int mt7915_dma_start(struct mt7915_dev *dev, bool reset, bool wed_reset)
+ 	u32 hif1_ofs = 0;
+ 	u32 irq_mask;
+ 
+-	dev_info(mdev->dev,
+-		 "wed dma_start: reset=%d wed_reset=%d wed_active=%d version=%u running=%d\n",
+-		 reset, wed_reset, mtk_wed_device_active(&mdev->mmio.wed),
+-		 mdev->mmio.wed.version, mdev->mmio.wed.running);
+-
+ 	if (dev->hif2)
+ 		hif1_ofs = MT_WFDMA0_PCIE1(0) - MT_WFDMA0(0);
+ 
+@@ -321,38 +311,20 @@ int mt7915_dma_start(struct mt7915_dev *dev, bool reset, bool wed_reset)
+ 		int ret;
+ 
+ 		wed_irq_mask |= MT_INT_TX_DONE_BAND0 | MT_INT_TX_DONE_BAND1;
+-		dev_info(mdev->dev,
+-			 "wed dma_start: configuring WED irq_mask=%08x base_irq_mask=%08x\n",
+-			 wed_irq_mask, irq_mask);
+-		if (IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED)) {
+-			dev_info(mdev->dev,
+-				 "WED active: skipping WED start/rx-stats for Airoha attach-only debug mask=%08x\n",
+-				 wed_irq_mask);
+-		} else {
+-			if (!is_mt798x(&dev->mt76))
+-				mt76_wr(dev, MT_INT_WED_MASK_CSR, wed_irq_mask);
+-			else
+-				mt76_wr(dev, MT_INT_MASK_CSR, wed_irq_mask);
++		if (!is_mt798x(&dev->mt76))
++			mt76_wr(dev, MT_INT_WED_MASK_CSR, wed_irq_mask);
++		else
++			mt76_wr(dev, MT_INT_MASK_CSR, wed_irq_mask);
+ 
+-			ret = mt7915_mcu_wed_enable_rx_stats(dev);
+-			if (ret)
+-				return ret;
++		ret = mt7915_mcu_wed_enable_rx_stats(dev);
++		if (ret)
++			return ret;
+ 
+-			mtk_wed_device_start(&dev->mt76.mmio.wed, wed_irq_mask);
+-		}
+-		dev_info(mdev->dev,
+-			 "wed dma_start: mtk_wed_device_start done running=%d\n",
+-			 dev->mt76.mmio.wed.running);
++		mtk_wed_device_start(&dev->mt76.mmio.wed, wed_irq_mask);
+ 	}
+ 
+ 	irq_mask = reset ? MT_INT_MCU_CMD : irq_mask;
+ 
+-	dev_info(mdev->dev,
+-		 "wed dma_start: final irq_mask=%08x wfdma0_glo=%08x int_mask=%08x wed_active=%d\n",
+-		 irq_mask, mt76_rr(dev, MT_WFDMA0_GLO_CFG),
+-		 mt76_rr(dev, MT_INT_MASK_CSR),
+-		 mtk_wed_device_active(&mdev->mmio.wed));
+-
+ 	mt7915_irq_enable(dev, irq_mask);
+ 	mt7915_irq_disable(dev, 0);
+ 
+@@ -453,15 +425,8 @@ int mt7915_dma_init(struct mt7915_dev *dev, struct mt7915_phy *phy2)
+ 		if (!is_mt798x(mdev)) {
+ 			u8 wed_control_rx1 = is_mt7915(mdev) ? 1 : 2;
+ 
+-			if (IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED)) {
+-				dev_info(mdev->dev,
+-					 "WED active: programming WED_RING_CONTROL only, keeping WFDMA_HOST_CONFIG_WED disabled for Airoha isolation debug\n");
+-				mt76_clear(dev, MT_WFDMA_HOST_CONFIG,
+-					   MT_WFDMA_HOST_CONFIG_WED);
+-			} else {
+-				mt76_set(dev, MT_WFDMA_HOST_CONFIG,
+-					 MT_WFDMA_HOST_CONFIG_WED);
+-			}
++			mt76_set(dev, MT_WFDMA_HOST_CONFIG,
++				 MT_WFDMA_HOST_CONFIG_WED);
+ 
+ 			mt76_wr(dev, MT_WFDMA_WED_RING_CONTROL,
+ 				FIELD_PREP(MT_WFDMA_WED_RING_CONTROL_TX0, 18) |
+@@ -471,13 +436,6 @@ int mt7915_dma_init(struct mt7915_dev *dev, struct mt7915_phy *phy2)
+ 			if (is_mt7915(mdev))
+ 				mt76_rmw(dev, MT_WFDMA0_EXT0_CFG, MT_WFDMA0_EXT0_RXWB_KEEP,
+ 					 MT_WFDMA0_EXT0_RXWB_KEEP);
+-
+-			if (IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED))
+-				dev_info(mdev->dev,
+-					 "WED active: WFDMA_HOST_CONFIG=%08x WED_RING_CONTROL=%08x EXT0=%08x\n",
+-					 mt76_rr(dev, MT_WFDMA_HOST_CONFIG),
+-					 mt76_rr(dev, MT_WFDMA_WED_RING_CONTROL),
+-					 mt76_rr(dev, MT_WFDMA0_EXT0_CFG));
+ 		}
+ 	} else {
+ 		mt76_clear(dev, MT_WFDMA_HOST_CONFIG, MT_WFDMA_HOST_CONFIG_WED);
+@@ -535,34 +493,21 @@ int mt7915_dma_init(struct mt7915_dev *dev, struct mt7915_phy *phy2)
+ 
+ 	/* event from WA */
+ 	if (mtk_wed_device_active(&mdev->mmio.wed) && is_mt7915(mdev)) {
+-		/*
+-		 * EN7523/Airoha WED bring-up: force the WA MCU event queue to
+-		 * remain on the native WPDMA ring. The generic MT7915 WED v1
+-		 * path reuses this queue as the WED TX-free ring; if the provider
+-		 * does not proxy this path correctly, WA MCU replies are lost right
+-		 * after MT76_STATE_MCU_RUNNING is set.
+-		 */
+-		dev_info(mdev->dev,
+-			 "WED active: keeping WA MCU event queue on native WPDMA for debug\n");
+-		wa_rx_base = MT_RXQ_RING_BASE(MT_RXQ_MCU_WA);
+-		wa_rx_idx = MT_RXQ_ID(MT_RXQ_MCU_WA);
++		wa_rx_base = mdev->mmio.wed.version == 1 ?
++				     MT_RXQ_RING_BASE(MT_RXQ_MCU_WA) :
++				     MT_WED_RX_RING_BASE;
++		wa_rx_idx = MT7915_RXQ_MCU_WA;
++		mdev->q_rx[MT_RXQ_MCU_WA].flags = MT_WED_Q_TXFREE;
++		mdev->q_rx[MT_RXQ_MCU_WA].wed = &mdev->mmio.wed;
+ 	} else {
+ 		wa_rx_base = MT_RXQ_RING_BASE(MT_RXQ_MCU_WA);
+ 		wa_rx_idx = MT_RXQ_ID(MT_RXQ_MCU_WA);
+-		dev_info(mdev->dev,
+-			 "wed dma_init: WA MCU queue native idx=%d base=%08x wed_active=%d\n",
+-			 wa_rx_idx, wa_rx_base, mtk_wed_device_active(&mdev->mmio.wed));
+ 	}
+ 	ret = mt76_queue_alloc(dev, &dev->mt76.q_rx[MT_RXQ_MCU_WA],
+ 			       wa_rx_idx, MT7915_RX_MCU_RING_SIZE,
+ 			       MT_RX_BUF_SIZE, wa_rx_base);
+ 	if (ret)
+ 		return ret;
+-	dev_info(mdev->dev,
+-		 "wed dma_init: WA MCU queue allocated idx=%d base=%08x flags=%08x wed=%p\n",
+-		 wa_rx_idx, wa_rx_base, mdev->q_rx[MT_RXQ_MCU_WA].flags,
+-		 mdev->q_rx[MT_RXQ_MCU_WA].wed);
+-
+ 	/* rx data queue for band0 */
+ 	if (!dev->phy.mt76->band_idx) {
+ 		if (mtk_wed_device_active(&mdev->mmio.wed) &&
+diff --git a/mt7915/mac.c b/mt7915/mac.c
+index cd12325..19dc4c2 100644
+--- a/mt7915/mac.c
++++ b/mt7915/mac.c
+@@ -809,10 +809,15 @@ int mt7915_tx_prepare_skb(struct mt76_dev *mdev, void *txwi_ptr,
+ u32 mt7915_wed_init_buf(void *ptr, dma_addr_t phys, int token_id)
+ {
+ 	struct mt76_connac_fw_txp *txp = ptr + MT_TXD_SIZE;
++	u32 payload_offset = MT_TXD_SIZE + sizeof(*txp);
+ 	__le32 *txwi = ptr;
+ 	u32 val;
+ 
+-	memset(ptr, 0, MT_TXD_SIZE + sizeof(*txp));
++	/* Airoha WED v1 fetches a fixed-size 128-byte host descriptor. */
++	if (IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED))
++		payload_offset = 128;
++
++	memset(ptr, 0, payload_offset);
+ 
+ 	val = FIELD_PREP(MT_TXD0_TX_BYTES, MT_TXD_SIZE) |
+ 	      FIELD_PREP(MT_TXD0_PKT_FMT, MT_TX_TYPE_CT);
+@@ -824,9 +829,9 @@ u32 mt7915_wed_init_buf(void *ptr, dma_addr_t phys, int token_id)
+ 
+ 	txp->token = cpu_to_le16(token_id);
+ 	txp->nbuf = 1;
+-	txp->buf[0] = cpu_to_le32(phys + MT_TXD_SIZE + sizeof(*txp));
++	txp->buf[0] = cpu_to_le32(phys + payload_offset);
+ 
+-	return MT_TXD_SIZE + sizeof(*txp);
++	return payload_offset;
+ }
+ 
+ static void
+diff --git a/mt7915/mcu.c b/mt7915/mcu.c
+index 95c0815..4e16085 100644
+--- a/mt7915/mcu.c
++++ b/mt7915/mcu.c
+@@ -2433,18 +2433,13 @@ int mt7915_mcu_init_firmware(struct mt7915_dev *dev)
+ 		return ret;
+ 
+ 	set_bit(MT76_STATE_MCU_RUNNING, &dev->mphy.state);
+-	if (!mtk_wed_device_active(&dev->mt76.mmio.wed)) {
+-		ret = mt7915_mcu_fw_log_2_host(dev, MCU_FW_LOG_WM, 0);
+-		if (ret)
+-			return ret;
++	ret = mt7915_mcu_fw_log_2_host(dev, MCU_FW_LOG_WM, 0);
++	if (ret)
++		return ret;
+ 
+-		ret = mt7915_mcu_fw_log_2_host(dev, MCU_FW_LOG_WA, 0);
+-		if (ret)
+-			return ret;
+-	} else {
+-		dev_warn(dev->mt76.dev,
+-			 "WED active: skipping early fwlog setup for debug\n");
+-	}
++	ret = mt7915_mcu_fw_log_2_host(dev, MCU_FW_LOG_WA, 0);
++	if (ret)
++		return ret;
+ 
+ 	mt76_connac_mcu_del_wtbl_all(&dev->mt76);
+ 
+diff --git a/mt7915/mmio.c b/mt7915/mmio.c
+index 67cd54d..fe74eea 100644
+--- a/mt7915/mmio.c
++++ b/mt7915/mmio.c
+@@ -637,22 +637,12 @@ int mt7915_mmio_wed_init(struct mt7915_dev *dev, void *pdev_ptr,
+ 	struct mtk_wed_device *wed = &dev->mt76.mmio.wed;
+ 	int ret;
+ 
+-	if (!wed_enable) {
+-		dev_info(dev->mt76.dev, "wed_init: disabled by module parameter\n");
++	if (!wed_enable)
+ 		return 0;
+-	}
+-
+-	dev_info(dev->mt76.dev, "wed_init: enter pci=%d current_irq=%d chip=%04x\n",
+-		 pci, *irq, mt76_chip(&dev->mt76));
+ 
+ 	if (pci) {
+ 		struct pci_dev *pci_dev = pdev_ptr;
+ 
+-		dev_info(dev->mt76.dev,
+-			 "wed_init: pci domain=%d bus=%02x devfn=%02x bar0=%pR\n",
+-			 pci_domain_nr(pci_dev->bus), pci_dev->bus->number,
+-			 pci_dev->devfn, &pci_dev->resource[0]);
+-
+ 		wed->wlan.pci_dev = pci_dev;
+ 		wed->wlan.bus_type = MTK_WED_BUS_PCIE;
+ 		wed->wlan.base = devm_ioremap(dev->mt76.dev,
+@@ -676,13 +666,6 @@ int mt7915_mmio_wed_init(struct mt7915_dev *dev, void *pdev_ptr,
+ 					 MT_WPDMA_GLO_CFG;
+ 		wed->wlan.wpdma_rx[0] = pci_resource_start(pci_dev, 0) +
+ 					MT_RXQ_WED_DATA_RING_BASE;
+-
+-		dev_info(dev->mt76.dev,
+-			 "wed_init: pci WPDMA phy=%08x int=%08x mask=%08x tx=%08x txfree=%08x rx_glo=%08x rx0=%08x\n",
+-			 wed->wlan.wpdma_phys, wed->wlan.wpdma_int,
+-			 wed->wlan.wpdma_mask, wed->wlan.wpdma_tx,
+-			 wed->wlan.wpdma_txfree, wed->wlan.wpdma_rx_glo,
+-			 wed->wlan.wpdma_rx[0]);
+ 	} else {
+ 		struct platform_device *plat_dev = pdev_ptr;
+ 		struct resource *res;
+@@ -705,13 +688,6 @@ int mt7915_mmio_wed_init(struct mt7915_dev *dev, void *pdev_ptr,
+ 		wed->wlan.wpdma_txfree = res->start + MT_RXQ_WED_RING_BASE;
+ 		wed->wlan.wpdma_rx_glo = res->start + MT_WPDMA_GLO_CFG;
+ 		wed->wlan.wpdma_rx[0] = res->start + MT_RXQ_WED_DATA_RING_BASE;
+-
+-		dev_info(dev->mt76.dev,
+-			 "wed_init: axi WPDMA phy=%08x int=%08x mask=%08x tx=%08x txfree=%08x rx_glo=%08x rx0=%08x\n",
+-			 wed->wlan.phy_base, wed->wlan.wpdma_int,
+-			 wed->wlan.wpdma_mask, wed->wlan.wpdma_tx,
+-			 wed->wlan.wpdma_txfree, wed->wlan.wpdma_rx_glo,
+-			 wed->wlan.wpdma_rx[0]);
+ 	}
+ 	wed->wlan.nbuf = MT7915_HW_TOKEN_SIZE;
+ 	wed->wlan.tx_tbit[0] = is_mt7915(&dev->mt76) ? 4 : 30;
+@@ -745,18 +721,7 @@ int mt7915_mmio_wed_init(struct mt7915_dev *dev, void *pdev_ptr,
+ 
+ 	dev->mt76.rx_token_size = wed->wlan.rx_npkt;
+ 
+-	dev_info(dev->mt76.dev,
+-		 "wed_init: tokens nbuf=%u token_start=%u tx_tbit=%u/%u txfree_tbit=%u rx_tbit=%u/%u rx_npkt=%u rx_size=%u\n",
+-		 wed->wlan.nbuf, wed->wlan.token_start, wed->wlan.tx_tbit[0],
+-		 wed->wlan.tx_tbit[1], wed->wlan.txfree_tbit,
+-		 wed->wlan.rx_tbit[0], wed->wlan.rx_tbit[1],
+-		 wed->wlan.rx_npkt, wed->wlan.rx_size);
+-
+ 	ret = mtk_wed_device_attach(wed);
+-	dev_info(dev->mt76.dev,
+-		 "wed_init: attach ret=%d active=%d version=%u irq=%d wed_dev=%s\n",
+-		 ret, mtk_wed_device_active(wed), wed->version, wed->irq,
+-		 wed->dev ? dev_name(wed->dev) : "none");
+ 	if (ret)
+ 		return 0;
+ 
+@@ -764,8 +729,6 @@ int mt7915_mmio_wed_init(struct mt7915_dev *dev, void *pdev_ptr,
+ 	dev->mt76.dma_dev = wed->dev;
+ 
+ 	ret = dma_set_mask(wed->dev, DMA_BIT_MASK(32));
+-	dev_info(dev->mt76.dev, "wed_init: dma_set_mask ret=%d irq=%d dma_dev=%s\n",
+-		 ret, *irq, dev_name(dev->mt76.dma_dev));
+ 	if (ret)
+ 		return ret;
+ 
+@@ -841,15 +804,11 @@ void mt7915_dual_hif_set_irq_mask(struct mt7915_dev *dev,
+ 	mdev->mmio.irqmask |= set;
+ 
+ 	if (write_reg) {
+-		if (mtk_wed_device_active(&mdev->mmio.wed)) {
+-			dev_info_ratelimited(mdev->dev,
+-					     "wed irq_mask_update: clear=%08x set=%08x new=%08x\n",
+-					     clear, set, mdev->mmio.irqmask);
++		if (mtk_wed_device_active(&mdev->mmio.wed))
+ 			mtk_wed_device_irq_set_mask(&mdev->mmio.wed,
+ 						    mdev->mmio.irqmask);
+-		} else {
++		else
+ 			mt76_wr(dev, MT_INT_MASK_CSR, mdev->mmio.irqmask);
+-		}
+ 		mt76_wr(dev, MT_INT1_MASK_CSR, mdev->mmio.irqmask);
+ 	}
+ 
+@@ -873,26 +832,9 @@ static void mt7915_irq_tasklet(struct tasklet_struct *t)
+ 
+ 	if (mtk_wed_device_active(wed)) {
+ 		mtk_wed_device_irq_set_mask(wed, 0);
+-		if (IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED))
+-			mt76_wr(dev, MT_INT_MASK_CSR, 0);
+ 		if (dev->hif2)
+ 			mt76_wr(dev, MT_INT1_MASK_CSR, 0);
+ 		intr = mtk_wed_device_irq_get(wed, dev->mt76.mmio.irqmask);
+-		if (IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED)) {
+-			u32 raw = mt76_rr(dev, MT_INT_SOURCE_CSR);
+-
+-			raw &= dev->mt76.mmio.irqmask;
+-			if (raw)
+-				mt76_wr(dev, MT_INT_SOURCE_CSR, raw);
+-			dev_info_ratelimited(dev->mt76.dev,
+-					     "wed irq_tasklet: wed_intr=%08x raw_wpdma=%08x irqmask=%08x version=%u\n",
+-					     intr, raw, dev->mt76.mmio.irqmask, wed->version);
+-			intr |= raw;
+-		} else {
+-			dev_info_ratelimited(dev->mt76.dev,
+-					     "wed irq_tasklet: wed_intr=%08x irqmask=%08x version=%u\n",
+-					     intr, dev->mt76.mmio.irqmask, wed->version);
+-		}
+ 	} else {
+ 		mt76_wr(dev, MT_INT_MASK_CSR, 0);
+ 		if (dev->hif2)
+diff --git a/mt7915/pci.c b/mt7915/pci.c
+index 4d55076..f6b0321 100644
+--- a/mt7915/pci.c
++++ b/mt7915/pci.c
+@@ -106,7 +106,6 @@ static int mt7915_pci_probe(struct pci_dev *pdev,
+ 	struct mt7915_hif *hif2 = NULL;
+ 	struct mt7915_dev *dev;
+ 	struct mt76_dev *mdev;
+-	bool airoha_wed_native_irq = false;
+ 	int irq;
+ 	int ret;
+ 
+@@ -142,21 +141,7 @@ static int mt7915_pci_probe(struct pci_dev *pdev,
+ 	if (ret < 0)
+ 		goto free_wed_or_irq_vector;
+ 
+-	if (ret > 0 && IS_ENABLED(CONFIG_NET_AIROHA_SOC_WED)) {
+-		/*
+-		 * EN7523/Airoha WED bring-up: keep using the native PCI IRQ so
+-		 * MCU and non-offloaded WPDMA interrupts can still be observed while
+-		 * the WED interrupt agent is being validated.
+-		 */
+-		ret = pci_alloc_irq_vectors(pdev, 1, 1, PCI_IRQ_ALL_TYPES);
+-		if (ret < 0)
+-			goto free_wed_or_irq_vector;
+-
+-		airoha_wed_native_irq = true;
+-		irq = pdev->irq;
+-		dev_info(mdev->dev,
+-			 "WED active: using native PCI IRQ for Airoha bring-up debug\n");
+-	} else if (!ret) {
++	if (!ret) {
+ 		hif2 = mt7915_pci_init_hif2(pdev);
+ 
+ 		ret = pci_alloc_irq_vectors(pdev, 1, 1, PCI_IRQ_ALL_TYPES);
+@@ -205,13 +190,10 @@ free_hif2:
+ 		put_device(dev->hif2->dev);
+ 	devm_free_irq(mdev->dev, irq, dev);
+ free_wed_or_irq_vector:
+-	if (mtk_wed_device_active(&mdev->mmio.wed)) {
++	if (mtk_wed_device_active(&mdev->mmio.wed))
+ 		mtk_wed_device_detach(&mdev->mmio.wed);
+-		if (airoha_wed_native_irq)
+-			pci_free_irq_vectors(pdev);
+-	} else {
++	else
+ 		pci_free_irq_vectors(pdev);
+-	}
+ free_device:
+ 	mt76_free_device(&dev->mt76);
+ 
+-- 
+2.51.1
+

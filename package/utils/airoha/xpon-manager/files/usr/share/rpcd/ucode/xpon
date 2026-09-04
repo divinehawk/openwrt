@@ -1,0 +1,753 @@
+'use strict';
+
+/*
+ * rpcd backend for Linux net/xpon and net/xpon/omci.
+ *
+ * All kernel communication is performed by the native xpon.so and omci.so
+ * ucode modules through Generic Netlink. No sysfs or helper process is used.
+ */
+
+import * as omci from 'omci';
+import * as xpon from 'xpon';
+import { connect } from 'ubus';
+import { cursor } from 'uci';
+import { interval } from 'uloop';
+
+const uci = cursor();
+const event_bus = connect();
+const XPON_DEVICE_DEFAULT = 'pon0';
+const CONFIG_POLL_MS = 2000;
+const CONFIG_RETRY_POLLS = 15;
+
+let auto_apply_busy = false;
+let last_applied_signature = null;
+let last_config_signature = null;
+let retry_polls = 0;
+
+/* OMCI configuration keys exported by the kernel UAPI that are useful to userspace. */
+const config_specs = [
+	{ key: 1,  name: 'serial', option: 'serial', scalar: false },
+	{ key: 2,  name: 'vendor-id', option: 'vendor_id', scalar: false },
+	{ key: 4,  name: 'equipment-id', option: 'equipment_id', scalar: false },
+	{ key: 5,  name: 'password', option: 'password', scalar: false, secret: true },
+	{ key: 6,  name: 'traffic-management-option', option: 'traffic_management_option', scalar: true },
+	{ key: 7,  name: 'onu-type', option: 'onu_type', scalar: true },
+	{ key: 8,  name: 'uni-count', option: 'uni_count', scalar: true },
+	{ key: 9,  name: 'agent-enabled', option: 'enabled', scalar: true, agent: true },
+	{ key: 10, name: 'agent-permissive', option: 'permissive', scalar: true, agent: true },
+	{ key: 11, name: 'agent-fake-omci', option: 'fake_omci', scalar: true, agent: true },
+	{ key: 14, name: 'agent-dying-gasp', option: 'dying_gasp', scalar: true, agent: true },
+	{ key: 15, name: 'omcc-version', option: 'omcc_version', scalar: true },
+	{ key: 16, name: 'hardware-version', option: 'hardware_version', scalar: false },
+	{ key: 17, name: 'software-version-0', option: 'software_version_0', scalar: false },
+	{ key: 18, name: 'software-version-1', option: 'software_version_1', scalar: false },
+];
+
+const source_names = [
+	'unspecified', 'default', 'device-tree', 'nvmem', 'driver', 'netlink', 'sysfs'
+];
+const onu_type_names = [ 'other', 'sfu', 'hgu', 'mdu', 'sbu', 'mtu', 'cbu' ];
+const xpon_mode_values = { gpon: 0, epon: 1, xgspon: 2 };
+const xpon_mode_names = [ 'gpon', 'epon', 'xgspon' ];
+const category_names = [
+	'unspecified', 'equipment', 'ani', 'uni', 'layer2', 'layer3',
+	'multicast', 'voice', 'security', 'management', 'performance', 'xdsl',
+	'legacy', 'vendor', 'reserved', 'other'
+];
+const support_names = [ 'catalog', 'shadow', 'parsed', 'provisioned', 'native' ];
+const origin_names = [ 'default', 'local', 'olt', 'hardware' ];
+const class_flag_bits = [
+	[ 1 << 0, 'standard' ],
+	[ 1 << 1, 'deprecated' ],
+	[ 1 << 2, 'reserved' ],
+	[ 1 << 3, 'vendor-specific' ],
+	[ 1 << 4, 'performance' ],
+	[ 1 << 5, 'table' ],
+	[ 1 << 6, 'datapath' ],
+];
+
+function bits_to_names(value, table) {
+	let out = [];
+	value = value || 0;
+	for (let item in table)
+		if (value & item[0])
+			push(out, item[1]);
+	return out;
+}
+
+function flag_value(value, fallback) {
+	if (value == null || `${value}` == '')
+		return fallback;
+	if (value === true || value === false)
+		return value;
+	let n = int(value, 0);
+	return n != null ? !!n : fallback;
+}
+
+function xpon_failure(operation) {
+	let error = xpon.error();
+	return {
+		success: false,
+		error: error?.message || 'xPON native binding failed',
+		errno: error?.errno || 0,
+		operation: operation
+	};
+}
+
+function omci_failure(operation) {
+	let error = omci.error();
+	return {
+		success: false,
+		error: error?.message || 'OMCI native binding failed',
+		errno: error?.errno || 0,
+		operation: operation
+	};
+}
+
+function reply_failure(request, failure) {
+	let status = (failure.errno == 22 || failure.errno == 34 || failure.errno == 19 ||
+		      failure.errno == 95) ? UBUS_STATUS_INVALID_ARGUMENT : UBUS_STATUS_UNKNOWN_ERROR;
+	request.reply(failure, status);
+	return null;
+}
+
+function xpon_native_error(request, operation) {
+	return reply_failure(request, xpon_failure(operation));
+}
+
+function omci_native_error(request, operation) {
+	return reply_failure(request, omci_failure(operation));
+}
+
+function find_spec_by_key(key) {
+	for (let spec in config_specs)
+		if (spec.key == key)
+			return spec;
+	return null;
+}
+
+function find_spec_by_name(name) {
+	for (let spec in config_specs)
+		if (spec.name == name || spec.option == name)
+			return spec;
+	return null;
+}
+
+function decorate_config_item(item) {
+	let spec = find_spec_by_key(item.key);
+	if (!spec)
+		return item;
+	item.name = spec.name;
+	item.option = spec.option;
+	item.scalar = spec.scalar;
+	item.secret = spec.secret || false;
+	item.source_name = source_names[item.source] || `unknown-${item.source}`;
+	if (spec.name == 'onu-type')
+		item.onu_type_name = onu_type_names[item.value] || `unknown-${item.value}`;
+	return item;
+}
+
+function config_array_to_object(items) {
+	let out = {};
+	for (let item in (items || [])) {
+		decorate_config_item(item);
+		if (item.name != null)
+			out[item.name] = item.value;
+	}
+	return out;
+}
+
+function decorate_class(item) {
+	item.category_name = category_names[item.category] || `unknown-${item.category}`;
+	item.support_name = support_names[item.support] || `unknown-${item.support}`;
+	item.flag_names = bits_to_names(item.flags, class_flag_bits);
+	return item;
+}
+
+function decorate_mib(item) {
+	item.origin_name = origin_names[item.origin] || `unknown-${item.origin}`;
+	return item;
+}
+
+function load_omci_config(device) {
+	let list = omci.config_list(device);
+	if (list == null)
+		return null;
+	return config_array_to_object(list);
+}
+
+function decorate_omci_status(device, status) {
+	let config = load_omci_config(device);
+	if (config != null) {
+		status.identity = {
+			serial: config.serial,
+			'vendor-id': config['vendor-id'],
+			'hardware-version': config['hardware-version'],
+			'software-version-0': config['software-version-0'],
+			'software-version-1': config['software-version-1'],
+			'equipment-id': config['equipment-id'],
+			'omcc-version': config['omcc-version'],
+			'onu-type': config['onu-type'],
+			'onu-type-name': onu_type_names[config['onu-type']] || `unknown-${config['onu-type']}`
+		};
+	}
+
+	/* OLT-G is class 131, entity 0. Its absence is not an error. */
+	let olt = omci.mib_get(device, 131, 0);
+	if (olt != null && olt.olt_g != null)
+		status.olt = olt.olt_g;
+
+	return status;
+}
+
+function decorate_xpon_status(status) {
+	status.mode_name = status.mode_name || xpon_mode_names[status.mode] || `unknown-${status.mode}`;
+	status.available_mode_names = status.available_mode_names || [];
+	return status;
+}
+
+function first_section(type) {
+	let found = null;
+	uci.foreach('xpon', type, (section) => {
+		if (found == null)
+			found = section;
+	});
+	return found || {};
+}
+
+function get_sections(fresh) {
+	if (fresh)
+		uci.unload('xpon');
+	return {
+		core: first_section('core'),
+		omci: first_section('omci'),
+		oam: first_section('oam')
+	};
+}
+
+function xpon_device(section) {
+	let name = `${section?.device || XPON_DEVICE_DEFAULT}`;
+	return name == '' ? XPON_DEVICE_DEFAULT : name;
+}
+
+function xpon_mode_value(value) {
+	if (value == null || `${value}` == '')
+		return null;
+	if (xpon_mode_values[`${value}`] != null)
+		return xpon_mode_values[`${value}`];
+	let n = int(value, 0);
+	return n != null && n >= 0 && n < length(xpon_mode_names) ? n : null;
+}
+
+function xpon_mode_name(value) {
+	return xpon_mode_names[value] || `unknown-${value}`;
+}
+
+function omci_device(section) {
+	return xpon_device(section);
+}
+
+function resolve_omci_device(device) {
+	let name = `${device || XPON_DEVICE_DEFAULT}`;
+	let status = omci.status(name);
+
+	if (status == null)
+		return null;
+	if (status.device == null)
+		return null;
+
+	return { name: name, id: status.device, status: status };
+}
+
+function omci_target(request, value, operation) {
+	let name = value == null || `${value}` == '' ?
+		omci_device(get_sections(false).omci) : `${value}`;
+	let resolved = resolve_omci_device(name);
+
+	if (resolved == null) {
+		omci_native_error(request, operation || `resolve ${name}`);
+		return null;
+	}
+
+	return resolved;
+}
+
+function config_signature(sections) {
+	let values = [
+		`core.device=${sections.core.device ?? ''}`,
+		`mode=${sections.core.mode ?? ''}`,
+		`oam.device=${sections.oam.device ?? ''}`,
+		`oam.enabled=${sections.oam.enabled ?? ''}`,
+		`omci.device=${sections.omci.device ?? ''}`,
+		`omci.enabled=${sections.omci.enabled ?? ''}`,
+		`omci.permissive=${sections.omci.permissive ?? ''}`,
+		`omci.fake_omci=${sections.omci.fake_omci ?? ''}`,
+		`omci.dying_gasp=${sections.omci.dying_gasp ?? ''}`
+	];
+
+	for (let spec in config_specs)
+		if (!spec.agent)
+			push(values, `omci.${spec.option}=${sections.omci[spec.option] ?? ''}`);
+	return join('\x1f', values);
+}
+
+function apply_core(core) {
+	let iface = xpon_device(core);
+	let mode = core.mode;
+	let applied = [];
+	let status = xpon.status(iface);
+
+	if (status == null)
+		return xpon_failure('read xPON status');
+	status = decorate_xpon_status(status);
+
+	if (mode != null && `${mode}` != '') {
+		let normalized = xpon_mode_value(mode);
+		if (normalized == null)
+			return { success: false, error: 'invalid xPON mode', errno: 22, operation: 'apply xPON mode' };
+		if (status.mode != normalized) {
+			if (xpon.set_mode(iface, normalized) == null)
+				return xpon_failure('apply xPON mode');
+			push(applied, 'mode');
+			status = xpon.status(iface);
+			if (status == null)
+				return xpon_failure('read xPON status after mode change');
+			status = decorate_xpon_status(status);
+		}
+	}
+
+	return { success: true, interface: iface, status: status, applied: applied };
+}
+
+function apply_oam(section) {
+	let device = xpon_device(section);
+	let status = xpon.status(device);
+	let enabled = flag_value(section.enabled, true);
+
+	if (status == null)
+		return xpon_failure('read OAM xPON status');
+	status = decorate_xpon_status(status);
+
+	let oam = status?.oam || {};
+	if (!oam.present)
+		return { success: true, device: device, pending: true, present: false, enabled: null, applied: [], skipped: 'OAM provider is not registered' };
+
+	if (xpon.set_oam_enabled(device, enabled ? 1 : 0) == null)
+		return xpon_failure('apply OAM administrative state');
+
+	return { success: true, device: device, present: true, enabled: enabled, applied: [ 'oam-enabled' ] };
+}
+
+function apply_omci(section) {
+	let device_name = omci_device(section);
+	let xpon_status = xpon.status(device_name);
+	let enabled = flag_value(section.enabled, true);
+	let applied = [];
+
+	if (xpon_status == null)
+		return xpon_failure('read OMCI xPON status');
+	xpon_status = decorate_xpon_status(xpon_status);
+
+	if (xpon_status.mode_name == 'epon')
+		return { success: true, device: device_name, enabled: enabled, applied: [], skipped: 'EPON does not use OMCI' };
+
+	let resolved = resolve_omci_device(device_name);
+	if (resolved == null)
+		return omci_failure(`resolve OMCI device ${device_name}`);
+	let device = resolved.id;
+
+	let opts = {
+		enabled: enabled ? 1 : 0,
+		permissive: flag_value(section.permissive, true) ? 1 : 0,
+		fake_omci: flag_value(section.fake_omci, false) ? 1 : 0,
+		dying_gasp: flag_value(section.dying_gasp, true) ? 1 : 0
+	};
+	if (omci.agent_set(device, opts) == null)
+		return omci_failure('apply OMCI agent settings');
+	push(applied, 'agent');
+
+	if (!enabled)
+		return { success: true, device: device_name, device_id: device, enabled: false, applied: applied };
+
+	for (let spec in config_specs) {
+		if (spec.agent)
+			continue;
+		let value = section[spec.option];
+		if (value == null || `${value}` == '')
+			continue;
+		if (omci.config_set(device, spec.key, value) == null)
+			return omci_failure(`apply OMCI ${spec.name}`);
+		push(applied, spec.name);
+	}
+
+	return { success: true, device: device_name, device_id: device, enabled: true, applied: applied };
+}
+
+function apply_all(sections) {
+	let result = { success: false, applied: [] };
+	let core = apply_core(sections.core);
+	if (!core.success)
+		return core;
+	for (let item in core.applied)
+		push(result.applied, `core:${item}`);
+
+	let oam = apply_oam(sections.oam);
+	if (!oam.success)
+		return oam;
+	for (let item in oam.applied)
+		push(result.applied, `oam:${item}`);
+
+	let omci_result = apply_omci(sections.omci);
+	if (!omci_result.success)
+		return omci_result;
+	for (let item in omci_result.applied)
+		push(result.applied, `omci:${item}`);
+
+	result.success = true;
+	result.device = xpon_device(sections.core);
+	result.mode = core.status.mode_name;
+	result.pending = !!oam.pending;
+	result.oam = oam;
+	result.omci = omci_result;
+	return result;
+}
+
+function refresh_applied_signature(result) {
+	if (result.success && !result.pending)
+		last_applied_signature = config_signature(get_sections(true));
+}
+
+function auto_apply(trigger) {
+	if (auto_apply_busy)
+		return;
+
+	let sections = get_sections(true);
+	let signature = config_signature(sections);
+	if (signature == last_applied_signature) {
+		last_config_signature = signature;
+		retry_polls = 0;
+		return;
+	}
+
+	if (trigger == 'poll' && signature == last_config_signature &&
+	    ++retry_polls < CONFIG_RETRY_POLLS)
+		return;
+
+	last_config_signature = signature;
+	retry_polls = 0;
+	auto_apply_busy = true;
+	let result = apply_all(sections);
+	refresh_applied_signature(result);
+	auto_apply_busy = false;
+
+	if (!result.success)
+		warn(`xpon: automatic UCI apply failed during ${trigger}: ` +
+		     `${result.operation}: ${result.error}\n`);
+}
+
+function config_change(type, data) {
+	let package_name = data?.config || data?.package || data?.data?.config || data?.data?.package;
+	if (type == 'config.change' && package_name == 'xpon')
+		auto_apply('config.change');
+}
+
+const xpon_methods = {
+	family: {
+		call: function(request) {
+			let data = xpon.family();
+			if (data == null)
+				return xpon_native_error(request, 'family');
+			return { family: data };
+		}
+	},
+
+	status: {
+		args: { interface: '' },
+		call: function(request) {
+			let core = get_sections(false).core;
+			let iface = request.args.interface || xpon_device(core);
+			let data = xpon.status(iface);
+			if (data == null)
+				return xpon_native_error(request, 'status');
+			return { status: decorate_xpon_status(data) };
+		}
+	},
+
+	mode_set: {
+		args: { interface: '', mode: '' },
+		call: function(request) {
+			let core = get_sections(false).core;
+			let iface = request.args.interface || xpon_device(core);
+			let mode = xpon_mode_value(request.args.mode);
+			if (mode == null) {
+				request.reply({ error: 'invalid xPON mode' }, UBUS_STATUS_INVALID_ARGUMENT);
+				return null;
+			}
+			if (xpon.set_mode(iface, mode) == null)
+				return xpon_native_error(request, 'mode_set');
+			return { success: true, interface: iface, mode: xpon_mode_name(mode) };
+		}
+	},
+
+	oam_set: {
+		args: { interface: '', enabled: 1 },
+		call: function(request) {
+			let oam = get_sections(false).oam;
+			let iface = request.args.interface || xpon_device(oam);
+			let enabled = flag_value(request.args.enabled, null);
+			if (enabled == null) {
+				request.reply({ error: 'enabled must be 0 or 1' }, UBUS_STATUS_INVALID_ARGUMENT);
+				return null;
+			}
+			if (xpon.set_oam_enabled(iface, enabled ? 1 : 0) == null)
+				return xpon_native_error(request, 'oam_set');
+			return { success: true, interface: iface, enabled: enabled };
+		}
+	},
+
+	apply: {
+		call: function(request) {
+			let result = apply_all(get_sections(true));
+			refresh_applied_signature(result);
+			if (!result.success)
+				return reply_failure(request, result);
+			return result;
+		}
+	}
+};
+
+const omci_methods = {
+	family: {
+		call: function(request) {
+			let data = omci.family();
+			if (data == null)
+				return omci_native_error(request, 'family');
+			return { family: data };
+		}
+	},
+
+	status: {
+		args: { device: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'status');
+			if (target == null)
+				return null;
+			target.status.device_name = target.name;
+			return { status: decorate_omci_status(target.id, target.status) };
+		}
+	},
+
+	agent_set: {
+		args: { device: '', enabled: 0, permissive: 0, fake_omci: 0, dying_gasp: 0 },
+		call: function(request) {
+			let opts = {};
+			for (let key in [ 'enabled', 'permissive', 'fake_omci', 'dying_gasp' ])
+				if (request.args[key] != null)
+					opts[key] = request.args[key];
+			if (length(opts) == 0) {
+				request.reply({ error: 'no agent option supplied' }, UBUS_STATUS_INVALID_ARGUMENT);
+				return null;
+			}
+			let target = omci_target(request, request.args.device, 'agent_set');
+			if (target == null)
+				return null;
+			if (omci.agent_set(target.id, opts) == null)
+				return omci_native_error(request, 'agent_set');
+			return { success: true, device: target.name, device_id: target.id };
+		}
+	},
+
+	config_list: {
+		args: { device: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'config_list');
+			if (target == null) return null;
+			let list = omci.config_list(target.id);
+			if (list == null)
+				return omci_native_error(request, 'config_list');
+			let config = config_array_to_object(list);
+			return { config: config, details: list };
+		}
+	},
+
+	config_details: {
+		args: { device: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'config_details');
+			if (target == null) return null;
+			let list = omci.config_list(target.id);
+			if (list == null)
+				return omci_native_error(request, 'config_details');
+			for (let item in list)
+				decorate_config_item(item);
+			return { config: config_array_to_object(list), details: list };
+		}
+	},
+
+	config_get: {
+		args: { device: '', key: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'config_get');
+			if (target == null) return null;
+			let spec = find_spec_by_name(request.args.key);
+			if (!spec) {
+				request.reply({ error: 'unknown OMCI configuration key' }, UBUS_STATUS_INVALID_ARGUMENT);
+				return null;
+			}
+			let item = omci.config_get(target.id, spec.key);
+			if (item == null)
+				return omci_native_error(request, 'config_get');
+			return { config: decorate_config_item(item) };
+		}
+	},
+
+	config_inspect: {
+		args: { device: '', key: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'config_inspect');
+			if (target == null) return null;
+			let spec = find_spec_by_name(request.args.key);
+			if (!spec) {
+				request.reply({ error: 'unknown OMCI configuration key' }, UBUS_STATUS_INVALID_ARGUMENT);
+				return null;
+			}
+			let item = omci.config_get(target.id, spec.key);
+			if (item == null)
+				return omci_native_error(request, 'config_inspect');
+			return { config: decorate_config_item(item) };
+		}
+	},
+
+	config_set: {
+		args: { device: '', key: '', value: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'config_set');
+			if (target == null) return null;
+			let spec = find_spec_by_name(request.args.key);
+			if (!spec || spec.agent) {
+				request.reply({ error: 'unknown or non-scalar OMCI configuration key' }, UBUS_STATUS_INVALID_ARGUMENT);
+				return null;
+			}
+			if (omci.config_set(target.id, spec.key, request.args.value) == null)
+				return omci_native_error(request, 'config_set');
+			return { success: true, key: spec.name };
+		}
+	},
+
+	class_list: {
+		args: { device: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'class_list');
+			if (target == null) return null;
+			let list = omci.class_list(target.id);
+			if (list == null)
+				return omci_native_error(request, 'class_list');
+			for (let item in list)
+				decorate_class(item);
+			return { classes: list };
+		}
+	},
+
+	class_get: {
+		args: { device: '', class_id: 0 },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'class_get');
+			if (target == null) return null;
+			let item = omci.class_get(target.id, request.args.class_id);
+			if (item == null)
+				return omci_native_error(request, 'class_get');
+			return { class: decorate_class(item) };
+		}
+	},
+
+	mib_list: {
+		args: { device: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'mib_list');
+			if (target == null) return null;
+			let list = omci.mib_list(target.id);
+			if (list == null)
+				return omci_native_error(request, 'mib_list');
+			for (let item in list)
+				decorate_mib(item);
+			return { objects: list };
+		}
+	},
+
+	mib_get: {
+		args: { device: '', class_id: 0, entity_id: 0 },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'mib_get');
+			if (target == null) return null;
+			let item = omci.mib_get(target.id, request.args.class_id, request.args.entity_id);
+			if (item == null)
+				return omci_native_error(request, 'mib_get');
+			return { object: decorate_mib(item) };
+		}
+	},
+
+	mib_set: {
+		args: { device: '', class_id: 0, entity_id: 0, attr_mask: 0, data: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'mib_set');
+			if (target == null) return null;
+			if (omci.mib_set(target.id, request.args.class_id,
+					 request.args.entity_id, request.args.attr_mask,
+					 request.args.data) == null)
+				return omci_native_error(request, 'mib_set');
+			return { success: true };
+		}
+	},
+
+	mib_delete: {
+		args: { device: '', class_id: 0, entity_id: 0 },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'mib_delete');
+			if (target == null) return null;
+			if (omci.mib_delete(target.id, request.args.class_id,
+					    request.args.entity_id) == null)
+				return omci_native_error(request, 'mib_delete');
+			return { success: true };
+		}
+	},
+
+	mib_reset: {
+		args: { device: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'mib_reset');
+			if (target == null) return null;
+			if (omci.mib_reset(target.id) == null)
+				return omci_native_error(request, 'mib_reset');
+			return { success: true };
+		}
+	},
+
+	raw_tx: {
+		args: { device: '', pdu: '' },
+		call: function(request) {
+			let target = omci_target(request, request.args.device, 'raw_tx');
+			if (target == null) return null;
+			if (omci.raw_tx(target.id, request.args.pdu) == null)
+				return omci_native_error(request, 'raw_tx');
+			return { success: true };
+		}
+	},
+
+	apply: {
+		call: function(request) {
+			let result = apply_omci(get_sections(true).omci);
+			if (!result.success)
+				return reply_failure(request, result);
+			return result;
+		}
+	}
+};
+
+/* config.change is the immediate path for LuCI/ubus commits. Polling also
+ * catches direct `uci commit xpon` writes. */
+const config_listener = event_bus?.listener('config.change', config_change);
+const config_poll = interval(CONFIG_POLL_MS, () => auto_apply('poll'));
+
+auto_apply('startup');
+
+return { 'xpon': xpon_methods, 'xpon.omci': omci_methods };
