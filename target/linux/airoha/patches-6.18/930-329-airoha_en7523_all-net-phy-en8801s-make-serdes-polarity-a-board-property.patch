@@ -1,0 +1,60 @@
+From: Matt Eaton <git@divinehawk.com>
+Subject: [PATCH] net: phy: en8801s: make serdes polarity a board property
+
+en8801s_phase1_init() forces both serdes lanes to normal polarity. Boards
+are free to swap the differential pair to ease routing, and the MikroTik
+E50UG (hEX refresh) does exactly that on ether1's receive pair.
+
+The failure is quiet rather than obvious: an inverted K28.5 comma still
+satisfies comma detection, so the SoC PCS reports RX sync and looks alive
+while every decoded symbol is garbage. Clause-37 autoneg therefore never
+completes, the link partner ability register stays empty and the port sits
+at NO-CARRIER even though the copper side has negotiated 1G full duplex.
+
+Read the polarity of each lane from the PHY node instead, keeping normal
+on both as the default so existing boards are unaffected.
+
+Signed-off-by: Matt Eaton <git@divinehawk.com>
+---
+--- a/drivers/net/phy/air_en8801s.c
++++ b/drivers/net/phy/air_en8801s.c
+@@ -255,6 +255,8 @@
+ 	u16 pro_version;
+ 	u8 pbus_addr;
+ 	bool pbus_addr_from_firmware;
++	bool rx_polarity_reverse;
++	bool tx_polarity_reverse;
+ 	bool leds_initialized;
+ 	unsigned long led_rules[EN8801S_LEDS];
+ 	enum en8801s_led_control led_control[EN8801S_LEDS];
+@@ -1088,7 +1090,18 @@
+ 		return err;
+ 
+ 	mdelay(500);
+-	pbus_data = (pbus_data & ~BIT(2)) | EN8801S_RX_POLARITY_NORMAL | EN8801S_TX_POLARITY_NORMAL;
++	/*
++	 * Serdes lane polarity is a board property: some designs swap the
++	 * differential pair to ease routing.  An inverted pair still passes
++	 * comma detection, so the PCS reaches RX sync but decodes garbage and
++	 * clause-37 autoneg never completes.  Default to normal on both paths.
++	 */
++	pbus_data &= ~(BIT(2) | EN8801S_RX_POLARITY_NORMAL |
++		       EN8801S_TX_POLARITY_REVERSE);
++	if (!priv->rx_polarity_reverse)
++		pbus_data |= EN8801S_RX_POLARITY_NORMAL;
++	if (priv->tx_polarity_reverse)
++		pbus_data |= EN8801S_TX_POLARITY_REVERSE;
+ 	err = airoha_pbus_write(mbus, pbus_addr, EN8801S_RG_LTR_CTL, pbus_data);
+ 	if (err)
+ 		return err;
+@@ -1705,6 +1718,10 @@
+ 	priv->dev = dev;
+ 	priv->pbus_addr = pbus_addr;
+ 	priv->pbus_addr_from_firmware = pbus_addr_from_firmware;
++	priv->rx_polarity_reverse =
++		device_property_read_bool(dev, "airoha,rx-polarity-reverse");
++	priv->tx_polarity_reverse =
++		device_property_read_bool(dev, "airoha,tx-polarity-reverse");
+ 
+ 	if (mdiodev->reset_gpio) {
+ 		dev_dbg(dev, "Assert PHY %lx HWRST until phy_init_hw", phy_addr);
