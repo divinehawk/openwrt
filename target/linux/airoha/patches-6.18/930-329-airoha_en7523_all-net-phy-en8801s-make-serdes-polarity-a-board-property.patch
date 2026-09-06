@@ -27,17 +27,11 @@ Signed-off-by: Matt Eaton <git@divinehawk.com>
  	bool leds_initialized;
  	unsigned long led_rules[EN8801S_LEDS];
  	enum en8801s_led_control led_control[EN8801S_LEDS];
-@@ -1088,7 +1090,18 @@
+@@ -1088,7 +1090,12 @@
  		return err;
  
  	mdelay(500);
 -	pbus_data = (pbus_data & ~BIT(2)) | EN8801S_RX_POLARITY_NORMAL | EN8801S_TX_POLARITY_NORMAL;
-+	/*
-+	 * Serdes lane polarity is a board property: some designs swap the
-+	 * differential pair to ease routing.  An inverted pair still passes
-+	 * comma detection, so the PCS reaches RX sync but decodes garbage and
-+	 * clause-37 autoneg never completes.  Default to normal on both paths.
-+	 */
 +	pbus_data &= ~(BIT(2) | EN8801S_RX_POLARITY_NORMAL |
 +		       EN8801S_TX_POLARITY_REVERSE);
 +	if (!priv->rx_polarity_reverse)
@@ -47,7 +41,7 @@ Signed-off-by: Matt Eaton <git@divinehawk.com>
  	err = airoha_pbus_write(mbus, pbus_addr, EN8801S_RG_LTR_CTL, pbus_data);
  	if (err)
  		return err;
-@@ -1705,6 +1718,10 @@
+@@ -1705,6 +1712,10 @@
  	priv->dev = dev;
  	priv->pbus_addr = pbus_addr;
  	priv->pbus_addr_from_firmware = pbus_addr_from_firmware;
