@@ -99,5 +99,7 @@ jobs:
             bin/targets/airoha/en7523/*.elf \
             bin/targets/airoha/en7523/*.manifest \
             bin/targets/airoha/en7523/sha256sums \
+            bin/targets/airoha/en7523/profiles.json \
+            bin/targets/airoha/en7523/*.buildinfo \
             kmods-e50ug.tar.xz \
             build.tar.xz
