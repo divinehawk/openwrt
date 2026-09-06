@@ -1,0 +1,82 @@
+name: Build MikroTik E50UG
+run-name: E50UG build ${{ github.run_number }} (${{ github.run_id }})
+
+on:
+  push:
+    branches:
+      - e50ug
+    paths:
+      - 'e50ug.config'
+      - '.github/workflows/build-e50ug.yaml'
+      - 'target/linux/airoha/**'
+      - 'target/linux/generic/files/drivers/platform/mikrotik/**'
+  schedule:
+    # Weekly, so the image tracks upstream package and kernel fixes.
+    - cron: '0 4 * * 0'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        type: choice
+        required: false
+        default: 's'
+        description: OpenWrt build verbosity
+        options:
+          - 'none'
+          - 'sc'
+          - 's'
+
+concurrency:
+  cancel-in-progress: true
+  group: e50ug-build-${{ github.ref }}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build image
+    # Reuses the airoha maintainer's build pipeline. It checks out the OpenWrt
+    # tree from openwrt_repository@ref, and checks this repository out again
+    # into config_build/, where it reads <config_file>.config from the root.
+    uses: Sirherobrine23/airoha_en7523_builds/.github/workflows/generic.yaml@main
+    with:
+      config_file: e50ug
+      openwrt_repository: divinehawk/openwrt
+      openwrt_repository_ref: e50ug
+      verbose: ${{ github.event_name == 'workflow_dispatch' && inputs.verbose || 's' }}
+      # No files_folder on purpose: the local files/ overlay carries bench-only
+      # overrides (LAN on 192.168.40.1, flow offload forced on) that must not
+      # ship publicly. Public images get stock OpenWrt defaults.
+
+  release:
+    name: Publish release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: artifacts_e50ug.tar.xz
+
+      - name: Unpack
+        run: |
+          xz -d artifacts_e50ug.tar.xz
+          tar -xvf artifacts_e50ug.tar
+
+      - name: Show what was built
+        run: |
+          ls -l bin/targets/airoha/en7523/ || true
+          sha256sum bin/targets/airoha/en7523/*.bin bin/targets/airoha/en7523/*.elf 2>/dev/null || true
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="e50ug-${{ github.run_number }}"
+          gh release create "$tag" \
+            --repo "${{ github.repository }}" \
+            --title "MikroTik E50UG (hEX refresh) build ${{ github.run_number }}" \
+            --notes-file release_body.md \
+            bin/targets/airoha/en7523/* build.tar.xz
