@@ -57,7 +57,7 @@
 
 #include "routerboot.h"
 
-#define RB_SOFTCONFIG_VER		"0.05"
+#define RB_SOFTCONFIG_VER		"0.06"
 #define RB_SC_PR_PFX			"[rb_softconfig] "
 
 #define RB_SC_HAS_WRITE_SUPPORT	true
@@ -116,9 +116,8 @@
 
 /*
  * Restricts preboot etherboot to a single Netinstall server. Zero means any.
- * Unlike the other tags in this record, which are little-endian u32, this one
- * holds the IPv4 address in network byte order: 192.168.1.142 is stored as
- * c0 a8 01 8e. Reading it as a u32 would silently yield a different host.
+ * Unlike the other tags in this record, which are accessed in CPU byte order,
+ * this one holds the IPv4 address in network byte order.
  */
 #define RB_PREBOOT_ETHERBOOT_SERVER_ANY		0
 #define RB_PREBOOT_ETHERBOOT_SERVER_ANY_STR	"any"
