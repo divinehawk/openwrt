@@ -106,21 +106,10 @@
 
 /*
  * RouterBOOT waits this many seconds for a netboot server before falling
- * through to the configured boot device.  RouterOS accepts "disabled" or a
- * timeout of 1..30s, and stores "disabled" as zero.
+ * through to the configured boot device. Zero disables the wait.
  */
-#define RB_PREBOOT_ETHERBOOT_OFF	0
-#define RB_PREBOOT_ETHERBOOT_MIN	1
+#define RB_PREBOOT_ETHERBOOT_MIN	0
 #define RB_PREBOOT_ETHERBOOT_MAX	30
-#define RB_PREBOOT_ETHERBOOT_OFF_STR	"disabled"
-
-/*
- * Restricts preboot etherboot to a single Netinstall server. Zero means any.
- * Unlike the other tags in this record, which are accessed in CPU byte order,
- * this one holds the IPv4 address in network byte order.
- */
-#define RB_PREBOOT_ETHERBOOT_SERVER_ANY		0
-#define RB_PREBOOT_ETHERBOOT_SERVER_ANY_STR	"any"
 
 #define RB_BOOT_DEVICE_ETHER		0	// "boot over Ethernet"
 #define RB_BOOT_DEVICE_NANDETH		1	// "boot from NAND, if fail then Ethernet"
@@ -410,9 +399,14 @@ static ssize_t sc_tag_store_bootdelays(const u8 *pld, u16 pld_len, const char *b
 	return count;
 }
 
+/*
+ * Restricts preboot etherboot to a single Netinstall server, 0.0.0.0 accepting
+ * any. Unlike the other tags in this record, which are accessed in CPU byte
+ * order, this one holds the IPv4 address in network byte order.
+ */
 static ssize_t sc_tag_show_preboot_etherboot_server(const u8 *pld, u16 pld_len, char *buf)
 {
-	__be32 data;	// network order, unlike every other tag here
+	__be32 data;
 
 	if (sizeof(data) != pld_len)
 		return -EINVAL;
@@ -421,28 +415,18 @@ static ssize_t sc_tag_show_preboot_etherboot_server(const u8 *pld, u16 pld_len, 
 	memcpy(&data, pld, sizeof(data));	// pld aliases sc_buf
 	read_unlock(&sc_bufrwl);
 
-	if (RB_PREBOOT_ETHERBOOT_SERVER_ANY == data)
-		return sprintf(buf, "%s\n", RB_PREBOOT_ETHERBOOT_SERVER_ANY_STR);
-
 	return sprintf(buf, "%pI4\n", &data);
 }
 
 static ssize_t sc_tag_store_preboot_etherboot_server(const u8 *pld, u16 pld_len, const char *buf, size_t count)
 {
 	__be32 data;
-	u8 addr[4];
 
 	if (sizeof(data) != pld_len)
 		return -EINVAL;
 
-	if (sysfs_streq(buf, RB_PREBOOT_ETHERBOOT_SERVER_ANY_STR)) {
-		data = RB_PREBOOT_ETHERBOOT_SERVER_ANY;
-	} else {
-		if (!in4_pton(buf, count, addr, -1, NULL))
-			return -EINVAL;
-
-		memcpy(&data, addr, sizeof(data));
-	}
+	if (!in4_pton(buf, count, (u8 *)&data, -1, NULL))
+		return -EINVAL;
 
 	write_lock(&sc_bufrwl);
 	memcpy((u8 *)pld, &data, sizeof(data));	// pld aliases sc_buf
@@ -466,9 +450,6 @@ static ssize_t sc_tag_show_preboot_etherboot(const u8 *pld, u16 pld_len, char *b
 	data = *(u32 *)pld;		// pld aliases sc_buf
 	read_unlock(&sc_bufrwl);
 
-	fmt = (RB_PREBOOT_ETHERBOOT_OFF == data) ? "[%s] " : "%s ";
-	out += sprintf(out, fmt, RB_PREBOOT_ETHERBOOT_OFF_STR);
-
 	for (i = RB_PREBOOT_ETHERBOOT_MIN; i <= RB_PREBOOT_ETHERBOOT_MAX; i++) {
 		fmt = (i == data) ? "[%d] " : "%d ";
 		out += sprintf(out, fmt, i);
@@ -486,17 +467,12 @@ static ssize_t sc_tag_store_preboot_etherboot(const u8 *pld, u16 pld_len, const 
 	if (sizeof(data) != pld_len)
 		return -EINVAL;
 
-	if (sysfs_streq(buf, RB_PREBOOT_ETHERBOOT_OFF_STR)) {
-		data = RB_PREBOOT_ETHERBOOT_OFF;
-	} else {
-		ret = kstrtou32(buf, 10, &data);
-		if (ret)
-			return ret;
+	ret = kstrtou32(buf, 10, &data);
+	if (ret)
+		return ret;
 
-		if ((data < RB_PREBOOT_ETHERBOOT_MIN) ||
-		    (RB_PREBOOT_ETHERBOOT_MAX < data))
-			return -EINVAL;
-	}
+	if (RB_PREBOOT_ETHERBOOT_MAX < data)
+		return -EINVAL;
 
 	write_lock(&sc_bufrwl);
 	*(u32 *)pld = data;		// pld aliases sc_buf
