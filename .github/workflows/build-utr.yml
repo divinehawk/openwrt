@@ -1,4 +1,4 @@
-name: Build UTR
+name: Build UTR and UTR-LR
 
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Configure for UTR
+      - name: Configure for UTR and UTR-LR
         run: |
           printf '%s\n' \
             'CONFIG_TARGET_ipq40xx=y' \
@@ -41,6 +41,7 @@ jobs:
             'CONFIG_TARGET_MULTI_PROFILE=y' \
             'CONFIG_TARGET_PER_DEVICE_ROOTFS=y' \
             'CONFIG_TARGET_DEVICE_ipq40xx_generic_DEVICE_ubnt_utr=y' \
+            'CONFIG_TARGET_DEVICE_ipq40xx_generic_DEVICE_ubnt_utr-lr=y' \
             'CONFIG_DISPLAY_SUPPORT=y' \
             'CONFIG_PACKAGE_kmod-bluetooth=m' \
             'CONFIG_PACKAGE_kmod-btmtk=m' \
@@ -149,7 +150,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_number }}
-          name: UTR Build ${{ github.run_number }}
+          name: UTR / UTR-LR Build ${{ github.run_number }}
           files: |
             bin/targets/ipq40xx/generic/*utr*
             bin/targets/ipq40xx/generic/packages/*
