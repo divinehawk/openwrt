@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: utr
+          ref: utr-build
 
       - name: Free disk space
         run: |
@@ -42,7 +42,8 @@ jobs:
             'CONFIG_TARGET_PER_DEVICE_ROOTFS=y' \
             'CONFIG_TARGET_DEVICE_ipq40xx_generic_DEVICE_ubnt_utr=y' \
             'CONFIG_TARGET_DEVICE_ipq40xx_generic_DEVICE_ubnt_utr-lr=y' \
-            'CONFIG_DISPLAY_SUPPORT=y' \
+            'CONFIG_PACKAGE_input-support=y' \
+            'CONFIG_PACKAGE_video-support=y' \
             'CONFIG_PACKAGE_kmod-bluetooth=y' \
             'CONFIG_PACKAGE_kmod-btmtk=y' \
             'CONFIG_PACKAGE_kmod-btusb=y' \
@@ -79,7 +80,6 @@ jobs:
             'CONFIG_PACKAGE_kmod-leds-gpio=y' \
             'CONFIG_PACKAGE_kmod-lib-crc-ccitt=y' \
             'CONFIG_PACKAGE_kmod-lib-crc16=y' \
-            'CONFIG_PACKAGE_kmod-lib-crc32c=y' \
             'CONFIG_PACKAGE_kmod-nls-base=y' \
             'CONFIG_PACKAGE_kmod-nf-conntrack=y' \
             'CONFIG_PACKAGE_kmod-nf-flow=y' \
