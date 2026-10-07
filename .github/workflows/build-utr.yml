@@ -14,6 +14,14 @@ jobs:
         with:
           ref: utr-build
 
+      # Until openwrt/firmware_qca-wireless#156 is merged and ipq-wifi bumped
+      - name: Add UTR-LR Wi-Fi board data
+        run: |
+          mkdir -p package/firmware/ipq-wifi/src
+          curl -fsSL -o package/firmware/ipq-wifi/src/board-ubnt_utr-lr.qca4019 \
+            https://raw.githubusercontent.com/divinehawk/firmware_qca-wireless/b85addb44d92433812fc061a093e415dd1ca24b5/board-ubnt_utr-lr.qca4019
+          echo "b3f7b494fd52792728487c118bd9473d59864e5d08e3cc40d57759766723e789  package/firmware/ipq-wifi/src/board-ubnt_utr-lr.qca4019" | sha256sum -c -
+
       - name: Free disk space
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
