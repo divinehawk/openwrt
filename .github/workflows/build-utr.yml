@@ -14,13 +14,21 @@ jobs:
         with:
           ref: utr-build
 
-      # Until openwrt/firmware_qca-wireless#156 is merged and ipq-wifi bumped
-      - name: Add UTR-LR Wi-Fi board data
+      # Until openwrt/firmware_qca-wireless#155 and #156 are merged and
+      # ipq-wifi bumped
+      - name: Add UTR and UTR-LR Wi-Fi board data
         run: |
-          mkdir -p package/firmware/ipq-wifi/src
-          curl -fsSL -o package/firmware/ipq-wifi/src/board-ubnt_utr-lr.qca4019 \
-            https://raw.githubusercontent.com/divinehawk/firmware_qca-wireless/b85addb44d92433812fc061a093e415dd1ca24b5/board-ubnt_utr-lr.qca4019
-          echo "b3f7b494fd52792728487c118bd9473d59864e5d08e3cc40d57759766723e789  package/firmware/ipq-wifi/src/board-ubnt_utr-lr.qca4019" | sha256sum -c -
+          src=package/firmware/ipq-wifi/src
+          qcaw=https://raw.githubusercontent.com/divinehawk/firmware_qca-wireless
+          mkdir -p $src
+          curl -fsSL -o $src/board-ubnt_utr.qca4019 \
+            $qcaw/81c3dc1115d24cb8276dfedb1c53cfe1f3a0cc23/board-ubnt_utr.qca4019
+          curl -fsSL -o $src/board-ubnt_utr-lr.qca4019 \
+            $qcaw/b85addb44d92433812fc061a093e415dd1ca24b5/board-ubnt_utr-lr.qca4019
+          sha256sum -c - <<EOF
+          26177642ced9a463d41f13daadf8d0c08e68bd2aee33f18e31d53ce445be379c  $src/board-ubnt_utr.qca4019
+          b3f7b494fd52792728487c118bd9473d59864e5d08e3cc40d57759766723e789  $src/board-ubnt_utr-lr.qca4019
+          EOF
 
       - name: Free disk space
         run: |
